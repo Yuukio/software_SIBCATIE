@@ -16,7 +16,7 @@ include_once 'plantillas/head-dashboard.php';
 
     <?php
     $registros = "active";
-    
+
     include_once 'plantillas/cargar-pantalla.php';
     include_once 'plantillas/barra-superior.php';
     include_once 'plantillas/menu-lateral.php';
@@ -171,8 +171,12 @@ include_once 'plantillas/head-dashboard.php';
                                             </a>
                                         </td>
                                         <td style="text-align:center;">
-                                            <input type="checkbox" name="seleccion[]" value="<?php echo $id ?>"/>
+                                            <label class="containerCheck" style="margin-left: 7px">
+                                                <input type="checkbox" name="seleccion[]" value="<?php echo $id ?>">
+                                                <span class="checkmark"></span>
+                                            </label>
                                         </td>
+
                                     </tr>
                                     <?php
                                 }
@@ -433,7 +437,7 @@ include_once 'plantillas/head-dashboard.php';
 
                                 <div class="row" style="padding-top: 15px">
                                     <div class="col-md-6">
-                                        <label>Nombre común</label>
+                                        <label>Imagen principal</label>
                                         <div class="row">
                                             <div class="col-md-10 col-xs-10">
                                                 <input type="text" class="form-control" id="comun" name="comun">
@@ -448,9 +452,17 @@ include_once 'plantillas/head-dashboard.php';
                                     <div class="col-md-2" style="text-align: center">
                                         <label>Reproducción</label>
                                         <div class="row centrar" style="text-align: center; padding-top: 8px">
-                                            <label>Sexual</label>
-                                            <label class="switch"><input type="checkbox" id="a-reproduccion" name="a-reproduccion"><span class="slider round"></span></label>
-                                            <label>Asexual</label>
+
+                                            <label class="containerCheck" style="margin-right: 7px">Sexual
+                                                <input type="checkbox" value="" name="sexual" id="sexual">
+                                                <span class="checkmark"></span>
+                                            </label>
+
+                                            <label class="containerCheck" style="margin-left: 7px">Asexual
+                                                <input type="checkbox" value="" name="asexual" id="asexual">
+                                                <span class="checkmark"></span>
+                                            </label>
+
                                         </div>
                                     </div>
                                     <div class="col-md-2" style="text-align: center">
@@ -503,8 +515,30 @@ include_once 'plantillas/head-dashboard.php';
             autor = $('#autor').val();
             fuente = $('#fuente').val();
             altura = $('#altura').val();
-            revision = $('#revision').val();
-            visible = $('#visible').val();
+
+            if ($('#sexual').is(':checked')) {
+                sexual = 1;
+            } else {
+                sexual = 0;
+            }
+
+            if ($('#asexual').is(':checked')) {
+                asexual = 1;
+            } else {
+                asexual = 0;
+            }
+
+            if ($('#visible').is(':checked')) {
+                visible = 1;
+            } else {
+                visible = 0;
+            }
+
+            if ($('#revision').is(':checked')) {
+                revision = 1;
+            } else {
+                revision = 0;
+            }
 
             if (id_familia == "Indefinido")
             {
@@ -517,16 +551,13 @@ include_once 'plantillas/head-dashboard.php';
                     url: "app/insertarDatos.php",
                     data: {'funcion': 'insertarRegistro', 'reino': id_reino, 'division': id_division, 'clase': id_clase, 'orden': id_orden, 'familia': id_familia,
                         'genero': id_genero, 'epiteto': id_epiteto, 'determinado': id_determinado, 'color': id_color, 'forma': id_forma, 'tipo': id_tipo, 'autor': autor,
-                        'fuente': fuente, 'altura': altura, 'revision': revision, 'visible': visible},
+                        'fuente': fuente, 'altura': altura, 'revision': revision, 'visible': visible, 'sexual': sexual, 'asexual': asexual},
                     success: function (r) {
 
                         if (r == 1) {
-                            //console.log(r);
-                            //alert("Agregado con éxito");
                             alertify.success("Registro agregado");
 
                         } else {
-                            //console.log(r);
                             alertify.error("Error del servidor");
                         }
                     }
@@ -561,36 +592,6 @@ include_once 'plantillas/head-dashboard.php';
             }
         });
     </script>
-
-    <script>
-
-        //***** OCULTAR PLANTA
-        /*$('#ocultar').click(function ()
-         {
-         id_seleccion = $('#seleccion').val();
-         if (!id_seleccion)
-         {
-         alert('No se selecciono ningun campo');
-         } else
-         {
-         $.ajax({
-         type: "POST",
-         url: "app/ocultarDatos.php",
-         data: {'funcion': 'ocultarRegistro', 'id_planta': id_seleccion},
-         success: function (r) {
-         
-         if (r == 1) {
-         alert("Enviados correctamente");
-         } else {
-         alert("Error del servidor");
-         }
-         }
-         });
-         }
-         });*/
-
-    </script>
-
 
     <!--AGREGAR NOMBRE COMUN-->
     <script>
@@ -627,13 +628,7 @@ include_once 'plantillas/head-dashboard.php';
     </script>
 
     <?php
-    //include_once './plantillas/modal.inc.php';
-    ?>
-    <!-- #FINAL# Centro del Contenido-->
-
-    <?php
     Conexion::cerrar_conexion();
     ?>
 
 </body>
-</html>

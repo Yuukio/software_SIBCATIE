@@ -174,24 +174,6 @@ elseif ($funcion == 'insertarEstadoSalud') {
 // ********INSERTAR REGISTRO
 elseif ($funcion == 'insertarRegistro') {
 
-    // isset($_GET['date_from']) ? $_GET['date_from'] : date('Y-m-d');
-    /* $id_reino = $_POST["reino"];
-      $id_division = $_POST["division"];
-      $id_clase = $_POST["clase"];
-      $id_orden = $_POST["orden"];
-      $id_familia = $_POST["familia"];
-      $id_genero = $_POST["genero"];
-      $id_epiteto = $_POST["epiteto"];
-      $id_determinado = $_POST["determinado"];
-      $id_color = $_POST["color"];
-      $id_forma = $_POST["forma"];
-      $id_tipo = $_POST["tipo"];
-      $autor = $_POST["autor"];
-      $fuente = $_POST["fuente"];
-      $altura = $_POST["altura"];
-      $revision = $_POST["revision"];
-      $visible = $_POST["visible"]; */
-
     $id_reino = $_POST["reino"] != 'Indefinido' ? $_POST["reino"] : null;
     $id_division = $_POST["division"] != 'Indefinido' ? $_POST["division"] : null;
     $id_clase = $_POST["clase"] != 'Indefinido' ? $_POST["clase"] : null;
@@ -207,44 +189,70 @@ elseif ($funcion == 'insertarRegistro') {
     $fuente = $_POST["fuente"] != 'Indefinido' ? $_POST["fuente"] : null;
     $altura = $_POST["altura"] != 'Indefinido' ? $_POST["altura"] : null;
 
+    //**********CREAR EL ID MASCARA
     $sql_id = "SELECT idPlanta, fecha_ingreso FROM planta ORDER BY idPlanta DESC LIMIT 1";
     $consulta = $pdoConn->query($sql_id);
     $fila = $consulta->fetch(PDO::FETCH_ASSOC);
 
     $id = $fila['idPlanta'];
+    $fecha_registro = $fila['fecha_ingreso'];
+    $fecha = date("Y-m-d");
 
+    if ($fecha == $fecha_registro) {
+        $id = $id + 1;
+    } elseif ($fecha > $fecha_registro) {
+        $id = 1;
+    }
+
+    $date = explode('-', $fecha);
+    $anno = $date[0];
+    $mes = $date[1];
+    $dia = $date[2];
+
+    $id = str_pad($id, 3, "0", STR_PAD_LEFT);
+    $mes = str_pad($mes, 2, "0", STR_PAD_LEFT);
+    $dia = str_pad($dia, 2, "0", STR_PAD_LEFT);
+
+    $idMascara = $anno . $mes . $dia . $id;
+
+    //**********NOMBRE CIENTIFICO
     $nombre_cientifico = $id_genero . ' ' . $id_epiteto;
 
-    $id = $fila['idPlanta'];
-    $id = $id + 1;
+    //**********REPRODUCCION, VISIBLE Y REVISION
+    $visible = $_POST['visible'];
+    $revision = $_POST['revision'];
 
-    /*$fecha = $fila['fecha_ingreso'];
-    $fecha = explode('-', $fecha);
-    $anno = $fecha[0];
-    $mes = $fecha[1];
-    $dia = $fecha[2];*/
+    $sexual = $_POST["sexual"];
+    $asexual = $_POST["asexual"];
 
-    $id_nuevo = str_pad($id, 4, "0", STR_PAD_LEFT);
+    $reproduccion = 0;
 
-    //$idMascara = $anno . 0 . $mes . 0 . $dia . 0 . $id_nuevo;
+    if ($sexual == 1 && $asexual == 0) {
+        $reproduccion = 1;
+    } elseif ($sexual == 0 && $asexual == 1) {
+        $reproduccion = 2;
+    } elseif ($asexual == 1 && $asexual == 1) {
+        $reproduccion = 3;
+    } elseif ($sexual == 0 && $asexual == 0) {
+        $reproduccion = 0;
+    }
 
     if (strpos($nombre_cientifico, 'Indefinido') !== false) {
         $nombre_cientifico = null;
     }
 
     try {
-        $query = "INSERT INTO `planta`(`idMascara`, `Familia_idFamilia`, `Genero_idGenero`, `Epiteto_idEpiteto`, `fecha_ingreso`, `fuente_informacion`, `altura`, `autor`, `Forma_idForma`, "
-                . "`Color_idColor`, `TipoHoja_idTipoHoja`, `DeterminadaPor_idDeterminadaPor`, `orden_idOrden`, `clase_idClase`, `reino_idReino`, "
-                . "`division_idDivision`, `nombre_cientifico`) "
-                . "VALUES (?, ?, ?, ?, NOW(), ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+        $query = "INSERT INTO `planta`(`idMascara`, `Familia_idFamilia`, `Genero_idGenero`, `Epiteto_idEpiteto`, `fecha_ingreso`, "
+                . "`fuente_informacion`, `altura`, `autor`, `Forma_idForma`, `Color_idColor`, `TipoHoja_idTipoHoja`, "
+                . "`DeterminadaPor_idDeterminadaPor`, `orden_idOrden`, `clase_idClase`, `reino_idReino`, "
+                . "`division_idDivision`, `nombre_cientifico`, `reproduccion`, `visible`, `revision`) "
+                . "VALUES (?, ?, ?, ?, NOW(), ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
         $stmt = $pdoConn->prepare($query);
-        $stmt->execute(array($id_nuevo, $id_familia, $id_genero, $id_epiteto, $fuente, $altura, $autor, $id_forma, $id_color, $id_tipo, $id_determinado, $id_orden, $id_clase, $id_reino, $id_division, $nombre_cientifico));
-        //$stmt->execute();
+        $stmt->execute(array($idMascara, $id_familia, $id_genero, $id_epiteto, $fuente, $altura, $autor, $id_forma, $id_color, $id_tipo,
+            $id_determinado, $id_orden, $id_clase, $id_reino, $id_division, $nombre_cientifico, $reproduccion, $visible, $revision));
+
         echo '1';
-        //echo $query;
-        //$a = $stmt->errorInfo();
-        //echo $a[2];
     } catch (Exception $e) {
         echo '0';
     }

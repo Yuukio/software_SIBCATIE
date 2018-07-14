@@ -12,7 +12,7 @@ if (isset($_GET['usuario']) && !empty($_GET['usuario'])) {
 
 $titulo = 'Registro Correcto';
 
-include_once './plantillas/documento-declaracion.inc.php';
+include_once 'plantillas/documento-declaracion.inc.php';
 ?>
 
 <nav class="navbar-sesion navbar navbar-expand-lg">

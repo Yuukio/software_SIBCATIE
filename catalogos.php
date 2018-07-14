@@ -69,7 +69,7 @@ include_once 'plantillas/head-dashboard.php';
                                     <div class="body">
                                         <div class="table-responsive">
                                                 <!--<table class="table table-bordered table-striped table-hover">-->
-                                            <table class="table table-bordered table-striped table-hover js-basic-example dataTable">
+                                            <table class="table table-bordered table-striped table-hover js-basic-example dataTable" id="tabla-reino">
                                                 <thead>
                                                     <tr style="background: white">
                                                         <th>ID</th>
@@ -1934,6 +1934,9 @@ include_once 'plantillas/head-dashboard.php';
                     success: function (r) {
 
                         if (r == 1) {
+                            var t = $('#tabla-reino').DataTable();
+                            t.clear();
+                            t.ajax.reload();
                             alertify.success("Agregado con éxito");
                         } else {
                             alertify.error("Error del servidor");

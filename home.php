@@ -550,9 +550,4 @@ include_once 'plantillas/head-dashboard.php';
                 </div>
             </div>
         </div>
-
     </section>
-
-    <?php
-    include_once 'plantillas/dashboard-scripts.php';
-    ?>

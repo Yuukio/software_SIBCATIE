@@ -62,7 +62,7 @@
                     <ul class="dropdown-menu pull-right">
                         <li><a href="javascript:void(0);"><i class="material-icons">person</i>Perfil</a></li>
                         <li class="divider"></li>
-                        <li><a href="javascript:void(0);"><i class="material-icons">input</i>Cerrar sesión</a></li>
+                        <li><a href="app/cerrarSesion.inc.php"><i class="material-icons">input</i>Cerrar sesión</a></li>
                     </ul>
                 </div>
             </div>
@@ -129,7 +129,7 @@
                 <li>
                     <a href="index.php">
                         <i class="material-icons col-light-blue">donut_large</i>
-                        <span>Salir</span>
+                        <span>Salir al Buscador</span>
                     </a>
                 </li>
             </ul>
