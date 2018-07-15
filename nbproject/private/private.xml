@@ -3,16 +3,11 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/xampp/htdocs/SIBCATIE_desarrollo/home.php</file>
-            <file>file:/C:/xampp/htdocs/SIBCATIE_desarrollo/plantillas/registro-plantas.inc.php</file>
-            <file>file:/C:/xampp/htdocs/SIBCATIE_desarrollo/plantillas/lista-usuarios.inc.php</file>
-            <file>file:/C:/xampp/htdocs/SIBCATIE_desarrollo/app/insertarDatos.php</file>
-            <file>file:/C:/xampp/htdocs/SIBCATIE_desarrollo/css/style.css</file>
-            <file>file:/C:/xampp/htdocs/SIBCATIE_desarrollo/app/filtrarDatos.php</file>
-            <file>file:/C:/xampp/htdocs/SIBCATIE_desarrollo/registros.php</file>
-            <file>file:/C:/xampp/htdocs/SIBCATIE_desarrollo/app/actualizarDatos.php</file>
-            <file>file:/C:/xampp/htdocs/SIBCATIE_desarrollo/plantillas/registro-usuarios.inc.php</file>
-            <file>file:/C:/xampp/htdocs/SIBCATIE_desarrollo/plugins/bootstrap/css/bootstrap.css</file>
+            <file>file:/C:/xampp/htdocs/software_SIBCATIE/app/ControlSesion.inc.php</file>
+            <file>file:/C:/xampp/htdocs/software_SIBCATIE/plantillas/navbar.inc.php</file>
+            <file>file:/C:/xampp/htdocs/software_SIBCATIE/registros.php</file>
+            <file>file:/C:/xampp/htdocs/software_SIBCATIE/tablas/tablaRegistros.php</file>
+            <file>file:/C:/xampp/htdocs/software_SIBCATIE/app/actualizarDatos.php</file>
         </group>
     </open-files>
 </project-private>

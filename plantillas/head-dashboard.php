@@ -2,6 +2,7 @@
 include_once 'app/ControlSesion.inc.php';
 include_once 'app/config.inc.php';
 include_once 'app/Conexion.inc.php';
+include_once 'app/conexion2.php';
 Conexion::abrir_conexion();
 ?>
 

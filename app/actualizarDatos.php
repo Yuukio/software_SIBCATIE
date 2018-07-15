@@ -1,6 +1,11 @@
 <?php
 
-include ('conexion2.php');
+include_once 'conexion2.php';
+include_once 'config.inc.php';
+include_once 'Conexion.inc.php';
+include_once 'ControlSesion.inc.php';
+
+Conexion::abrir_conexion();
 
 $funcion = $_POST['funcion'];
 
@@ -186,18 +191,100 @@ elseif ($funcion == 'actualizarEstado') {
     }
 }
 
+// ********ACTUALIZAR REGISTRO
+elseif ($funcion == 'actualizarRegistro') {
+    $id_reino_r = $_POST["reino"] != 'Indefinido' ? $_POST["reino"] : null;
+    $id_division_r = $_POST["division"] != 'Indefinido' ? $_POST["division"] : null;
+    $id_clase_r = $_POST["clase"] != 'Indefinido' ? $_POST["clase"] : null;
+    $id_orden_r = $_POST["orden"] != 'Indefinido' ? $_POST["orden"] : null;
+    $id_familia_r = $_POST["familia"] != 'Indefinido' ? $_POST["familia"] : null;
+    $id_genero_r = $_POST["genero"] != 'Indefinido' ? $_POST["genero"] : null;
+    $id_epiteto_r = $_POST["epiteto"] != 'Indefinido' ? $_POST["epiteto"] : null;
+    $id_determinado_r = $_POST["determinado"] != 'Indefinido' ? $_POST["determinado"] : null;
+    $id_color_r = $_POST["color"] != 'Indefinido' ? $_POST["color"] : null;
+    $id_forma_r = $_POST["forma"] != 'Indefinido' ? $_POST["forma"] : null;
+    $id_tipo_r = $_POST["tipo"] != 'Indefinido' ? $_POST["tipo"] : null;
+    $autor_r = $_POST["autor"] != 'Indefinido' ? $_POST["autor"] : null;
+    $fuente_r = $_POST["fuente"] != 'Indefinido' ? $_POST["fuente"] : null;
+    $altura_r = $_POST["altura"] != 'Indefinido' ? $_POST["altura"] : null;
+    $id_planta_r = $_POST['id-planta'];
+
+    //**********REPRODUCCION, VISIBLE Y REVISION
+    $visible_r = $_POST['visible'];
+    $revision_r = $_POST['revision'];
+
+    $sexual_r = $_POST["sexual"];
+    $asexual_r = $_POST["asexual"];
+
+    $reproduccion_r = 0;
+
+    if ($sexual_r == 1 && $asexual_r == 0) {
+        $reproduccion_r = 1;
+    } elseif ($sexual_r == 0 && $asexual_r == 1) {
+        $reproduccion_r = 2;
+    } elseif ($asexual_r == 1 && $asexual_r == 1) {
+        $reproduccion_r = 3;
+    } elseif ($sexual_r == 0 && $asexual_r == 0) {
+        $reproduccion_r = 0;
+    }
+
+    //$usuario = $_SESSION['nombre_usuario'];
+    
+    //Agregar una advertencia de actualizacion en cada tabla
+
+    $datos_prueba = $id_reino_r . '*' .
+            $id_division_r . '*' .
+            $id_clase_r . '*' .
+            $id_orden_r . '*' .
+            $id_familia_r . '*' .
+            $id_genero_r . '*' .
+            $id_epiteto_r . '*' .
+            $autor_r . '*' .
+            $fuente_r . '*' .
+            $altura_r . '*' .
+            $id_color_r . '*' .
+            $id_forma_r . '*' .
+            $id_tipo_r . '*' .
+            $id_determinado_r . '*' .
+            $reproduccion_r . '*' .
+            $revision_r . '*' .
+            $visible_r . '*' .
+            $id_planta_r;
+
+    //$usuario = $_SESSION['nombre_usuario'];
+
+    try {
+        $query = "UPDATE `planta` SET `Familia_idFamilia`='$id_familia_r',`Genero_idGenero`='$id_genero_r',`Epiteto_idEpiteto`='$id_epiteto_r', "
+                . "`fuente_informacion`='$fuente_r',`altura`='$altura_r',`autor`='$autor_r',`Forma_idForma`='$id_forma_r',`Color_idColor`='$id_color_r',"
+                . "`TipoHoja_idTipoHoja`='$id_tipo_r',`reproduccion`='$reproduccion_r',`DeterminadaPor_idDeterminadaPor`='$id_determinado_r',"
+                . "`visible`='$visible_r',`revision`='$revision_r',`orden_idOrden`='$id_orden_r',`clase_idClase`='$id_clase_r',`reino_idReino`='$id_reino_r',"
+                . "`division_idDivision`='$id_division_r' WHERE idPlanta='$id_planta_r'";
+
+        $stmt = $pdoConn->prepare($query);
+        $stmt->execute();
+
+        echo '1';
+        //echo $usuario;
+    } catch (PDOException $e) {
+        //echo $datos_prueba;
+        //print 'ERROR' . $e->getMessage();
+        echo '0';
+        //echo $usuario;
+    }
+}
+
 // ********PONER OCULTO
 elseif ($funcion == 'ponerOcultos') {
-    $oculto = $_POST["oculto"];
+    $seleccion = $_POST["seleccion"];
     try {
 
-        $query = "UPDATE `planta` SET `visible`= 1 WHERE idPlanta = ?";
+        $query = "UPDATE `planta` SET `visible`= 0 WHERE idPlanta = ?";
         $stmt = $pdoConn->prepare($query);
 
-        for ($i = 0; $i < sizeof($oculto); $i++) {
-            $stmt->execute(array($oculto[$i]));
+        for ($i = 0; $i < sizeof($seleccion); $i++) {
+            $stmt->execute(array($seleccion[$i]));
         }
-        
+
         echo '1';
     } catch (Exception $e) {
         echo '0';

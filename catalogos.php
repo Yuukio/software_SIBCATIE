@@ -46,13 +46,14 @@ include_once 'plantillas/head-dashboard.php';
                                 <button class="tablinks" onclick="openCity(event, 'Tipo')">Tipos de Hoja</button>
                                 <button class="tablinks" onclick="openCity(event, 'Uso')">Usos</button>
                                 <button class="tablinks" onclick="openCity(event, 'Estado')">Estados de Salud</button>
+                                <button class="tablinks" onclick="location.reload()" style="color: yellow; text-align: center">Recargar</button>
                             </div>
                         </div>
 
                         <!--***********TAB REINO************-->
                         <div class="col-md-9">
                             <div id="Reino" class="tabcontentC">
-                                <div class="card" id="tabla-reino">
+                                <div class="card">
                                     <div class="header bg-cyan">
                                         <h2>REINOS</h2>
                                         <ul class="header-dropdown m-r--5">
@@ -68,8 +69,7 @@ include_once 'plantillas/head-dashboard.php';
                                     </div>
                                     <div class="body">
                                         <div class="table-responsive">
-                                                <!--<table class="table table-bordered table-striped table-hover">-->
-                                            <table class="table table-bordered table-striped table-hover js-basic-example dataTable" id="tabla-reino">
+                                            <table class="table table-bordered table-striped table-hover js-basic-example dataTable">
                                                 <thead>
                                                     <tr style="background: white">
                                                         <th>ID</th>
@@ -82,7 +82,12 @@ include_once 'plantillas/head-dashboard.php';
                                                     <?php
                                                     $sql_reino = "SELECT `idReino`, `nombre_reino` FROM `reino`";
 
-                                                    $consulta_reino = Conexion::obtener_conexion()->query($sql_reino);
+                                                    //$consulta_reino = Conexion::obtener_conexion()->query($sql_reino);
+                                                    //*********
+                                                    $consulta_reino = $pdoConn->prepare($sql_reino);
+
+                                                    $consulta_reino->execute();
+                                                    //*********
 
                                                     while ($fila_reino = $consulta_reino->fetch(PDO::FETCH_ASSOC)) {
 
@@ -107,7 +112,7 @@ include_once 'plantillas/head-dashboard.php';
                                                         </tr>
                                                         <?php
                                                     }
-                                                    ?>                                                    
+                                                    ?>                                            
                                                 </tbody>
                                             </table>
                                         </div>
@@ -148,7 +153,9 @@ include_once 'plantillas/head-dashboard.php';
                                                     <?php
                                                     $sql_division = "SELECT `idDivision`, `nombre_division` FROM `division`";
 
-                                                    $consulta_division = Conexion::obtener_conexion()->query($sql_division);
+                                                    $consulta_division = $pdoConn->prepare($sql_division);
+
+                                                    $consulta_division->execute();
 
                                                     while ($fila_division = $consulta_division->fetch(PDO::FETCH_ASSOC)) {
 
@@ -214,7 +221,9 @@ include_once 'plantillas/head-dashboard.php';
                                                     <?php
                                                     $sql_clase = "SELECT `idClase`, `nombre_clase` FROM `clase`";
 
-                                                    $consulta_clase = Conexion::obtener_conexion()->query($sql_clase);
+                                                    $consulta_clase = $pdoConn->prepare($sql_clase);
+
+                                                    $consulta_clase->execute();
 
                                                     while ($fila_clase = $consulta_clase->fetch(PDO::FETCH_ASSOC)) {
 
@@ -280,7 +289,9 @@ include_once 'plantillas/head-dashboard.php';
                                                     <?php
                                                     $sql_orden = "SELECT `idOrden`, `nombre_orden` FROM `orden`";
 
-                                                    $consulta_orden = Conexion::obtener_conexion()->query($sql_orden);
+                                                    $consulta_orden = $pdoConn->prepare($sql_orden);
+
+                                                    $consulta_orden->execute();
 
                                                     while ($fila_orden = $consulta_orden->fetch(PDO::FETCH_ASSOC)) {
 
@@ -346,7 +357,9 @@ include_once 'plantillas/head-dashboard.php';
                                                     <?php
                                                     $sql_familia = "SELECT `idFamilia`, `nombre_familia` FROM `familia`";
 
-                                                    $consulta_familia = Conexion::obtener_conexion()->query($sql_familia);
+                                                    $consulta_familia = $pdoConn->prepare($sql_familia);
+
+                                                    $consulta_familia->execute();
 
                                                     while ($fila_familia = $consulta_familia->fetch(PDO::FETCH_ASSOC)) {
 
@@ -412,7 +425,9 @@ include_once 'plantillas/head-dashboard.php';
                                                     <?php
                                                     $sql_genero = "SELECT `idGenero`, `nombre_genero` FROM `genero`";
 
-                                                    $consulta_genero = Conexion::obtener_conexion()->query($sql_genero);
+                                                    $consulta_genero = $pdoConn->prepare($sql_genero);
+
+                                                    $consulta_genero->execute();
 
                                                     while ($fila_genero = $consulta_genero->fetch(PDO::FETCH_ASSOC)) {
 
@@ -478,7 +493,9 @@ include_once 'plantillas/head-dashboard.php';
                                                     <?php
                                                     $sql_epiteto = "SELECT `idEpiteto`, `nombre_epiteto` FROM `epiteto`";
 
-                                                    $consulta_epiteto = Conexion::obtener_conexion()->query($sql_epiteto);
+                                                    $consulta_epiteto = $pdoConn->prepare($sql_epiteto);
+
+                                                    $consulta_epiteto->execute();
 
                                                     while ($fila_epiteto = $consulta_epiteto->fetch(PDO::FETCH_ASSOC)) {
 
@@ -545,7 +562,9 @@ include_once 'plantillas/head-dashboard.php';
                                                     <?php
                                                     $sql_color = "SELECT `idColor`, `nombre_color` FROM `color`";
 
-                                                    $consulta_color = Conexion::obtener_conexion()->query($sql_color);
+                                                    $consulta_color = $pdoConn->prepare($sql_color);
+
+                                                    $consulta_color->execute();
 
                                                     while ($fila_color = $consulta_color->fetch(PDO::FETCH_ASSOC)) {
 
@@ -611,7 +630,9 @@ include_once 'plantillas/head-dashboard.php';
                                                     <?php
                                                     $sql_determinado = "SELECT `idDeterminadaPor`, `nombre_determinado` FROM `determinadapor`";
 
-                                                    $consulta_determinado = Conexion::obtener_conexion()->query($sql_determinado);
+                                                    $consulta_determinado = $pdoConn->prepare($sql_determinado);
+
+                                                    $consulta_determinado->execute();
 
                                                     while ($fila_determinado = $consulta_determinado->fetch(PDO::FETCH_ASSOC)) {
 
@@ -677,7 +698,9 @@ include_once 'plantillas/head-dashboard.php';
                                                     <?php
                                                     $sql_forma = "SELECT `idForma`, `nombre_forma` FROM `forma`";
 
-                                                    $consulta_forma = Conexion::obtener_conexion()->query($sql_forma);
+                                                    $consulta_forma = $pdoConn->prepare($sql_forma);
+
+                                                    $consulta_forma->execute();
 
                                                     while ($fila_forma = $consulta_forma->fetch(PDO::FETCH_ASSOC)) {
 
@@ -743,7 +766,9 @@ include_once 'plantillas/head-dashboard.php';
                                                     <?php
                                                     $sql_tipo = "SELECT `idTipoHoja`, `nombre_hoja` FROM `tipohoja`";
 
-                                                    $consulta_tipo = Conexion::obtener_conexion()->query($sql_tipo);
+                                                    $consulta_tipo = $pdoConn->prepare($sql_tipo);
+
+                                                    $consulta_tipo->execute();
 
                                                     while ($fila_tipo = $consulta_tipo->fetch(PDO::FETCH_ASSOC)) {
 
@@ -809,7 +834,9 @@ include_once 'plantillas/head-dashboard.php';
                                                     <?php
                                                     $sql_uso = "SELECT `idUso`, `nombre_uso` FROM `uso`";
 
-                                                    $consulta_uso = Conexion::obtener_conexion()->query($sql_uso);
+                                                    $consulta_uso = $pdoConn->prepare($sql_uso);
+
+                                                    $consulta_uso->execute();
 
                                                     while ($fila_uso = $consulta_uso->fetch(PDO::FETCH_ASSOC)) {
 
@@ -871,7 +898,9 @@ include_once 'plantillas/head-dashboard.php';
                                                     <?php
                                                     $sql_estado = "SELECT `idEstadoSalud`, `nombre_estado` FROM `estadosalud`";
 
-                                                    $consulta_estado = Conexion::obtener_conexion()->query($sql_estado);
+                                                    $consulta_estado = $pdoConn->prepare($sql_estado);
+
+                                                    $consulta_estado->execute();
 
                                                     while ($fila_estado = $consulta_estado->fetch(PDO::FETCH_ASSOC)) {
 
@@ -940,7 +969,7 @@ include_once 'plantillas/head-dashboard.php';
                                 <input type="text" class="form-control" name="nombre-reino" id="nombre-reino" >
                             </div>
                             <div class="modal-footer">
-                                <button type="button" class="btn btn-link waves-effect" id="guardar-reino">AGREGAR</button>
+                                <button type="button" class="btn btn-link waves-effect" id="guardar-reino" onclick="recargar - reino">AGREGAR</button>
                                 <button type="button" class="btn btn-link waves-effect" data-dismiss="modal" aria-label="Close">CANCELAR</button>
                             </div>
                         </form>
@@ -1915,10 +1944,16 @@ include_once 'plantillas/head-dashboard.php';
 
     </section>
 
+    <!--<script type="text/javascript">
+        $(document).ready(function () {
+            $('#tabla-reino').load('tablas/tablaReino.php');
+        });
+    </script>-->
+
     <!-- SCRIPT INSERTAR DATOS -->
     <script type="text/javascript">
 
-        //CREAR NUEVO REINO
+//CREAR NUEVO REINO
         $('#guardar-reino').click(function ()
         {
             nombre_reino = $('#nombre-reino').val();
@@ -1934,9 +1969,8 @@ include_once 'plantillas/head-dashboard.php';
                     success: function (r) {
 
                         if (r == 1) {
-                            var t = $('#tabla-reino').DataTable();
-                            t.clear();
-                            t.ajax.reload();
+                            //$('#tabla-reino').load('tablas/tablaReino.php');
+
                             alertify.success("Agregado con éxito");
                         } else {
                             alertify.error("Error del servidor");
@@ -2261,19 +2295,6 @@ include_once 'plantillas/head-dashboard.php';
             }
         });
 
-
-        /*
-         function desactivarReino(id)
-         {
-         if (confirm('Desea eliminar este reino?'))
-         {
-         
-         } else
-         {
-         alert("Cancelo la actualizacion");
-         }
-         
-         }*/
     </script>
 
     <!-- SCRIPT ACTUALIZAR DATOS -->
@@ -2296,6 +2317,7 @@ include_once 'plantillas/head-dashboard.php';
                     success: function (r) {
 
                         if (r == 1) {
+                            $('#tabla-reino').load('tablas/tablaReino.php');
                             alertify.success("Se actualizó correctamente");
                         } else {
                             alertify.error("Error del servidor");
@@ -2726,7 +2748,7 @@ include_once 'plantillas/head-dashboard.php';
                 }
             });
         }
-        //***** FILTRAR DIVISION
+//***** FILTRAR DIVISION
         function filtrarDivision(id) {
 
             $.ajax({
@@ -2780,7 +2802,7 @@ include_once 'plantillas/head-dashboard.php';
                 }
             });
         }
-        //***** FILTRAR ORDEN
+//***** FILTRAR ORDEN
         function filtrarOrden(id) {
 
             $.ajax({

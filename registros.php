@@ -1,7 +1,11 @@
 <?php
 include_once 'app/ControlSesion.inc.php';
 include_once 'app/config.inc.php';
+include_once 'app/Conexion.inc.php';
 include_once 'app/Redireccion.inc.php';
+include_once 'app/ControlSesion.inc.php';
+
+Conexion::abrir_conexion();
 
 //VALIDAR INICIO DE SESION
 if (!ControlSesion::sesionIniciada() OR ControlSesion::rolVisitante()) {
@@ -9,8 +13,66 @@ if (!ControlSesion::sesionIniciada() OR ControlSesion::rolVisitante()) {
 }
 
 $titulo = 'Registros';
-include_once 'plantillas/head-dashboard.php';
 ?>
+
+<head>
+    <meta charset="UTF-8">
+    <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+
+    <?php
+    if (!isset($titulo) || empty($titulo)) {
+        $titulo = 'Administración';
+    }
+    echo "<title>$titulo</title>";
+    ?>
+
+    <!-- Favicon-->
+    <link rel="icon" type="image/png" href="img/favicon-admin.png" />
+
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css?family=Roboto:400,700&subset=latin,cyrillic-ext" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" type="text/css">
+
+    <!-- Bootstrap Core Css -->
+    <link href="plugins/bootstrap/css/bootstrap.css" rel="stylesheet">
+
+    <!-- Waves Effect Css -->
+    <link href="plugins/node-waves/waves.css" rel="stylesheet" />
+
+    <!-- Animation Css -->
+    <link href="plugins/animate-css/animate.css" rel="stylesheet" />
+
+    <!-- Custom Css -->
+    <link href="css/style.css" rel="stylesheet">
+
+    <!-- AdminBSB Themes. You can choose a theme from css/themes instead of get all themes -->
+    <link href="css/themes/all-themes.css" rel="stylesheet" />
+    <link href="css/dashboard.css" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="css/css/alertify.css">
+    <link rel="stylesheet" type="text/css" href="css/css/themes/default.css">
+
+    <!-- Jquery Core Js -->
+    <script src="plugins/jquery/jquery.min.js"></script>
+
+    <!-- Bootstrap Core Js -->
+    <script src="plugins/bootstrap/js/bootstrap.js"></script>
+
+    <!-- Slimscroll Plugin Js -->
+    <script src="plugins/jquery-slimscroll/jquery.slimscroll.js"></script>
+
+    <!-- Waves Effect Plugin Js -->
+    <script src="plugins/node-waves/waves.js"></script>
+
+    <!-- Custom Js -->
+    <script src="js/admin.js"></script>
+
+    <!-- Demo Js -->
+    <script src="js/demo.js"></script>
+    <script src="js/jquery.stickytableheaders.js"></script>
+    <script src="js/script.js"></script>
+    <script src="plugins/bootstrap-notify/bootstrap-notify.js"></script>
+    <script src="js/alertify.js"></script>
+</head>
 
 <body class="theme-red">
 
@@ -54,136 +116,8 @@ include_once 'plantillas/head-dashboard.php';
                         </li>
                     </ul>
                 </div>
-                <div class="body">
-                    <div class="table-responsive">
-                        <table class="table table-bordered table-striped table-hover js-basic-example dataTable">
-                            <thead>
-                                <tr>
-                                    <th>ID</th>
-                                    <th>Familia</th>
-                                    <th>Género</th>
-                                    <th>Epíteto</th>
-                                    <th>Ingreso</th>
-                                    <th>Visible</th>
-                                    <th>Opciones</th>
-                                    <th>Seleccionar</th>
-                                </tr>
-                            </thead>
-                            <tfoot>
-                                <tr>
-                                    <th>ID</th>
-                                    <th>Familia</th>
-                                    <th>Género</th>
-                                    <th>Epíteto</th>
-                                    <th>Ingreso</th>
-                                    <th>Visible</th>
-                                    <th>Opciones</th>
-                                    <th>Seleccionar</th>
-                                </tr>
-                            </tfoot>
-                            <tbody>
-                                <?php
-                                $sql = "SELECT P.idPlanta, P.autor, P.fecha_ingreso, P.fuente_informacion, P.altura, P.reproduccion, P.visible, P.revision, Fa.nombre_familia, 
-                                            Ge.nombre_genero, Ep.nombre_epiteto, Fo.nombre_forma, Co.nombre_color, De.nombre_determinado, Ti.nombre_hoja 
-                                            FROM planta P 
-                                            INNER JOIN familia Fa ON P.Familia_idFamilia = Fa.idFamilia
-                                            INNER JOIN genero Ge ON P.Genero_idGenero = Ge.idGenero
-                                            INNER JOIN epiteto Ep ON P.Epiteto_idEpiteto = Ep.idEpiteto
-                                            INNER JOIN forma Fo ON P.Forma_idForma = Fo.idForma
-                                            INNER JOIN color Co ON P.Color_idColor = Co.idColor
-                                            INNER JOIN tipohoja Ti ON P.TipoHoja_idTipoHoja = Ti.idTipoHoja
-                                            INNER JOIN determinadapor De ON P.DeterminadaPor_idDeterminadaPor = De.idDeterminadaPor
-                                            WHERE p.revision=1";
+                <div class="body" id="tabla-registro">
 
-                                $consulta = Conexion::obtener_conexion()->query($sql);
-
-                                while ($fila = $consulta->fetch(PDO::FETCH_ASSOC)) {
-
-                                    $nombre_cientifico = $fila['nombre_genero'] . ' ' . $fila['nombre_epiteto'];
-                                    $revision = $fila['revision'];
-                                    $visible = $fila['visible'];
-
-                                    /* ingreso de id mascara */
-                                    $id = $fila['idPlanta'];
-
-                                    $fecha = $fila['fecha_ingreso'];
-                                    $fecha = explode('-', $fecha);
-                                    $anno = $fecha[0];
-                                    $mes = $fecha[1];
-                                    $dia = $fecha[2];
-
-                                    $id_nuevo = str_pad($id, 4, "0", STR_PAD_LEFT);
-
-                                    $idMasc = $anno . $mes . $dia . $id_nuevo;
-
-                                    /* ingreso de iconos de revision */
-                                    if ($revision == 0) {
-
-                                        $revision = '<a style="color: #E74C3C">
-                                                            <i class="material-icons">close</i>
-                                                        </a>
-                                                        ';
-                                    } else {
-                                        $revision = '<a style="color: #27AE60">
-                                                            <i class="material-icons">check</i>
-                                                        </a>
-                                                        ';
-                                    }
-
-                                    /* ingreso de iconos de visible */
-                                    if ($visible == 0) {
-
-                                        $visible = '<a style="color: #E74C3C">
-                                                            <i class="material-icons">visibility_off</i>
-                                                        </a>
-                                                        ';
-                                    } else {
-                                        $visible = '<a style="color: #27AE60">
-                                                            <i class="material-icons">visibility</i>
-                                                        </a>
-                                                        ';
-                                    }
-
-                                    /* asignando en tabla */
-                                    ?>
-                                    <tr valign="top">
-                                        <td><?php echo $idMasc ?></td> 
-                                        <td><?php echo $fila['nombre_familia'] ?></td>
-                                        <td><?php echo $fila['nombre_genero'] ?></td>
-                                        <td><?php echo $fila['nombre_epiteto'] ?></td>
-                                        <td><?php echo $fila['fecha_ingreso'] ?></td>
-                                        <td style="text-align:center; width: 5px;"><?php echo $visible ?></td>
-                                        <td style="text-align:center;">
-                                            <a href="#" style="color: #17c4cb">
-                                                <i class="material-icons" data-toggle="modal" data-target="#modalVer">search</i>
-                                            </a>
-                                            <i>&nbsp;</i>
-                                            <a href="#" style="color: #ffc122">
-                                                <i class="material-icons" data-toggle="modal" data-target="#modalActualizar">edit</i>
-                                            </a>
-                                            <i>&nbsp;</i>
-                                            <a href="#" style="color: #2a445f">
-                                                <i class="material-icons" data-toggle="modal" data-target="#modalFotos">playlist_add</i>
-                                            </a>
-                                            <i>&nbsp;</i>
-                                            <a href="#" style="color: #ff6d3a">
-                                                <i class="material-icons" data-toggle="modal" data-target="#modalComun">add_a_photo</i>
-                                            </a>
-                                        </td>
-                                        <td style="text-align:center;">
-                                            <label class="containerCheck" style="margin-left: 7px">
-                                                <input type="checkbox" name="seleccion[]" value="<?php echo $id ?>">
-                                                <span class="checkmark"></span>
-                                            </label>
-                                        </td>
-
-                                    </tr>
-                                    <?php
-                                }
-                                ?>
-                            </tbody>
-                        </table>
-                    </div>
                 </div>
             </div>
 
@@ -198,7 +132,7 @@ include_once 'plantillas/head-dashboard.php';
                             <h4 class="modal-title" id="defaultModalLabel">Agregar un nuevo Registro</h4>
                         </div>
 
-                        <form id="fmr-estadosalud">
+                        <form>
                             <div class="modal-body">
                                 <div class="col-md-12">
                                     <h4 style="text-align: center">TAXONOMÍA</h4>
@@ -494,8 +428,321 @@ include_once 'plantillas/head-dashboard.php';
                     </div>
                 </div>
             </div>
+
+            <!-- Modal ACTUALIZAR PLANTA -->
+            <div class="modal fade" id="modalActualizarPlanta" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                            <h4 class="modal-title" id="defaultModalLabel">Actualizar registro</h4>
+                        </div>
+
+                        <form>
+                            <div class="modal-body">
+                                <input type="text" class="form-control" name="id-planta" id="id-planta" >
+                                <div class="col-md-12">
+                                    <h4 style="text-align: center">TAXONOMÍA</h4>
+                                    <hr>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-md-3">
+                                        <label for="pl-reino">Reino</label>
+                                        <select id="id-reino-a" name="id-reino-a" class="form-control">
+                                            <?php
+                                            $sql = "SELECT nombre_reino, idReino FROM reino ORDER BY nombre_reino";
+
+                                            $consulta = Conexion::obtener_conexion()->query($sql);
+                                            ?>
+                                            <option>Indefinido</option>
+                                            <?php
+                                            while ($fila = $consulta->fetch(PDO::FETCH_ASSOC)) {
+                                                ?>
+                                                <option value="<?php echo $fila['idReino'] ?>"><?php echo $fila['nombre_reino'] ?></option>
+                                                <?php
+                                            }
+                                            ?>
+                                        </select>
+                                    </div>
+                                    <div class="col-md-3">
+                                        <label for="pl-division">División</label>
+                                        <select class="form-control" name="id-division" id="id-division-a">
+                                            <?php
+                                            $sql = "SELECT nombre_division, idDivision FROM division ORDER BY nombre_division";
+
+                                            $consulta = Conexion::obtener_conexion()->query($sql);
+                                            ?>
+                                            <option>Indefinido</option>
+                                            <?php
+                                            while ($fila = $consulta->fetch(PDO::FETCH_ASSOC)) {
+                                                ?>
+                                                <option value="<?php echo $fila['idDivision'] ?>"><?php echo $fila['nombre_division'] ?></option>
+                                                <?php
+                                            }
+                                            ?>
+                                        </select>
+                                    </div>
+                                    <div class="col-md-3">
+                                        <label for="pl-clase">Clase</label>
+                                        <select class="form-control" name="id-clase" id="id-clase-a">
+                                            <?php
+                                            $sql = "SELECT nombre_clase, idClase FROM clase ORDER BY nombre_clase";
+
+                                            $consulta = Conexion::obtener_conexion()->query($sql);
+                                            ?>
+                                            <option>Indefinido</option>
+                                            <?php
+                                            while ($fila = $consulta->fetch(PDO::FETCH_ASSOC)) {
+                                                ?>
+                                                <option value="<?php echo $fila['idClase'] ?>"><?php echo $fila['nombre_clase'] ?></option>
+                                                <?php
+                                            }
+                                            ?>
+                                        </select>
+                                    </div>
+                                    <div class="col-md-3">
+                                        <label>Orden</label>
+                                        <select class="form-control" name="id-orden" id="id-orden-a">
+                                            <?php
+                                            $sql = "SELECT nombre_orden, idOrden FROM orden ORDER BY nombre_orden";
+
+                                            $consulta = Conexion::obtener_conexion()->query($sql);
+                                            ?>
+                                            <option>Indefinido</option>
+                                            <?php
+                                            while ($fila = $consulta->fetch(PDO::FETCH_ASSOC)) {
+                                                ?>
+                                                <option value="<?php echo $fila['idOrden'] ?>"><?php echo $fila['nombre_orden'] ?></option>
+                                                <?php
+                                            }
+                                            ?>
+                                        </select>
+                                    </div>
+                                </div>
+
+                                <div class="row" style="padding-top: 15px">
+                                    <div class="col-md-3">
+                                        <label>Familia</label>
+                                        <select class="form-control" name="id-familia" id="id-familia-a">
+                                            <?php
+                                            $sql = "SELECT nombre_familia, idFamilia FROM familia ORDER BY nombre_familia";
+
+                                            $consulta = Conexion::obtener_conexion()->query($sql);
+                                            ?>
+                                            <option>Indefinido</option>
+                                            <?php
+                                            while ($fila = $consulta->fetch(PDO::FETCH_ASSOC)) {
+                                                ?>
+                                                <option value="<?php echo $fila['idFamilia'] ?>"><?php echo $fila['nombre_familia'] ?></option>
+                                                <?php
+                                            }
+                                            ?>
+                                        </select>
+                                    </div>
+                                    <div class="col-md-3">
+                                        <label>Género</label>
+                                        <select class="form-control" name="id-genero" id="id-genero-a">
+                                            <?php
+                                            $sql = "SELECT nombre_genero, idGenero FROM genero ORDER BY nombre_genero";
+
+                                            $consulta = Conexion::obtener_conexion()->query($sql);
+                                            ?>
+                                            <option>Indefinido</option>
+                                            <?php
+                                            while ($fila = $consulta->fetch(PDO::FETCH_ASSOC)) {
+                                                ?>
+                                                <option value="<?php echo $fila['idGenero'] ?>"><?php echo $fila['nombre_genero'] ?></option>
+                                                <?php
+                                            }
+                                            ?>
+                                        </select>
+                                    </div>
+                                    <div class="col-md-3">
+                                        <label>Epíteto</label>
+                                        <select class="form-control" name="id-epiteto" id="id-epiteto-a">
+                                            <?php
+                                            $sql = "SELECT nombre_epiteto, idEpiteto FROM epiteto ORDER BY nombre_epiteto";
+
+                                            $consulta = Conexion::obtener_conexion()->query($sql);
+                                            ?>
+                                            <option>Indefinido</option>
+                                            <?php
+                                            while ($fila = $consulta->fetch(PDO::FETCH_ASSOC)) {
+                                                ?>
+                                                <option value="<?php echo $fila['idEpiteto'] ?>"><?php echo $fila['nombre_epiteto'] ?></option>
+                                                <?php
+                                            }
+                                            ?>
+                                        </select>
+                                    </div>
+                                    <div class="col-md-3">
+                                        <label>Autor</label>
+                                        <input type="text" class="form-control" id="autor-a" name="autor">
+                                    </div>
+                                </div>
+
+                                <div class="col-md-12" style="padding-top: 20px">
+                                    <h4 style="text-align: center">CARACTERÍSTICAS</h4>
+                                    <hr>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-md-4">
+                                        <label>Fuente de información</label>
+                                        <input type="text" class="form-control" id="fuente-a" name="fuente">
+                                    </div>
+                                    <div class="col-md-4">
+                                        <label>Estatura</label>
+                                        <input type="text" class="form-control" id="altura-a" name="altura">
+                                    </div>
+                                    <div class="col-md-4">
+                                        <label>Color</label>
+                                        <select class="form-control" name="id-color" id="id-color-a">
+                                            <?php
+                                            $sql = "SELECT nombre_color, idColor FROM color ORDER BY nombre_color";
+
+                                            $consulta = Conexion::obtener_conexion()->query($sql);
+                                            ?>
+                                            <option>Indefinido</option>
+                                            <?php
+                                            while ($fila = $consulta->fetch(PDO::FETCH_ASSOC)) {
+                                                ?>
+                                                <option value="<?php echo $fila['idColor'] ?>"><?php echo $fila['nombre_color'] ?></option>
+                                                <?php
+                                            }
+                                            ?>
+                                        </select>
+                                    </div>
+                                </div>
+
+                                <div class="row" style="padding-top: 15px">
+                                    <div class="col-md-4">
+                                        <label>Forma de la Hoja</label>
+                                        <select class="form-control" name="id-forma" id="id-forma-a">
+                                            <?php
+                                            $sql = "SELECT nombre_forma, idForma FROM forma";
+
+                                            $consulta = Conexion::obtener_conexion()->query($sql);
+                                            ?>
+                                            <option>Indefinido</option>
+                                            <?php
+                                            while ($fila = $consulta->fetch(PDO::FETCH_ASSOC)) {
+                                                ?>
+                                                <option value="<?php echo $fila['idForma'] ?>"><?php echo $fila['nombre_forma'] ?></option>
+                                                <?php
+                                            }
+                                            ?>
+                                        </select>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <label>Tipo de Hoja</label>
+                                        <select class="form-control" name="id-tipo" id="id-tipo-a">
+                                            <?php
+                                            $sql = "SELECT nombre_hoja, idTipoHoja FROM tipohoja";
+
+                                            $consulta = Conexion::obtener_conexion()->query($sql);
+                                            ?>
+                                            <option>Indefinido</option>
+                                            <?php
+                                            while ($fila = $consulta->fetch(PDO::FETCH_ASSOC)) {
+                                                ?>
+                                                <option value="<?php echo $fila['idTipoHoja'] ?>"><?php echo $fila['nombre_hoja'] ?></option>
+                                                <?php
+                                            }
+                                            ?>
+                                        </select>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <label>Determinación</label>
+                                        <select class="form-control" name="id-determinado" id="id-determinado-a">
+                                            <?php
+                                            $sql = "SELECT nombre_determinado, idDeterminadaPor FROM determinadapor";
+
+                                            $consulta = Conexion::obtener_conexion()->query($sql);
+                                            ?>
+                                            <option>Indefinido</option>
+                                            <?php
+                                            while ($fila = $consulta->fetch(PDO::FETCH_ASSOC)) {
+                                                ?>
+                                                <option value="<?php echo $fila['idDeterminadaPor'] ?>"><?php echo $fila['nombre_determinado'] ?></option>
+
+                                                <?php
+                                            }
+                                            ?>
+                                        </select>
+                                    </div>
+                                </div>
+
+                                <hr style=" margin-bottom: 10px !important; margin-top: 25px !important">
+
+                                <div class="row" style="padding-top: 15px">
+                                    <div class="col-md-6">
+                                        <label>Imagen principal</label>
+                                        <div class="row">
+                                            <div class="col-md-10 col-xs-10">
+                                                <input type="text" class="form-control" id="comun" name="comun">
+                                            </div>
+                                            <div class="col-md-2 col-xs-2" style="margin-left: -20px">
+                                                <button type="submit" name="agregar-comun" id="agregar-comun" class="btn bg-light-blue btn-circle waves-effect waves-circle waves-float">
+                                                    <i class="material-icons">add</i>
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-2" style="text-align: center">
+                                        <label>Reproducción</label>
+                                        <div class="row centrar" style="text-align: center; padding-top: 8px">
+
+                                            <label class="containerCheck" style="margin-right: 7px">Sexual
+                                                <input type="checkbox" value="" name="sexual" id="sexual-a">
+                                                <span class="checkmark"></span>
+                                            </label>
+
+                                            <label class="containerCheck" style="margin-left: 7px">Asexual
+                                                <input type="checkbox" value="" name="asexual" id="asexual-a">
+                                                <span class="checkmark"></span>
+                                            </label>
+
+                                        </div>
+                                    </div>
+                                    <div class="col-md-2" style="text-align: center">
+                                        <label>Identificado</label>
+                                        <div class="row centrar" style="text-align: center; padding-top: 8px">
+                                            <label>No</label>
+                                            <label class="switch"><input type="checkbox" id="revision-a" name="revision"><span class="slider round"></span></label>
+                                            <label>Sí</label>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-2" style="text-align: center">
+                                        <label>Visible</label>
+                                        <div class="row centrar" style="text-align: center; padding-top: 8px">
+                                            <label>No</label>
+                                            <label class="switch"><input type="checkbox" id="visible-a" name="visible"><span class="slider round"></span></label>
+                                            <label>Sí</label>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-link waves-effect" id="actualizar-registro">ACTUALIZAR</button>
+                                <button type="button" class="btn btn-link waves-effect" data-dismiss="modal" aria-label="Close">CERRAR</button>
+                            </div>
+
+                        </form>
+
+                    </div>
+                </div>
+            </div>
+
         </div>
     </section>
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $('#tabla-registro').load('tablas/tablaRegistros.php');
+        });
+    </script>
 
     <script>
         //CREAR NUEVO REGISTRO
@@ -555,6 +802,7 @@ include_once 'plantillas/head-dashboard.php';
                     success: function (r) {
 
                         if (r == 1) {
+                            $('#tabla-registro').load('tablas/tablaRegistros.php');
                             alertify.success("Registro agregado");
 
                         } else {
@@ -593,6 +841,132 @@ include_once 'plantillas/head-dashboard.php';
         });
     </script>
 
+    <script>
+        //***** ACTUALIZAR REINO
+        $('#actualizar-registro').click(function ()
+        {
+            id_planta = $('#id-planta').val();
+            id_reino = $('#id-reino-a').val();
+            id_division = $('#id-division-a').val();
+            id_clase = $('#id-clase-a').val();
+            id_orden = $('#id-orden-a').val();
+            id_familia = $('#id-familia-a').val();
+            id_genero = $('#id-genero-a').val();
+            id_epiteto = $('#id-epiteto-a').val();
+            id_determinado = $('#id-determinado-a').val();
+            id_color = $('#id-color-a').val();
+            id_forma = $('#id-forma-a').val();
+            id_tipo = $('#id-tipo-a').val();
+            autor = $('#autor-a').val();
+            fuente = $('#fuente-a').val();
+            altura = $('#altura-a').val();
+
+            if ($('#sexual-a').is(':checked')) {
+                sexual = 1;
+            } else {
+                sexual = 0;
+            }
+
+            if ($('#asexual-a').is(':checked')) {
+                asexual = 1;
+            } else {
+                asexual = 0;
+            }
+
+            if ($('#visible-a').is(':checked')) {
+                visible = 1;
+            } else {
+                visible = 0;
+            }
+
+            if ($('#revision-a').is(':checked')) {
+                revision = 1;
+            } else {
+                revision = 0;
+            }
+
+            if (id_familia == "Indefinido")
+            {
+                alertify.warning('Debe seleccionar al menos el campo Familia');
+            } else
+            {
+
+                $.ajax({
+                    type: "POST",
+                    url: "app/actualizarDatos.php",
+                    data: {'funcion': 'actualizarRegistro', 'reino': id_reino, 'division': id_division, 'clase': id_clase, 'orden': id_orden, 'familia': id_familia,
+                        'genero': id_genero, 'epiteto': id_epiteto, 'determinado': id_determinado, 'color': id_color, 'forma': id_forma, 'tipo': id_tipo, 'autor': autor,
+                        'fuente': fuente, 'altura': altura, 'revision': revision, 'visible': visible, 'sexual': sexual, 'asexual': asexual, 'id-planta':id_planta},
+                    success: function (r) {
+
+                        if (r == 1) {
+                            $('#tabla-registro').load('tablas/tablaRegistros.php');
+                            alertify.success("Registro agregado");
+                            console.log(r);
+
+                        } else {
+                            alertify.error("Error del servidor");
+                            console.log(r);
+                        }
+                    }
+                });
+            }
+        });
+
+        function agregarForm(datos) {
+            re = datos.split('-');
+            console.log(datos);
+
+            $('#id-reino-a').val(re[0]);
+            $('#id-division-a').val(re[1]);
+            $('#id-clase-a').val(re[2]);
+            $('#id-orden-a').val(re[3]);
+            $('#id-familia-a').val(re[4]);
+            $('#id-genero-a').val(re[5]);
+            $('#id-epiteto-a').val(re[6]);
+            $('#autor-a').val(re[7]);
+            $('#fuente-a').val(re[8]);
+            $('#altura-a').val(re[9]);
+            $('#id-color-a').val(re[10]);
+            $('#id-forma-a').val(re[11]);
+            $('#id-tipo-a').val(re[12]);
+            $('#id-determinado-a').val(re[13]);
+            $('#reproduccion-a').val(re[14]);
+            $('#revision-a').val(re[15]);
+            $('#visible-a').val(re[16]);
+            $('#id-planta').val(re[17]);
+
+            //COMPROBAR ESTADO REPRODUCCION
+            if (re[14] == 0) {
+                $('#sexual-a').prop('checked', false);
+                $('#asexual-a').prop('checked', false);
+            } else if (re[14] == 1) {
+                $('#sexual-a').prop('checked', true);
+                $('#asexual-a').prop('checked', false);
+            } else if (re[14] == 2) {
+                $('#sexual-a').prop('checked', false);
+                $('#asexual-a').prop('checked', true);
+            } else if (re[14] == 3) {
+                $('#sexual-a').prop('checked', true);
+                $('#asexual-a').prop('checked', true);
+            }
+
+            //COMPROBAR REVISION
+            if (re[15] == 1) {
+                $('#revision-a').prop('checked', true);
+            } else {
+                $('#revision-a').prop('checked', false);
+            }
+
+            //COMPROBAR VISIBILIDAD
+            if (re[16] == 1) {
+                $('#visible-a').prop('checked', true);
+            } else {
+                $('#visible-a').prop('checked', false);
+            }
+        }
+    </script>
+
     <!--AGREGAR NOMBRE COMUN-->
     <script>
 
@@ -612,10 +986,11 @@ include_once 'plantillas/head-dashboard.php';
                 $.ajax({
                     type: "POST",
                     url: "app/actualizarDatos.php",
-                    data: {'funcion': 'ponerOcultos', 'oculto': checked},
+                    data: {'funcion': 'ponerOcultos', 'seleccion': checked},
                     success: function (r) {
 
                         if (r == 1) {
+                            $('#tabla-registro').load('tablas/tablaRegistros.php');
                             alertify.success("Ocultos correctamente");
                         } else {
                             alertify.error("Error del servidor");

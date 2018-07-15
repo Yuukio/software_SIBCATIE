@@ -1,5 +1,5 @@
 <?php
-
+date_default_timezone_set('America/Costa_Rica');
 include ('conexion2.php');
 
 $funcion = $_POST['funcion'];
