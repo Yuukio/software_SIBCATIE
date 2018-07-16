@@ -1953,7 +1953,7 @@ include_once 'plantillas/head-dashboard.php';
     <!-- SCRIPT INSERTAR DATOS -->
     <script type="text/javascript">
 
-//CREAR NUEVO REINO
+        //CREAR NUEVO REINO
         $('#guardar-reino').click(function ()
         {
             nombre_reino = $('#nombre-reino').val();
@@ -2748,7 +2748,7 @@ include_once 'plantillas/head-dashboard.php';
                 }
             });
         }
-//***** FILTRAR DIVISION
+        //***** FILTRAR DIVISION
         function filtrarDivision(id) {
 
             $.ajax({
@@ -2802,7 +2802,7 @@ include_once 'plantillas/head-dashboard.php';
                 }
             });
         }
-//***** FILTRAR ORDEN
+        //***** FILTRAR ORDEN
         function filtrarOrden(id) {
 
             $.ajax({

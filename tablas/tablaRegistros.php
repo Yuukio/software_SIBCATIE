@@ -62,7 +62,7 @@ include_once '../app/conexion2.php';
                     LEFT JOIN color Co ON P.Color_idColor = Co.idColor
                     LEFT JOIN tipohoja Ti ON P.TipoHoja_idTipoHoja = Ti.idTipoHoja
                     LEFT JOIN determinadapor De ON P.DeterminadaPor_idDeterminadaPor = De.idDeterminadaPor
-                    WHERE p.revision=1";
+                    WHERE P.revision=1";
 
             $consulta = $pdoConn->prepare($sql);
 

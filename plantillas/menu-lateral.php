@@ -97,6 +97,12 @@
             <ul class="list">
                 <li class="header">MENÚ DE NAVEGACIÓN</li>
 
+
+
+                <?php
+                if (ControlSesion::rolAdminNativa()) {
+                    ?>
+
                     <li class= "<?php echo $home ?>" >
                         <a href="home.php">
                             <i class="material-icons">home</i>
@@ -108,22 +114,41 @@
 
                     <li class= "<?php echo $registros ?>" >
                         <a href="registros.php">
-                            <i class="material-icons">view_list</i>
+                            <i class="material-icons">chrome_reader_mode</i>
                             <span>Registro de Especies</span>
                         </a>
                     </li>
                     <li class= "<?php echo $usuarios ?>" >
                         <a href="usuarios.php">
                             <i class="material-icons">people</i>
-                            <span>Usuarios registrados</span>
+                            <span>Usuarios Registrados</span>
                         </a>
                     </li>
                     <li class= "<?php echo $catalogos ?>" >
                         <a href="catalogos.php">
                             <i class="material-icons">view_module</i>
-                            <span>Catálogos taxonómicos</span>
+                            <span>Catálogos Taxonómicos</span>
                         </a>
                     </li>
+
+                    <?php
+                } elseif (ControlSesion::rolColaboradorNativa()) {
+                    ?>
+                    <li class= "<?php echo $registros ?>" >
+                        <a href="registros.php">
+                            <i class="material-icons">chrome_reader_mode</i>
+                            <span>Registro de Especies</span>
+                        </a>
+                    </li>
+                    <?php
+                }
+                ?>
+                <li class= "<?php echo $listas ?>" >
+                    <a href="listas.php">
+                        <i class="material-icons">view_list</i>
+                        <span>Administrar Listas</span>
+                    </a>
+                </li>
 
                 <li class="header">CONFIGURACIONES</li>
                 <li>

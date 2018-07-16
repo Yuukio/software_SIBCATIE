@@ -20,7 +20,7 @@ Conexion::abrir_conexion();
             <div class="collapse navbar-collapse" id="navbarResponsive">
                 <ul class="navbar-nav text-uppercase ml-auto">
 
-                    
+
 
                     <li class="nav-item">
                         <a class="nav-link js-scroll-trigger" href="#page-top">Home</a>
@@ -45,14 +45,21 @@ Conexion::abrir_conexion();
                     <?php
                     if (ControlSesion::sesionIniciada()) {
 
-                        if (ControlSesion::rolAdminNativa() OR ControlSesion::rolColaboradorNativa()) {
+                        if (ControlSesion::rolAdminNativa()) {
                             ?>
                             <li class="nav-item">
                                 <a class="nav-link js-scroll-trigger" href="<?php echo RUTA_DASHBOARD ?>">Administracion</a>
                             </li>
                             <?php
-                        } else {
+                        } elseif (ControlSesion::rolColaboradorNativa()) {
                             ?>
+                            <li class="nav-item">
+                                <a class="nav-link js-scroll-trigger" href="registros.php">Administracion</a>
+                            </li>
+                            <?php
+                        } elseif (!ControlSesion::sesionIniciada() OR ControlSesion::rolVisitante()) {
+                            ?>
+
                             <li class="nav-item">
                                 <a class="nav-link js-scroll-trigger" href="#"><?php echo '' . $_SESSION['rol_idRol']; ?></a>
                             </li>
@@ -86,4 +93,3 @@ Conexion::abrir_conexion();
             </div>
         </div>
     </nav>
-    

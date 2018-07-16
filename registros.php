@@ -2,8 +2,8 @@
 include_once 'app/ControlSesion.inc.php';
 include_once 'app/config.inc.php';
 include_once 'app/Conexion.inc.php';
+include_once 'app/conexion2.php';
 include_once 'app/Redireccion.inc.php';
-include_once 'app/ControlSesion.inc.php';
 
 Conexion::abrir_conexion();
 
@@ -13,6 +13,8 @@ if (!ControlSesion::sesionIniciada() OR ControlSesion::rolVisitante()) {
 }
 
 $titulo = 'Registros';
+
+$id_usuario = $_SESSION['idUsuario'];
 ?>
 
 <head>
@@ -98,20 +100,9 @@ $titulo = 'Registros';
                         <li class="dropdown" style="vertical-align: top; margin-right: 10px; top: -5px">
                             <div class="btn-group" role="group">
                                 <button type="submit" name="favoritos" id="favoritos" class="btn btn-info waves-effect">Favorito</button>
-                                <button type="button" name="exportar" id="exportar" class="btn btn-info waves-effect">Exportar</button>
+                                <button type="submit" name="exportar" id="exportar" class="btn btn-info waves-effect">Exportar</button>
                                 <button type="submit" name="ocultar" id="ocultar" class="btn btn-info waves-effect">Ocultar</button>                                    
                                 <button type="button" class="btn btn-info waves-effect" data-toggle="modal" data-target="#modalRegistroPlanta">Agregar</button>
-                                <div class="btn-group" role="group">
-                                    <button type="button" class="btn btn-info waves-effect dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
-                                        Listas
-                                        <span class="caret"></span>
-                                    </button>
-                                    <ul class="dropdown-menu">
-                                        <li><a href="javascript:void(0);" class=" waves-effect waves-block" data-toggle="modal" data-target="#modalFavoritos">Lista de Favoritos</a></li>
-                                        <li><a href="javascript:void(0);" class=" waves-effect waves-block" data-toggle="modal" data-target="#modalExcel">Lista de Excel</a></li>
-                                        <li><a href="javascript:void(0);" class=" waves-effect waves-block" data-toggle="modal" data-target="#modalOcultos">Lista de Ocultos</a></li>
-                                    </ul>
-                                </div>
                             </div>
                         </li>
                     </ul>
@@ -121,7 +112,7 @@ $titulo = 'Registros';
                 </div>
             </div>
 
-            <!-- ******************************* REGISTROR DE PLANTA ************************************************** -->
+            <!-- ******************************* REGISTRO DE PLANTA ************************************************** -->
 
             <!-- Modal REGISTRAR NUEVA PLANTA -->
             <div class="modal fade" id="modalRegistroPlanta" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
@@ -370,20 +361,25 @@ $titulo = 'Registros';
                                 <hr style=" margin-bottom: 10px !important; margin-top: 25px !important">
 
                                 <div class="row" style="padding-top: 15px">
-                                    <div class="col-md-6">
+                                    <div class="col-md-4" style="top: 20px;">
                                         <label>Imagen principal</label>
                                         <div class="row">
                                             <div class="col-md-10 col-xs-10">
                                                 <input type="text" class="form-control" id="comun" name="comun">
                                             </div>
                                             <div class="col-md-2 col-xs-2" style="margin-left: -20px">
-                                                <button type="submit" name="agregar-comun" id="agregar-comun" class="btn bg-light-blue btn-circle waves-effect waves-circle waves-float">
-                                                    <i class="material-icons">add</i>
+                                                <button type="button" name="agregar-img" id="agregar-img" class="btn bg-light-blue btn-circle waves-effect waves-circle waves-float">
+                                                    <i class="material-icons">file_upload</i>
                                                 </button>
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="col-md-2" style="text-align: center">
+                                    <div class="col-md-2" style="margin-left: -30px; margin-right: 30px">
+                                        <div class="box-shadow">
+                                            <img class="card-img-top" data-src="holder.js/100px225?theme=thumb&amp;bg=55595c&amp;fg=eceeef&amp;text=Thumbnail" alt="Thumbnail [100%x100%]" style="width: 100%; display: block;" src="img/image-gallery/1.jpg" data-holder-rendered="true">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-2" style="text-align: center; padding-top: 15px">
                                         <label>Reproducción</label>
                                         <div class="row centrar" style="text-align: center; padding-top: 8px">
 
@@ -399,7 +395,7 @@ $titulo = 'Registros';
 
                                         </div>
                                     </div>
-                                    <div class="col-md-2" style="text-align: center">
+                                    <div class="col-md-2" style="text-align: center; padding-top: 15px">
                                         <label>Identificado</label>
                                         <div class="row centrar" style="text-align: center; padding-top: 8px">
                                             <label>No</label>
@@ -407,7 +403,7 @@ $titulo = 'Registros';
                                             <label>Sí</label>
                                         </div>
                                     </div>
-                                    <div class="col-md-2" style="text-align: center">
+                                    <div class="col-md-2" style="text-align: center; padding-top: 15px">
                                         <label>Visible</label>
                                         <div class="row centrar" style="text-align: center; padding-top: 8px">
                                             <label>No</label>
@@ -744,6 +740,7 @@ $titulo = 'Registros';
         });
     </script>
 
+    <!-- CREAR -->
     <script>
         //CREAR NUEVO REGISTRO
         $('#agregar-registro').click(function ()
@@ -841,6 +838,7 @@ $titulo = 'Registros';
         });
     </script>
 
+    <!-- ACTUALIZAR -->
     <script>
         //***** ACTUALIZAR REINO
         $('#actualizar-registro').click(function ()
@@ -896,7 +894,7 @@ $titulo = 'Registros';
                     url: "app/actualizarDatos.php",
                     data: {'funcion': 'actualizarRegistro', 'reino': id_reino, 'division': id_division, 'clase': id_clase, 'orden': id_orden, 'familia': id_familia,
                         'genero': id_genero, 'epiteto': id_epiteto, 'determinado': id_determinado, 'color': id_color, 'forma': id_forma, 'tipo': id_tipo, 'autor': autor,
-                        'fuente': fuente, 'altura': altura, 'revision': revision, 'visible': visible, 'sexual': sexual, 'asexual': asexual, 'id-planta':id_planta},
+                        'fuente': fuente, 'altura': altura, 'revision': revision, 'visible': visible, 'sexual': sexual, 'asexual': asexual, 'id-planta': id_planta},
                     success: function (r) {
 
                         if (r == 1) {
@@ -967,9 +965,10 @@ $titulo = 'Registros';
         }
     </script>
 
-    <!--AGREGAR NOMBRE COMUN-->
+    <!--FUNCIONES CHECKBOX-->
     <script>
 
+        //AGREGAR A OCULTOS
         $('#ocultar').click(function ()
         {
             var checked = [];
@@ -987,6 +986,37 @@ $titulo = 'Registros';
                     type: "POST",
                     url: "app/actualizarDatos.php",
                     data: {'funcion': 'ponerOcultos', 'seleccion': checked},
+                    success: function (r) {
+
+                        if (r == 1) {
+                            $('#tabla-registro').load('tablas/tablaRegistros.php');
+                            alertify.success("Ocultos correctamente");
+                        } else {
+                            alertify.error("Error del servidor");
+                        }
+                    }
+                });
+            }
+        });
+
+        //AGREGAR A FAVORITOS
+        $('#favoritos').click(function ()
+        {
+            var checked = [];
+            $("input[name='seleccion[]']:checked").each(function ()
+            {
+                checked.push(parseInt($(this).val()));
+            });
+
+            if (checked.length == 0)
+            {
+                alertify.warning('No ha seleccionado ninguna casilla');
+            } else
+            {
+                $.ajax({
+                    type: "POST",
+                    url: "app/actualizarDatos.php",
+                    data: {'funcion': 'ponerFavoritos', 'seleccion': checked},
                     success: function (r) {
 
                         if (r == 1) {

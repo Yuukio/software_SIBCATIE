@@ -1,13 +1,22 @@
 <?php
 
-include_once 'conexion2.php';
+include_once 'ControlSesion.inc.php';
 include_once 'config.inc.php';
 include_once 'Conexion.inc.php';
-include_once 'ControlSesion.inc.php';
+include_once 'conexion2.php';
+include_once 'Redireccion.inc.php';
+
+
+//VALIDAR INICIO DE SESION
+if (!ControlSesion::sesionIniciada() OR ControlSesion::rolVisitante()) {
+    Redireccion::redirigir(SERVIDOR);
+}
 
 Conexion::abrir_conexion();
 
 $funcion = $_POST['funcion'];
+
+$id_usuario = $_SESSION['idUsuario'];
 
 // ********ACTUALIZAR REINO
 if ($funcion == 'actualizarReino') {
@@ -273,12 +282,30 @@ elseif ($funcion == 'actualizarRegistro') {
     }
 }
 
-// ********PONER OCULTO
+// ********AGREGAR A OCULTO
 elseif ($funcion == 'ponerOcultos') {
     $seleccion = $_POST["seleccion"];
     try {
 
         $query = "UPDATE `planta` SET `visible`= 0 WHERE idPlanta = ?";
+        $stmt = $pdoConn->prepare($query);
+
+        for ($i = 0; $i < sizeof($seleccion); $i++) {
+            $stmt->execute(array($seleccion[$i]));
+        }
+
+        echo '1';
+    } catch (Exception $e) {
+        echo '0';
+    }
+}
+
+// ********AGREGAR A FAVORITOS
+elseif ($funcion == 'ponerFavoritos') {
+    $seleccion = $_POST["seleccion"];
+    try {
+
+        $query = "INSERT INTO `favorito`(`Planta_idPlanta`, `Usuario_idUsuario`) VALUES (?, '$id_usuario')";
         $stmt = $pdoConn->prepare($query);
 
         for ($i = 0; $i < sizeof($seleccion); $i++) {
