@@ -1,4 +1,5 @@
 <?php
+
 date_default_timezone_set('America/Costa_Rica');
 include ('conexion2.php');
 
@@ -190,17 +191,19 @@ elseif ($funcion == 'insertarRegistro') {
     $altura = $_POST["altura"] != 'Indefinido' ? $_POST["altura"] : null;
 
     //**********CREAR EL ID MASCARA
-    $sql_id = "SELECT idPlanta, fecha_ingreso FROM planta ORDER BY idPlanta DESC LIMIT 1";
+    $sql_id = "SELECT idMascara, fecha_ingreso FROM planta ORDER BY idPlanta DESC LIMIT 1";
     $consulta = $pdoConn->query($sql_id);
     $fila = $consulta->fetch(PDO::FETCH_ASSOC);
 
-    $id = $fila['idPlanta'];
+    $id = $fila['idMascara'];
+    $id = substr($id, -3);
+
     $fecha_registro = $fila['fecha_ingreso'];
     $fecha = date("Y-m-d");
 
     if ($fecha == $fecha_registro) {
         $id = $id + 1;
-    } elseif ($fecha > $fecha_registro) {
+    } elseif ($fecha > $fecha_registro || $id == 0 || $id == NULL) {
         $id = 1;
     }
 
@@ -259,11 +262,17 @@ elseif ($funcion == 'insertarRegistro') {
 }
 // ********INSERTAR COMUN
 elseif ($funcion == 'insertarNombreComun') {
-    $nombre_comun = $_POST["n_comun"];
+    $comun = $_POST["comun"];
+    $lengua = $_POST['lengua'];
+    $id_comun = $_POST['id-comun'];
+
+    $datos_comun = $comun . ' ' . $lengua . ' ' . $id_comun;
+
     try {
-        $query = "INSERT INTO estadosalud (nombre_estado) VALUES (?)";
+        $query = "INSERT INTO `nombrecomun`(`nombre_nombre_comun`, `lengua`, `Planta_idPlanta`) VALUES (?, ?, ?)";
         $stmt = $pdoConn->prepare($query);
-        $stmt->execute(array($nombre_comun));
+        $stmt->execute(array($comun, $lengua, $id_comun));
+
         echo '1';
     } catch (Exception $e) {
         echo '0';

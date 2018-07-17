@@ -46,7 +46,6 @@ include_once 'plantillas/head-dashboard.php';
                                 <button class="tablinks" onclick="openCity(event, 'Tipo')">Tipos de Hoja</button>
                                 <button class="tablinks" onclick="openCity(event, 'Uso')">Usos</button>
                                 <button class="tablinks" onclick="openCity(event, 'Estado')">Estados de Salud</button>
-                                <button class="tablinks" onclick="location.reload()" style="color: yellow; text-align: center">Recargar</button>
                             </div>
                         </div>
 
@@ -1970,7 +1969,7 @@ include_once 'plantillas/head-dashboard.php';
 
                         if (r == 1) {
                             //$('#tabla-reino').load('tablas/tablaReino.php');
-
+                            location.reload();
                             alertify.success("Agregado con éxito");
                         } else {
                             alertify.error("Error del servidor");
@@ -1998,6 +1997,7 @@ include_once 'plantillas/head-dashboard.php';
                     success: function (r) {
 
                         if (r == 1) {
+                            location.reload();
                             alertify.success("Agregado con éxito");
                         } else {
                             alertify.error("Error del servidor");
@@ -2026,6 +2026,7 @@ include_once 'plantillas/head-dashboard.php';
                     success: function (r) {
 
                         if (r == 1) {
+                            location.reload();
                             alertify.success("Agregado con éxito");
                         } else {
                             alertify.error("Error del servidor");
@@ -2052,6 +2053,7 @@ include_once 'plantillas/head-dashboard.php';
                     success: function (r) {
 
                         if (r == 1) {
+                            location.reload();
                             alertify.success("Agregado con éxito");
                         } else {
                             alertify.error("Error del servidor");
@@ -2078,6 +2080,7 @@ include_once 'plantillas/head-dashboard.php';
                     success: function (r) {
 
                         if (r == 1) {
+                            location.reload();
                             alertify.success("Agregado con éxito");
                         } else {
                             alertify.error("Error del servidor");
@@ -2104,6 +2107,7 @@ include_once 'plantillas/head-dashboard.php';
                     success: function (r) {
 
                         if (r == 1) {
+                            location.reload();
                             alertify.success("Agregado con éxito");
                         } else {
                             alertify.error("Error del servidor");
@@ -2130,6 +2134,7 @@ include_once 'plantillas/head-dashboard.php';
                     success: function (r) {
 
                         if (r == 1) {
+                            location.reload();
                             alertify.success("Agregado con éxito");
                         } else {
                             alertify.error("Error del servidor");
@@ -2156,6 +2161,7 @@ include_once 'plantillas/head-dashboard.php';
                     success: function (r) {
 
                         if (r == 1) {
+                            location.reload();
                             alertify.success("Agregado con éxito");
                         } else {
                             alertify.error("Error del servidor");
@@ -2182,6 +2188,7 @@ include_once 'plantillas/head-dashboard.php';
                     success: function (r) {
 
                         if (r == 1) {
+                            location.reload();
                             alertify.success("Agregado con éxito");
                         } else {
                             alertify.error("Error del servidor");
@@ -2208,6 +2215,7 @@ include_once 'plantillas/head-dashboard.php';
                     success: function (r) {
 
                         if (r == 1) {
+                            location.reload();
                             alertify.success("Agregado con éxito");
                         } else {
                             alertify.error("Error del servidor");
@@ -2234,6 +2242,7 @@ include_once 'plantillas/head-dashboard.php';
                     success: function (r) {
 
                         if (r == 1) {
+                            location.reload();
                             alertify.success("Agregado con éxito");
                         } else {
                             alertify.error("Error del servidor");
@@ -2260,6 +2269,7 @@ include_once 'plantillas/head-dashboard.php';
                     success: function (r) {
 
                         if (r == 1) {
+                            location.reload();
                             alertify.success("Agregado con éxito");
                         } else {
                             alertify.error("Error del servidor");
@@ -2286,6 +2296,7 @@ include_once 'plantillas/head-dashboard.php';
                     success: function (r) {
 
                         if (r == 1) {
+                            location.reload();
                             alertify.success("Agregado con éxito");
                         } else {
                             alertify.error("Error del servidor");
@@ -2317,7 +2328,7 @@ include_once 'plantillas/head-dashboard.php';
                     success: function (r) {
 
                         if (r == 1) {
-                            $('#tabla-reino').load('tablas/tablaReino.php');
+                            location.reload();
                             alertify.success("Se actualizó correctamente");
                         } else {
                             alertify.error("Error del servidor");
@@ -2344,6 +2355,7 @@ include_once 'plantillas/head-dashboard.php';
                     success: function (r) {
 
                         if (r == 1) {
+                            location.reload();
                             alertify.success("Se actualizó correctamente");
                         } else {
                             alertify.error("Error del servidor");
@@ -2370,6 +2382,7 @@ include_once 'plantillas/head-dashboard.php';
                     success: function (r) {
 
                         if (r == 1) {
+                            location.reload();
                             alertify.success("Se actualizó correctamente");
                         } else {
                             alertify.error("Error del servidor");
@@ -2396,6 +2409,7 @@ include_once 'plantillas/head-dashboard.php';
                     success: function (r) {
 
                         if (r == 1) {
+                            location.reload();
                             alertify.success("Se actualizó correctamente");
                         } else {
                             alertify.error("Error del servidor");
@@ -2422,6 +2436,7 @@ include_once 'plantillas/head-dashboard.php';
                     success: function (r) {
 
                         if (r == 1) {
+                            location.reload();
                             alertify.success("Se actualizó correctamente");
                         } else {
                             alertify.error("Error del servidor");
@@ -2448,6 +2463,7 @@ include_once 'plantillas/head-dashboard.php';
                     success: function (r) {
 
                         if (r == 1) {
+                            location.reload();
                             alertify.success("Se actualizó correctamente");
                         } else {
                             alertify.error("Error del servidor");
@@ -2474,6 +2490,7 @@ include_once 'plantillas/head-dashboard.php';
                     success: function (r) {
 
                         if (r == 1) {
+                            location.reload();
                             alertify.success("Se actualizó correctamente");
                         } else {
                             alertify.error("Error del servidor");
@@ -2500,6 +2517,7 @@ include_once 'plantillas/head-dashboard.php';
                     success: function (r) {
 
                         if (r == 1) {
+                            location.reload();
                             alertify.success("Se actualizó correctamente");
                         } else {
                             alertify.error("Error del servidor");
@@ -2526,6 +2544,7 @@ include_once 'plantillas/head-dashboard.php';
                     success: function (r) {
 
                         if (r == 1) {
+                            location.reload();
                             alertify.success("Se actualizó correctamente");
                         } else {
                             alertify.error("Error del servidor");
@@ -2552,6 +2571,7 @@ include_once 'plantillas/head-dashboard.php';
                     success: function (r) {
 
                         if (r == 1) {
+                            location.reload();
                             alertify.success("Se actualizó correctamente");
                         } else {
                             alertify.error("Error del servidor");
@@ -2578,6 +2598,7 @@ include_once 'plantillas/head-dashboard.php';
                     success: function (r) {
 
                         if (r == 1) {
+                            location.reload();
                             alertify.success("Se actualizó correctamente");
                         } else {
                             alertify.error("Error del servidor");
@@ -2604,6 +2625,7 @@ include_once 'plantillas/head-dashboard.php';
                     success: function (r) {
 
                         if (r == 1) {
+                            location.reload();
                             alertify.success("Se actualizó correctamente");
                         } else {
                             alertify.error("Error del servidor");
@@ -2630,6 +2652,7 @@ include_once 'plantillas/head-dashboard.php';
                     success: function (r) {
 
                         if (r == 1) {
+                            location.reload();
                             alertify.success("Se actualizó correctamente");
                         } else {
                             alertify.error("Error del servidor");

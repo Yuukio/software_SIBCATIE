@@ -317,3 +317,21 @@ elseif ($funcion == 'ponerFavoritos') {
         echo '0';
     }
 }
+
+// ********AGREGAR A EXPORTACION
+elseif ($funcion == 'ponerExportacion') {
+    $seleccion = $_POST["seleccion"];
+    try {
+
+        $query = "INSERT INTO `exportar`(`Planta_idPlanta`, `Usuario_idUsuario`) VALUES (?, '$id_usuario')";
+        $stmt = $pdoConn->prepare($query);
+
+        for ($i = 0; $i < sizeof($seleccion); $i++) {
+            $stmt->execute(array($seleccion[$i]));
+        }
+
+        echo '1';
+    } catch (Exception $e) {
+        echo '0';
+    }
+}

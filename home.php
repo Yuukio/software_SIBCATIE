@@ -308,7 +308,7 @@ include_once 'plantillas/head-dashboard.php';
         <!--MODAL NO IDENTIFICADAS-->
         <div class="modal fade" id="modalNoIdentificadas" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
             <div class="modal-dialog" role="document" style="width: 80%">
-                <div class="modal-content" style="width: 1400px">
+                <div class="modal-content">
                     <div class="card">
                         <div class="header bg-red">
                             <button type="button" class="close" data-dismiss="modal" aria-label="Close" 

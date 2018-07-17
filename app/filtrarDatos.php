@@ -302,3 +302,20 @@ elseif ($funcion == 'filtrarTipoHoja') {
     }
 }
 
+//******MOSTRAR LISTA NOMBRES COMUNES
+elseif ($funcion == 'filtrarComun') {
+    $id = $_POST["id"];
+    
+    try {
+        $query = "SELECT `nombre_nombre_comun`, `lengua` FROM `nombrecomun` WHERE Planta_idPlanta=$id";
+        
+        $stmt = $pdoConn->prepare($query);
+        $stmt->execute();
+        $resultado = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        echo json_encode($resultado);
+        
+    } catch (Exception $e) {
+        echo '0';
+    }
+}
+

@@ -74,6 +74,8 @@ $id_usuario = $_SESSION['idUsuario'];
     <script src="js/script.js"></script>
     <script src="plugins/bootstrap-notify/bootstrap-notify.js"></script>
     <script src="js/alertify.js"></script>
+
+
 </head>
 
 <body class="theme-red">
@@ -363,16 +365,7 @@ $id_usuario = $_SESSION['idUsuario'];
                                 <div class="row" style="padding-top: 15px">
                                     <div class="col-md-4" style="top: 20px;">
                                         <label>Imagen principal</label>
-                                        <div class="row">
-                                            <div class="col-md-10 col-xs-10">
-                                                <input type="text" class="form-control" id="comun" name="comun">
-                                            </div>
-                                            <div class="col-md-2 col-xs-2" style="margin-left: -20px">
-                                                <button type="button" name="agregar-img" id="agregar-img" class="btn bg-light-blue btn-circle waves-effect waves-circle waves-float">
-                                                    <i class="material-icons">file_upload</i>
-                                                </button>
-                                            </div>
-                                        </div>
+                                        
                                     </div>
                                     <div class="col-md-2" style="margin-left: -30px; margin-right: 30px">
                                         <div class="box-shadow">
@@ -436,7 +429,7 @@ $id_usuario = $_SESSION['idUsuario'];
 
                         <form>
                             <div class="modal-body">
-                                <input type="text" class="form-control" name="id-planta" id="id-planta" >
+                                <input type="text" class="form-control" name="id-planta" id="id-planta" style="display: none">
                                 <div class="col-md-12">
                                     <h4 style="text-align: center">TAXONOMÍA</h4>
                                     <hr>
@@ -677,10 +670,10 @@ $id_usuario = $_SESSION['idUsuario'];
                                         <label>Imagen principal</label>
                                         <div class="row">
                                             <div class="col-md-10 col-xs-10">
-                                                <input type="text" class="form-control" id="comun" name="comun">
+                                                <input type="text" class="form-control">
                                             </div>
                                             <div class="col-md-2 col-xs-2" style="margin-left: -20px">
-                                                <button type="submit" name="agregar-comun" id="agregar-comun" class="btn bg-light-blue btn-circle waves-effect waves-circle waves-float">
+                                                <button type="submit" class="btn bg-light-blue btn-circle waves-effect waves-circle waves-float">
                                                     <i class="material-icons">add</i>
                                                 </button>
                                             </div>
@@ -731,12 +724,80 @@ $id_usuario = $_SESSION['idUsuario'];
                 </div>
             </div>
 
+            <!-- Modal AGREGAR NOMBRE COMUN -->
+            <div class="modal fade" id="modalAgregarComun" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                            <h4 class="modal-title" id="defaultModalLabel">Agregar nombres comunes</h4>
+                        </div>
+
+                        <form>
+                            <div class="modal-body">
+
+                                <!--style="display:none"-->
+                                <input class="form-control" style="display:none" type="text" name="id-comun" id="id-comun" >
+
+                                <div class="col-md-12">
+                                    <h4 style="text-align: center">AGREGAR DATOS</h4>
+                                    <hr style="padding-bottom: 20px">
+                                </div>
+                                <div class="row" style="padding: 20px; margin-top: 20px">
+                                    <div class="col-md-5">
+                                        <label>Nombre común</label>
+                                        <input type="text" class="form-control" id="nombre-comun" name="nombre-comun">
+                                    </div>
+                                    <div class="col-md-5">
+                                        <label>Lengua</label>
+                                        <input type="text" class="form-control" id="lengua" name="lengua">
+                                    </div>
+                                    <div class="col-md-2" style="bottom: 0px">
+                                        <button type="button" class="btn-lg btn waves-effect" id="agregar-comun" style="width: 100%; bottom: -20px">AGREGAR</button>
+                                    </div>
+                                </div>
+
+                                <div class="col-md-12" style="padding-top: 30px; padding-bottom: 30px">
+                                    <h4 style="text-align: center">LISTA DE NOMBRES COMUNES</h4>
+                                    <hr style="padding-bottom: 20px">
+                                    <div class="body" id="tabla-comun">
+                                        <!--<table class="table" id="tablaComun" style="text-align: center">
+                                            <thead>
+                                                <tr style="background-color: white">
+                                                    <th>Nombre</th>
+                                                    <th>Lengua</th>
+                                                    <th>Opciones</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+
+                                            </tbody>
+                                        </table>-->
+                                    </div>
+                                </div>
+
+                            </div>
+                            <div class="modal-footer" style="padding-top: 30px">
+                            </div>
+
+                        </form>
+
+                    </div>
+                </div>
+            </div>
+
         </div>
     </section>
 
     <script type="text/javascript">
         $(document).ready(function () {
             $('#tabla-registro').load('tablas/tablaRegistros.php');
+        });
+    </script>
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $('#tabla-comun').load('tablas/tablaNombreComun.php');
         });
     </script>
 
@@ -813,20 +874,24 @@ $id_usuario = $_SESSION['idUsuario'];
         //AGREGAR NOMBRE COMUN
         $('#agregar-comun').click(function ()
         {
-            nombre_comun = $('#comun').val();
+            nombre_comun = $('#nombre-comun').val();
+            lengua = $('#lengua').val();
+            id = $('#id-comun').val();
+
             if (!nombre_comun)
             {
-                alertify.warning('Debe agregar un nombre común');
+                alertify.warning('Debe agregar al menos el nombre común');
             } else
             {
 
                 $.ajax({
                     type: "POST",
                     url: "app/insertarDatos.php",
-                    data: {'funcion': 'insertarNombreComun', 'n_comun': nombre_comun},
+                    data: {'funcion': 'insertarNombreComun', 'comun': nombre_comun, 'lengua': lengua, 'id-comun': id},
                     success: function (r) {
 
                         if (r == 1) {
+                            $('#tabla-comun').load('tablas/tablaNombreComun.php');
                             alertify.success("Agregado con éxito");
 
                         } else {
@@ -836,11 +901,38 @@ $id_usuario = $_SESSION['idUsuario'];
                 });
             }
         });
+
+        function obtenerID(id) {
+            $('#id-comun').val(id);
+            row = '<button type="submit" class="btn btn-xl waves-effect btn-danger">ELIMINAR</button>';
+
+            $.ajax({
+                type: "POST",
+                url: "app/filtrarDatos.php",
+                data: {'funcion': 'filtrarComun', 'id': id},
+
+                success: function (r) {
+                    var datos = $.parseJSON(r);
+                    var t = $('#tablaComun').DataTable();
+                    t.clear().draw();
+                    $.each(datos, function (i, item)
+                    {
+                        t.row.add([
+                            item.nombre_nombre_comun,
+                            item.lengua,
+                            row
+
+                        ]).draw(false);
+                    });
+                }
+            });
+        }
+
     </script>
 
     <!-- ACTUALIZAR -->
     <script>
-        //***** ACTUALIZAR REINO
+        //***** ACTUALIZAR REGISTRO
         $('#actualizar-registro').click(function ()
         {
             id_planta = $('#id-planta').val();
@@ -913,7 +1005,6 @@ $id_usuario = $_SESSION['idUsuario'];
 
         function agregarForm(datos) {
             re = datos.split('-');
-            console.log(datos);
 
             $('#id-reino-a').val(re[0]);
             $('#id-division-a').val(re[1]);
@@ -1017,6 +1108,37 @@ $id_usuario = $_SESSION['idUsuario'];
                     type: "POST",
                     url: "app/actualizarDatos.php",
                     data: {'funcion': 'ponerFavoritos', 'seleccion': checked},
+                    success: function (r) {
+
+                        if (r == 1) {
+                            $('#tabla-registro').load('tablas/tablaRegistros.php');
+                            alertify.success("Ocultos correctamente");
+                        } else {
+                            alertify.error("Error del servidor");
+                        }
+                    }
+                });
+            }
+        });
+
+        //AGREGAR A EXPORTACION 
+        $('#exportar').click(function ()
+        {
+            var checked = [];
+            $("input[name='seleccion[]']:checked").each(function ()
+            {
+                checked.push(parseInt($(this).val()));
+            });
+
+            if (checked.length == 0)
+            {
+                alertify.warning('No ha seleccionado ninguna casilla');
+            } else
+            {
+                $.ajax({
+                    type: "POST",
+                    url: "app/actualizarDatos.php",
+                    data: {'funcion': 'ponerExportacion', 'seleccion': checked},
                     success: function (r) {
 
                         if (r == 1) {

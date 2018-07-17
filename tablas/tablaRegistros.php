@@ -1,24 +1,10 @@
 <?php
 include_once '../app/Conexion.inc.php';
 include_once '../app/conexion2.php';
+include_once '../plantillas/dataTable.inc.php';
 ?>
 
-<!-- JQuery DataTable Css -->
-<link href="plugins/jquery-datatable/skin/bootstrap/css/dataTables.bootstrap.css" rel="stylesheet">
 
-<!-- Jquery DataTable Plugin Js -->
-<script src="plugins/jquery-datatable/jquery.dataTables.js"></script>
-<script src="plugins/jquery-datatable/skin/bootstrap/js/dataTables.bootstrap.js"></script>
-<script src="plugins/jquery-datatable/extensions/export/dataTables.buttons.min.js"></script>
-<script src="plugins/jquery-datatable/extensions/export/buttons.flash.min.js"></script>
-<script src="plugins/jquery-datatable/extensions/export/jszip.min.js"></script>
-<script src="plugins/jquery-datatable/extensions/export/pdfmake.min.js"></script>
-<script src="plugins/jquery-datatable/extensions/export/vfs_fonts.js"></script>
-<script src="plugins/jquery-datatable/extensions/export/buttons.html5.min.js"></script>
-<script src="plugins/jquery-datatable/extensions/export/buttons.print.min.js"></script>
-
-<!-- Custom Js -->
-<script src="js/pages/tables/jquery-datatable.js"></script>
 
 <div class="table-responsive">
     <table class="table table-bordered table-striped table-hover js-basic-example dataTable">
@@ -70,7 +56,7 @@ include_once '../app/conexion2.php';
 
             while ($fila = $consulta->fetch(PDO::FETCH_ASSOC)) {
 
-                $id_registro = $fila['idPlanta'];
+                $id = $fila['idPlanta'];
 
                 if ($fila['reino_idReino'] == NULL || $fila['reino_idReino'] == 0) {
                     $reino = 'Indefinido';
@@ -140,12 +126,11 @@ include_once '../app/conexion2.php';
 
                 $datos = $reino . '-' . $division . '-' . $clase . '-' . $orden . '-' . $familia . '-' . $genero . '-' . $epiteto . '-' .
                         $fila['autor'] . '-' . $fila['fuente_informacion'] . '-' . $fila['altura'] . '-' . $color . '-' . $forma . '-' . $tipo . '-' .
-                        $determinado . '-' . $fila['reproduccion'] . '-' . $fila['revision'] . '-' . $fila['visible'] . '-' . $id_registro;
+                        $determinado . '-' . $fila['reproduccion'] . '-' . $fila['revision'] . '-' . $fila['visible'] . '-' . $id;
 
                 $nombre_cientifico = $fila['nombre_genero'] . ' ' . $fila['nombre_epiteto'];
                 $revision = $fila['revision'];
                 $visible = $fila['visible'];
-                $id = $fila['idPlanta'];
 
                 /* ingreso de iconos de revision */
                 if ($revision == 0) {
@@ -194,8 +179,8 @@ include_once '../app/conexion2.php';
                             <i class="material-icons" data-toggle="modal" data-target="#modalActualizarPlanta" onclick="agregarForm('<?php echo $datos ?>')">edit</i>
                         </a>
                         <i>&nbsp;</i>
-                        <a href="#" style="color: #2a445f">
-                            <i class="material-icons" data-toggle="modal" data-target="#modalFotos">playlist_add</i>
+                        <a href="#" style="color: #2a445f" name="btn-comun">
+                            <i class="material-icons" data-toggle="modal" data-target="#modalAgregarComun" onclick="obtenerID('<?php echo $id?>')">playlist_add</i>
                         </a>
                         <i>&nbsp;</i>
                         <a href="#" style="color: #ff6d3a">
