@@ -125,7 +125,7 @@ $id_usuario = $_SESSION['idUsuario'];
                             <h4 class="modal-title" id="defaultModalLabel">Agregar un nuevo Registro</h4>
                         </div>
 
-                        <form>
+                        <form action="" id="insertar-planta" enctype="multipart/form-data">
                             <div class="modal-body">
                                 <div class="col-md-12">
                                     <h4 style="text-align: center">TAXONOMÍA</h4>
@@ -141,7 +141,7 @@ $id_usuario = $_SESSION['idUsuario'];
 
                                             $consulta = Conexion::obtener_conexion()->query($sql);
                                             ?>
-                                            <option>Indefinido</option>
+                                            <option value="0">Indefinido</option>
                                             <?php
                                             while ($fila = $consulta->fetch(PDO::FETCH_ASSOC)) {
                                                 ?>
@@ -159,7 +159,7 @@ $id_usuario = $_SESSION['idUsuario'];
 
                                             $consulta = Conexion::obtener_conexion()->query($sql);
                                             ?>
-                                            <option value="<?php echo $fila['idDivision'] ?>">Indefinido</option>
+                                            <option value="0">Indefinido</option>
                                             <?php
                                             while ($fila = $consulta->fetch(PDO::FETCH_ASSOC)) {
                                                 ?>
@@ -177,7 +177,7 @@ $id_usuario = $_SESSION['idUsuario'];
 
                                             $consulta = Conexion::obtener_conexion()->query($sql);
                                             ?>
-                                            <option>Indefinido</option>
+                                            <option value="0">Indefinido</option>
                                             <?php
                                             while ($fila = $consulta->fetch(PDO::FETCH_ASSOC)) {
                                                 ?>
@@ -195,7 +195,7 @@ $id_usuario = $_SESSION['idUsuario'];
 
                                             $consulta = Conexion::obtener_conexion()->query($sql);
                                             ?>
-                                            <option>Indefinido</option>
+                                            <option value="0">Indefinido</option>
                                             <?php
                                             while ($fila = $consulta->fetch(PDO::FETCH_ASSOC)) {
                                                 ?>
@@ -216,7 +216,7 @@ $id_usuario = $_SESSION['idUsuario'];
 
                                             $consulta = Conexion::obtener_conexion()->query($sql);
                                             ?>
-                                            <option>Indefinido</option>
+                                            <option value="0">Indefinido</option>
                                             <?php
                                             while ($fila = $consulta->fetch(PDO::FETCH_ASSOC)) {
                                                 ?>
@@ -234,7 +234,7 @@ $id_usuario = $_SESSION['idUsuario'];
 
                                             $consulta = Conexion::obtener_conexion()->query($sql);
                                             ?>
-                                            <option>Indefinido</option>
+                                            <option value="0">Indefinido</option>
                                             <?php
                                             while ($fila = $consulta->fetch(PDO::FETCH_ASSOC)) {
                                                 ?>
@@ -252,7 +252,7 @@ $id_usuario = $_SESSION['idUsuario'];
 
                                             $consulta = Conexion::obtener_conexion()->query($sql);
                                             ?>
-                                            <option>Indefinido</option>
+                                            <option value="0">Indefinido</option>
                                             <?php
                                             while ($fila = $consulta->fetch(PDO::FETCH_ASSOC)) {
                                                 ?>
@@ -290,7 +290,7 @@ $id_usuario = $_SESSION['idUsuario'];
 
                                             $consulta = Conexion::obtener_conexion()->query($sql);
                                             ?>
-                                            <option>Indefinido</option>
+                                            <option value="0">Indefinido</option>
                                             <?php
                                             while ($fila = $consulta->fetch(PDO::FETCH_ASSOC)) {
                                                 ?>
@@ -311,7 +311,7 @@ $id_usuario = $_SESSION['idUsuario'];
 
                                             $consulta = Conexion::obtener_conexion()->query($sql);
                                             ?>
-                                            <option>Indefinido</option>
+                                            <option value="0">Indefinido</option>
                                             <?php
                                             while ($fila = $consulta->fetch(PDO::FETCH_ASSOC)) {
                                                 ?>
@@ -329,7 +329,7 @@ $id_usuario = $_SESSION['idUsuario'];
 
                                             $consulta = Conexion::obtener_conexion()->query($sql);
                                             ?>
-                                            <option>Indefinido</option>
+                                            <option value="0">Indefinido</option>
                                             <?php
                                             while ($fila = $consulta->fetch(PDO::FETCH_ASSOC)) {
                                                 ?>
@@ -347,7 +347,7 @@ $id_usuario = $_SESSION['idUsuario'];
 
                                             $consulta = Conexion::obtener_conexion()->query($sql);
                                             ?>
-                                            <option>Indefinido</option>
+                                            <option value="0">Indefinido</option>
                                             <?php
                                             while ($fila = $consulta->fetch(PDO::FETCH_ASSOC)) {
                                                 ?>
@@ -362,58 +362,55 @@ $id_usuario = $_SESSION['idUsuario'];
 
                                 <hr style=" margin-bottom: 10px !important; margin-top: 25px !important">
 
-                                <div class="row" style="padding-top: 15px">
-                                    <div class="col-md-4" style="top: 20px;">
-                                        <label>Imagen principal</label>
-                                        
-                                    </div>
-                                    <div class="col-md-2" style="margin-left: -30px; margin-right: 30px">
-                                        <div class="box-shadow">
-                                            <img class="card-img-top" data-src="holder.js/100px225?theme=thumb&amp;bg=55595c&amp;fg=eceeef&amp;text=Thumbnail" alt="Thumbnail [100%x100%]" style="width: 100%; display: block;" src="img/image-gallery/1.jpg" data-holder-rendered="true">
+                                <div class="row" style="padding-top: 15px; margin-bottom: 15px">
+                                    <div class="col-md-4" style="top: 20px; margin-bottom: 15px">
+                                        <div class="col-md-8">
+                                            <label>Imagen principal</label>
+                                            <input class="form-control" type="file" name="imagen" id="imagen" required> 
+                                        </div>
+                                        <div id="respuesta" class="col-md-4" style="top: -10px; text-align: center">
+                                            
                                         </div>
                                     </div>
-                                    <div class="col-md-2" style="text-align: center; padding-top: 15px">
-                                        <label>Reproducción</label>
-                                        <div class="row centrar" style="text-align: center; padding-top: 8px">
-
-                                            <label class="containerCheck" style="margin-right: 7px">Sexual
-                                                <input type="checkbox" value="" name="sexual" id="sexual">
-                                                <span class="checkmark"></span>
-                                            </label>
-
-                                            <label class="containerCheck" style="margin-left: 7px">Asexual
-                                                <input type="checkbox" value="" name="asexual" id="asexual">
-                                                <span class="checkmark"></span>
-                                            </label>
-
+                                    <div class="col-md-8">
+                                        <div class="col-md-4" style="text-align: center; padding-top: 20px">
+                                            <label>Reproducción</label>
+                                            <div class="row centrar" style="text-align: center; padding-top: 8px">
+                                                <label class="containerCheck" style="margin-right: 7px">Sexual
+                                                    <input type="checkbox" value="1" name="sexual" id="sexual">
+                                                    <span class="checkmark"></span>
+                                                </label>
+                                                <label class="containerCheck" style="margin-left: 7px">Asexual
+                                                    <input type="checkbox" value="1" name="asexual" id="asexual">
+                                                    <span class="checkmark"></span>
+                                                </label>
+                                            </div>
                                         </div>
-                                    </div>
-                                    <div class="col-md-2" style="text-align: center; padding-top: 15px">
-                                        <label>Identificado</label>
-                                        <div class="row centrar" style="text-align: center; padding-top: 8px">
-                                            <label>No</label>
-                                            <label class="switch"><input type="checkbox" id="revision" name="revision"><span class="slider round"></span></label>
-                                            <label>Sí</label>
+                                        <div class="col-md-4" style="text-align: center; padding-top: 15px">
+                                            <label>Identificado</label>
+                                            <div class="row centrar" style="text-align: center; padding-top: 8px">
+                                                <label>No</label>
+                                                <label class="switch"><input type="checkbox" id="revision" name="revision"><span class="slider round"></span></label>
+                                                <label>Sí</label>
+                                            </div>
                                         </div>
-                                    </div>
-                                    <div class="col-md-2" style="text-align: center; padding-top: 15px">
-                                        <label>Visible</label>
-                                        <div class="row centrar" style="text-align: center; padding-top: 8px">
-                                            <label>No</label>
-                                            <label class="switch"><input type="checkbox" id="visible" name="visible"><span class="slider round"></span></label>
-                                            <label>Sí</label>
+                                        <div class="col-md-4" style="text-align: center; padding-top: 15px">
+                                            <label>Visible</label>
+                                            <div class="row centrar" style="text-align: center; padding-top: 8px">
+                                                <label>No</label>
+                                                <label class="switch"><input type="checkbox" id="visible" name="visible"><span class="slider round"></span></label>
+                                                <label>Sí</label>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
                             <div class="modal-footer">
                                 <button type="reset" class="btn btn-link waves-effect" style="margin-right: 100px">BORRAR</button>
-                                <button type="button" class="btn btn-link waves-effect" id="agregar-registro">AGREGAR</button>
+                                <button type="submit" class="btn btn-link waves-effect" id="agregar-registro">AGREGAR</button>
                                 <button type="button" class="btn btn-link waves-effect" data-dismiss="modal" aria-label="Close">CERRAR</button>
                             </div>
-
                         </form>
-
                     </div>
                 </div>
             </div>
@@ -801,8 +798,35 @@ $id_usuario = $_SESSION['idUsuario'];
         });
     </script>
 
-    <!-- CREAR -->
     <script>
+
+        $(document).ready(function () {
+            
+            $("#insertar-planta").submit(insertarPlanta);
+
+            function insertarPlanta(evento) {
+                evento.preventDefault();
+                var datos = new FormData($("#insertar-planta")[0]);
+                $("#respuesta").html("<img src='img/cargando8.gif' height='75'>");
+
+                $.ajax({
+                    url: 'app/insertar-planta.php',
+                    type: 'POST',
+                    data: datos,
+                    contentType: false,
+                    processData: false,
+                    success: function (datos) {
+                        $('#tabla-registro').load('tablas/tablaRegistros.php');
+                        $("#respuesta").html(datos);
+                    }
+                });
+            }
+        });
+
+    </script>
+
+    <!-- CREAR -->
+    <!--<script>
         //CREAR NUEVO REGISTRO
         $('#agregar-registro').click(function ()
         {
@@ -928,7 +952,7 @@ $id_usuario = $_SESSION['idUsuario'];
             });
         }
 
-    </script>
+    </script>-->
 
     <!-- ACTUALIZAR -->
     <script>

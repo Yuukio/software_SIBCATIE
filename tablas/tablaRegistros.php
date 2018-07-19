@@ -10,12 +10,12 @@ include_once '../plantillas/dataTable.inc.php';
     <table class="table table-bordered table-striped table-hover js-basic-example dataTable">
         <thead>
             <tr>
+                <!--<th>Imagen</th>-->
                 <th>ID</th>
                 <th>ID MASCARA</th>
                 <th>Familia</th>
                 <th>Género</th>
                 <th>Epíteto</th>
-                <th>Ingreso</th>
                 <th>Visible</th>
                 <th>Opciones</th>
                 <th>Seleccionar</th>
@@ -23,12 +23,12 @@ include_once '../plantillas/dataTable.inc.php';
         </thead>
         <tfoot>
             <tr>
+                <!--<th>Imagen</th>-->
                 <th>ID</th>
                 <th>ID MASCARA</th>
                 <th>Familia</th>
                 <th>Género</th>
                 <th>Epíteto</th>
-                <th>Ingreso</th>
                 <th>Visible</th>
                 <th>Opciones</th>
                 <th>Seleccionar</th>
@@ -39,7 +39,7 @@ include_once '../plantillas/dataTable.inc.php';
             $sql = "SELECT P.idPlanta, P.idMascara, P.autor, P.fecha_ingreso, P.fuente_informacion, P.altura, P.reproduccion, P.visible, P.revision, Fa.nombre_familia, 
                     Ge.nombre_genero, Ep.nombre_epiteto, Fo.nombre_forma, Co.nombre_color, De.nombre_determinado, Ti.nombre_hoja, P.reino_idReino, P.division_idDivision,
                     P.clase_idClase, P.orden_idOrden, P.Familia_idFamilia, P.Genero_idGenero, P.Epiteto_idEpiteto, P.Color_idColor, P.Forma_idForma, P.TipoHoja_idTipoHoja, 
-                    P.DeterminadaPor_idDeterminadaPor
+                    P.DeterminadaPor_idDeterminadaPor, P.url_img
                     FROM planta P 
                     LEFT JOIN familia Fa ON P.Familia_idFamilia = Fa.idFamilia
                     LEFT JOIN genero Ge ON P.Genero_idGenero = Ge.idGenero
@@ -57,6 +57,7 @@ include_once '../plantillas/dataTable.inc.php';
             while ($fila = $consulta->fetch(PDO::FETCH_ASSOC)) {
 
                 $id = $fila['idPlanta'];
+                $imagen = $fila['url_img'];
 
                 if ($fila['reino_idReino'] == NULL || $fila['reino_idReino'] == 0) {
                     $reino = 'Indefinido';
@@ -163,12 +164,12 @@ include_once '../plantillas/dataTable.inc.php';
                 /* asignando en tabla */
                 ?>
                 <tr valign="top">
+                    <!--<td><img src="<?php echo $fila['url_img']; ?>" width="50" height="50"></td>-->
                     <td><?php echo $fila['idPlanta'] ?></td> 
                     <td><?php echo $fila['idMascara'] ?></td> 
                     <td><?php echo $fila['nombre_familia'] ?></td>
                     <td><?php echo $fila['nombre_genero'] ?></td>
                     <td><?php echo $fila['nombre_epiteto'] ?></td>
-                    <td><?php echo $fila['fecha_ingreso'] ?></td>
                     <td style="text-align:center; width: 5px;"><?php echo $visible ?></td>
                     <td style="text-align:center;">
                         <a href="#" style="color: #17c4cb">
@@ -180,7 +181,7 @@ include_once '../plantillas/dataTable.inc.php';
                         </a>
                         <i>&nbsp;</i>
                         <a href="#" style="color: #2a445f" name="btn-comun">
-                            <i class="material-icons" data-toggle="modal" data-target="#modalAgregarComun" onclick="obtenerID('<?php echo $id?>')">playlist_add</i>
+                            <i class="material-icons" data-toggle="modal" data-target="#modalAgregarComun" onclick="obtenerID('<?php echo $id ?>')">playlist_add</i>
                         </a>
                         <i>&nbsp;</i>
                         <a href="#" style="color: #ff6d3a">
