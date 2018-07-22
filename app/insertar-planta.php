@@ -4,6 +4,7 @@ date_default_timezone_set('America/Costa_Rica');
 include_once '../app/conexion2.php';
 
 //$reino = $_POST["id-reino"];
+$reino = $_POST["id-reino"];
 $division = $_POST["id-division"];
 $clase = $_POST["id-clase"];
 $orden = $_POST["id-orden"];
@@ -21,9 +22,6 @@ $altura = $_POST["altura"];
 if ($altura <= 0) {
     $altura = 0;
 }
-
-//****** VALIDACION LISTAS ********
-$reino = $_POST["id-reino"];
 
 //****** REPRODUCCION ********
 if (isset($_POST["sexual"])) {
@@ -91,17 +89,15 @@ $dia = str_pad($dia, 2, "0", STR_PAD_LEFT);
 
 $idMascara = $anno . $mes . $dia . $id;
 
-
+//****** INSERTANDO ********
 $imagen = $_FILES["imagen"];
 $temporal = $_FILES["imagen"]["tmp_name"];
 
-$ruta = "fotos/" . $imagen["name"];
+$ruta = "fotos/" . $idMascara . '-' . $imagen["name"];
 
-
-
-$sql = "INSERT INTO planta (idMascara, reino_idReino, division_idDivision, clase_idClase, orden_idOrden, Familia_idFamilia, Genero_idGenero, 
-        Epiteto_idEpiteto, autor, fuente_informacion, altura, Color_idColor, Forma_idForma, TipoHoja_idTipoHoja, DeterminadaPor_idDeterminadaPor, 
-        url_img, reproduccion, revision, visible, fecha_ingreso) 
+$sql = "INSERT INTO planta (idMascara, reino_idReino, division_idDivision, clase_idClase, orden_idOrden, Familia_idFamilia, Genero_idGenero,
+        Epiteto_idEpiteto, autor, fuente_informacion, altura, Color_idColor, Forma_idForma, TipoHoja_idTipoHoja, DeterminadaPor_idDeterminadaPor,
+        url_img, reproduccion, revision, visible, fecha_ingreso)
         VALUES ($idMascara, $reino, $division, $clase, $orden, $familia, $genero, $epiteto, '$autor', '$fuente', $altura, $color, $forma,
         $tipo, $determinado, '$ruta', $reproduccion, $revision, $visible, NOW())";
 
@@ -112,21 +108,21 @@ $directorio = 'fotos/';
 
 if ($imagen["type"] == "image/jpg" || $imagen["type"] == "image/jpeg" || $imagen["type"] == "image/png") {
 
-    if (file_exists($directorio)) {
-        echo 'Sí existe directorio.' . '<br>';
-    } else {
+    if (!file_exists($directorio)) {
         mkdir("fotos/", 0777);
-        echo 'No existía el directorio, pero se creó.' . '<br>';
     }
 
     $insertado = move_uploaded_file($imagen["tmp_name"], $ruta);
 
     if ($insertado) {
-        echo 'Se insertó correctamente';
+        //carga correcta
+        echo '1';
     } else {
-        echo "Ocurrió un error";
+        //falló el servidor
+        echo '2';
     }
 } else {
-    echo 'Formato incorrecto.';
+    //formato incorrecto
+    echo '3';
 }
 ?>

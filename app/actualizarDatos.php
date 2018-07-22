@@ -238,27 +238,9 @@ elseif ($funcion == 'actualizarRegistro') {
     }
 
     //$usuario = $_SESSION['nombre_usuario'];
-    
+
     //Agregar una advertencia de actualizacion en cada tabla
 
-    $datos_prueba = $id_reino_r . '*' .
-            $id_division_r . '*' .
-            $id_clase_r . '*' .
-            $id_orden_r . '*' .
-            $id_familia_r . '*' .
-            $id_genero_r . '*' .
-            $id_epiteto_r . '*' .
-            $autor_r . '*' .
-            $fuente_r . '*' .
-            $altura_r . '*' .
-            $id_color_r . '*' .
-            $id_forma_r . '*' .
-            $id_tipo_r . '*' .
-            $id_determinado_r . '*' .
-            $reproduccion_r . '*' .
-            $revision_r . '*' .
-            $visible_r . '*' .
-            $id_planta_r;
 
     //$usuario = $_SESSION['nombre_usuario'];
 

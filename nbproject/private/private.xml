@@ -1,12 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project-private xmlns="http://www.netbeans.org/ns/project-private/1">
-    <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
+    <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="1">
+        <file>
+            <url>app/insertar-planta.php</url>
+            <bookmark id="1">
+                <name/>
+                <line>6</line>
+                <key/>
+            </bookmark>
+        </file>
+    </editor-bookmarks>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/xampp/htdocs/software_SIBCATIE/app/insertarDatos.php</file>
-            <file>file:/C:/xampp/htdocs/software_SIBCATIE/home.php</file>
             <file>file:/C:/xampp/htdocs/software_SIBCATIE/registros.php</file>
-            <file>file:/C:/xampp/htdocs/software_SIBCATIE/app/insertar-planta.php</file>
+            <file>file:/C:/xampp/htdocs/software_SIBCATIE/app/actualizar-planta.php</file>
+            <file>file:/C:/xampp/htdocs/software_SIBCATIE/tablas/tablaRegistros.php</file>
         </group>
     </open-files>
 </project-private>

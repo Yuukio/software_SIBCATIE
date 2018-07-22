@@ -11,6 +11,7 @@ include_once '../plantillas/dataTable.inc.php';
         <thead>
             <tr>
                 <!--<th>Imagen</th>-->
+                <th>Imagen</th>
                 <th>ID</th>
                 <th>ID MASCARA</th>
                 <th>Familia</th>
@@ -24,6 +25,7 @@ include_once '../plantillas/dataTable.inc.php';
         <tfoot>
             <tr>
                 <!--<th>Imagen</th>-->
+                <th>Imagen</th>
                 <th>ID</th>
                 <th>ID MASCARA</th>
                 <th>Familia</th>
@@ -125,9 +127,9 @@ include_once '../plantillas/dataTable.inc.php';
                     $determinado = $fila['DeterminadaPor_idDeterminadaPor'];
                 }
 
-                $datos = $reino . '-' . $division . '-' . $clase . '-' . $orden . '-' . $familia . '-' . $genero . '-' . $epiteto . '-' .
-                        $fila['autor'] . '-' . $fila['fuente_informacion'] . '-' . $fila['altura'] . '-' . $color . '-' . $forma . '-' . $tipo . '-' .
-                        $determinado . '-' . $fila['reproduccion'] . '-' . $fila['revision'] . '-' . $fila['visible'] . '-' . $id;
+                $datos = $reino . '*' . $division . '*' . $clase . '*' . $orden . '*' . $familia . '*' . $genero . '*' . $epiteto . '*' .
+                        $fila['autor'] . '*' . $fila['fuente_informacion'] . '*' . $fila['altura'] . '*' . $color . '*' . $forma . '*' . $tipo . '*' .
+                        $determinado . '*' . $fila['reproduccion'] . '*' . $fila['revision'] . '*' . $fila['visible'] . '*' . $id;
 
                 $nombre_cientifico = $fila['nombre_genero'] . ' ' . $fila['nombre_epiteto'];
                 $revision = $fila['revision'];
@@ -164,9 +166,9 @@ include_once '../plantillas/dataTable.inc.php';
                 /* asignando en tabla */
                 ?>
                 <tr valign="top">
-                    <!--<td><img src="<?php echo $fila['url_img']; ?>" width="50" height="50"></td>-->
-                    <td><?php echo $fila['idPlanta'] ?></td> 
-                    <td><?php echo $fila['idMascara'] ?></td> 
+                    <td style="text-align:center" ><a style="cursor: pointer"><img src="app/<?php echo $fila['url_img']; ?>" width="80" height="50"></a></td>
+                    <td><?php echo $fila['idPlanta'] ?></td>
+                    <td><?php echo $fila['idMascara'] ?></td>
                     <td><?php echo $fila['nombre_familia'] ?></td>
                     <td><?php echo $fila['nombre_genero'] ?></td>
                     <td><?php echo $fila['nombre_epiteto'] ?></td>
@@ -177,7 +179,7 @@ include_once '../plantillas/dataTable.inc.php';
                         </a>
                         <i>&nbsp;</i>
                         <a href="#" style="color: #ffc122">
-                            <i class="material-icons" data-toggle="modal" data-target="#modalActualizarPlanta" onclick="agregarForm('<?php echo $datos ?>')">edit</i>
+                            <i class="material-icons" data-toggle="modal" data-target="#modalActualizarPlanta" onclick="formActualizarDatos('<?php echo $datos ?>')">edit</i>
                         </a>
                         <i>&nbsp;</i>
                         <a href="#" style="color: #2a445f" name="btn-comun">

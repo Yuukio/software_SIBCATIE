@@ -5,8 +5,8 @@ include_once 'app/Redireccion.inc.php';
 
 //VALIDAR INICIO DE SESION
 if (!ControlSesion::sesionIniciada() OR ControlSesion::rolVisitante()) {
-    Redireccion::redirigir(SERVIDOR);    
-} 
+    Redireccion::redirigir(SERVIDOR);
+}
 
 $titulo = 'Home';
 include_once 'plantillas/head-dashboard.php';
@@ -67,7 +67,7 @@ include_once 'plantillas/head-dashboard.php';
                 </div>
 
                 <!--Especies no identificadas-->
-                <div class="col-md-10">       
+                <div class="col-md-10">
                     <div class="card">
                         <div class="header bg-red">
                             <h2>ESPECIES INDEFINIDAS</h2>
@@ -98,7 +98,7 @@ include_once 'plantillas/head-dashboard.php';
                                             <tbody>
                                                 <?php
                                                 $sql_no_identificadas = "SELECT f.nombre_familia, p.fecha_ingreso, p.idPlanta, g.nombre_genero, e.nombre_epiteto
-                                                                            FROM planta p 
+                                                                            FROM planta p
                                                                             LEFT JOIN familia f ON p.Familia_idFamilia = f.idFamilia
                                                                             LEFT JOIN genero g ON p.Genero_idGenero=g.idGenero
                                                                             LEFT JOIN epiteto e ON p.Epiteto_idEpiteto=e.idEpiteto
@@ -122,7 +122,7 @@ include_once 'plantillas/head-dashboard.php';
                                                     ?>
 
                                                     <tr valign="top">
-                                                        <td><?php echo $id_nuevo ?></td> 
+                                                        <td><?php echo $id_nuevo ?></td>
                                                         <td><?php echo $file_no_identificada['nombre_familia'] ?></td>
                                                         <td><?php echo $file_no_identificada['nombre_genero'] ?></td>
                                                         <td><?php echo $file_no_identificada['nombre_epiteto'] ?></td>
@@ -151,7 +151,7 @@ include_once 'plantillas/head-dashboard.php';
                                                     </tr>
                                                     <?php
                                                 }
-                                                ?>                                                    
+                                                ?>
                                             </tbody>
                                         </table>
                                     </div>
@@ -236,14 +236,14 @@ include_once 'plantillas/head-dashboard.php';
 
                                             echo'
                                                 <tr valign="top">
-                                                <td>' . $file_historial['fecha_historial'] . '</td> 
+                                                <td>' . $file_historial['fecha_historial'] . '</td>
                                                 <td>' . $nombre_usuario_historial . '</td>
                                                 <td>' . $idMasc_historial . '</td>
-                                                <td>' . $file_historial['accion'] . '</td> 
+                                                <td>' . $file_historial['accion'] . '</td>
                                                 <td style="text-align:center;">' . $revision_historial . '</td>
                                                 ';
                                         }
-                                        ?>         
+                                        ?>
                                     </tbody>
                                 </table>
                             </div>
@@ -290,12 +290,12 @@ include_once 'plantillas/head-dashboard.php';
 
                                             echo'
                                                 <tr valign="top">
-                                                <td>' . $nombre_completo . '</td> 
+                                                <td>' . $nombre_completo . '</td>
                                                 <td>' . $file_usuarios['email'] . '</td>
                                                 <td>' . $file_usuarios['telefono'] . '</td>
                                                 ';
                                         }
-                                        ?>                                                    
+                                        ?>
                                     </tbody>
                                 </table>
                             </div>
@@ -311,9 +311,9 @@ include_once 'plantillas/head-dashboard.php';
                 <div class="modal-content">
                     <div class="card">
                         <div class="header bg-red">
-                            <button type="button" class="close" data-dismiss="modal" aria-label="Close" 
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close"
                                     style="font-size: 40px; line-height: 0.5; color: #fff; opacity: 1"><span aria-hidden="true">&times;</span></button>
-                            <h2>ESPECIES INDEFINIDAS</h2>                                
+                            <h2>ESPECIES INDEFINIDAS</h2>
                         </div>
                         <div class="body">
                             <div class="table-responsive">
@@ -346,7 +346,7 @@ include_once 'plantillas/head-dashboard.php';
                                         <?php
                                         $sql = "SELECT P.idPlanta, P.autor, P.fecha_ingreso, P.fuente_informacion, P.altura, P.reproduccion, P.visible, P.revision, Fa.nombre_familia, 
                                                     Ge.nombre_genero, Ep.nombre_epiteto, Fo.nombre_forma, Co.nombre_color, De.nombre_determinado, Ti.nombre_hoja 
-                                                    FROM planta P 
+                                                    FROM planta P
                                                     LEFT JOIN familia Fa ON P.Familia_idFamilia = Fa.idFamilia
                                                     LEFT JOIN genero Ge ON P.Genero_idGenero = Ge.idGenero
                                                     LEFT JOIN epiteto Ep ON P.Epiteto_idEpiteto = Ep.idEpiteto
@@ -380,7 +380,7 @@ include_once 'plantillas/head-dashboard.php';
                                             /* asignando en tabla */
                                             ?>
                                             <tr valign="top">
-                                                <td><?php echo $idMasc ?></td> 
+                                                <td><?php echo $idMasc ?></td>
                                                 <td><?php echo $fila['nombre_familia'] ?></td>
                                                 <td><?php echo $fila['nombre_genero'] ?></td>
                                                 <td><?php echo $fila['nombre_epiteto'] ?></td>
@@ -426,7 +426,7 @@ include_once 'plantillas/head-dashboard.php';
                 <div class="modal-content">
                     <div class="card">
                         <div class="header bg-green">
-                            <button type="button" class="close" data-dismiss="modal" aria-label="Close" 
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close"
                                     style="font-size: 40px; line-height: 0.5; color: #fff; opacity: 1"><span aria-hidden="true">&times;</span></button>
                             <h2>REGISTRO DE ACTIVIDAD</h2>
                         </div>
@@ -486,14 +486,14 @@ include_once 'plantillas/head-dashboard.php';
 
                                         echo'
                                                 <tr valign="top">
-                                                <td>' . $file_historial['fecha_historial'] . '</td> 
+                                                <td>' . $file_historial['fecha_historial'] . '</td>
                                                 <td>' . $nombre_usuario_historial . '</td>
                                                 <td>' . $idMasc_historial . '</td>
-                                                <td>' . $file_historial['accion'] . '</td> 
+                                                <td>' . $file_historial['accion'] . '</td>
                                                 <td style="text-align:center;">' . $revision_historial . '</td>
                                                 ';
                                     }
-                                    ?>         
+                                    ?>
                                 </tbody>
                             </table>
                         </div>
@@ -508,9 +508,9 @@ include_once 'plantillas/head-dashboard.php';
                 <div class="modal-content">
                     <div class="card">
                         <div class="header bg-cyan">
-                            <button type="button" class="close" data-dismiss="modal" aria-label="Close" 
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close"
                                     style="font-size: 40px; line-height: 0.5; color: #fff; opacity: 1"><span aria-hidden="true">&times;</span></button>
-                            <h2>USUARIOS ADMINISTRATIVOS</h2>                                
+                            <h2>USUARIOS ADMINISTRATIVOS</h2>
                         </div>
                         <div class="body">
                             <div class="table-responsive">
@@ -541,7 +541,7 @@ include_once 'plantillas/head-dashboard.php';
                                                 <td><?php echo $file_usuarios['telefono'] ?></td>
                                                 <?php
                                             }
-                                            ?>                                                    
+                                            ?>
                                     </tbody>
                                 </table>
                             </div>
