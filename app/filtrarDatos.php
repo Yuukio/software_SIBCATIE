@@ -307,7 +307,7 @@ elseif ($funcion == 'filtrarComun') {
     $id = $_POST["id"];
     
     try {
-        $query = "SELECT `nombre_nombre_comun`, `lengua` FROM `nombrecomun` WHERE Planta_idPlanta=$id";
+        $query = "SELECT `nombre_nombre_comun`, `lengua` FROM `nombrecomun` WHERE Planta_idPlanta=2";
         
         $stmt = $pdoConn->prepare($query);
         $stmt->execute();

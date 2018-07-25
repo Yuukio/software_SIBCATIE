@@ -26,6 +26,14 @@ if ($funcion == 'actualizarReino') {
         $query = "UPDATE `reino` SET `nombre_reino`= '$nombre_reino' WHERE idReino='$id_reino'";
         $stmt = $pdoConn->prepare($query);
         $stmt->execute(array($nombre_reino));
+
+        $registro = 'Reino. ' . str_pad($id_reino, 3, "0", STR_PAD_LEFT);
+
+        $sql = "INSERT INTO `historial`(`fecha_historial`, `registro`, `accion`, `Usuario_idUsuario`)
+                VALUES (NOW(), '$registro', 'Actualización', $id_usuario)";
+        $stmt = $pdoConn->prepare($sql);
+        $stmt->execute();
+
         echo '1';
     } catch (Exception $e) {
         echo '0';
@@ -40,6 +48,14 @@ elseif ($funcion == 'actualizarDivision') {
         $query = "UPDATE `division` SET `nombre_division`= '$nombre_division' WHERE idDivision='$id_division'";
         $stmt = $pdoConn->prepare($query);
         $stmt->execute(array($nombre_division));
+        
+        $registro = 'División. ' . str_pad($id_division, 3, "0", STR_PAD_LEFT);
+
+        $sql = "INSERT INTO `historial`(`fecha_historial`, `registro`, `accion`, `Usuario_idUsuario`)
+                VALUES (NOW(), '$registro', 'Actualización', $id_usuario)";
+        $stmt = $pdoConn->prepare($sql);
+        $stmt->execute();
+        
         echo '1';
     } catch (Exception $e) {
         echo '0';
@@ -54,6 +70,14 @@ elseif ($funcion == 'actualizarClase') {
         $query = "UPDATE `clase` SET `nombre_clase`= '$nombre_clase' WHERE idClase='$id_clase'";
         $stmt = $pdoConn->prepare($query);
         $stmt->execute(array($nombre_clase));
+        
+        $registro = 'Clase. ' . str_pad($id_clase, 3, "0", STR_PAD_LEFT);
+
+        $sql = "INSERT INTO `historial`(`fecha_historial`, `registro`, `accion`, `Usuario_idUsuario`)
+                VALUES (NOW(), '$registro', 'Actualización', $id_usuario)";
+        $stmt = $pdoConn->prepare($sql);
+        $stmt->execute();
+        
         echo '1';
     } catch (Exception $e) {
         echo '0';
@@ -68,6 +92,14 @@ elseif ($funcion == 'actualizarOrden') {
         $query = "UPDATE `orden` SET `nombre_orden`= '$nombre_orden' WHERE idOrden='$id_orden'";
         $stmt = $pdoConn->prepare($query);
         $stmt->execute(array($nombre_orden));
+        
+        $registro = 'Orden. ' . str_pad($id_orden, 3, "0", STR_PAD_LEFT);
+
+        $sql = "INSERT INTO `historial`(`fecha_historial`, `registro`, `accion`, `Usuario_idUsuario`)
+                VALUES (NOW(), '$registro', 'Actualización', $id_usuario)";
+        $stmt = $pdoConn->prepare($sql);
+        $stmt->execute();
+        
         echo '1';
     } catch (Exception $e) {
         echo '0';
@@ -82,6 +114,14 @@ elseif ($funcion == 'actualizarFamilia') {
         $query = "UPDATE `familia` SET `nombre_familia`= '$nombre_familia' WHERE idFamilia='$id_familia'";
         $stmt = $pdoConn->prepare($query);
         $stmt->execute(array($nombre_familia));
+        
+        $registro = 'Familia. ' . str_pad($id_familia, 3, "0", STR_PAD_LEFT);
+
+        $sql = "INSERT INTO `historial`(`fecha_historial`, `registro`, `accion`, `Usuario_idUsuario`)
+                VALUES (NOW(), '$registro', 'Actualización', $id_usuario)";
+        $stmt = $pdoConn->prepare($sql);
+        $stmt->execute();
+        
         echo '1';
     } catch (Exception $e) {
         echo '0';
@@ -96,6 +136,14 @@ elseif ($funcion == 'actualizarGenero') {
         $query = "UPDATE `genero` SET `nombre_genero`= '$nombre_genero' WHERE idGenero='$id_genero'";
         $stmt = $pdoConn->prepare($query);
         $stmt->execute(array($nombre_genero));
+        
+        $registro = 'Género. ' . str_pad($id_genero, 3, "0", STR_PAD_LEFT);
+
+        $sql = "INSERT INTO `historial`(`fecha_historial`, `registro`, `accion`, `Usuario_idUsuario`)
+                VALUES (NOW(), '$registro', 'Actualización', $id_usuario)";
+        $stmt = $pdoConn->prepare($sql);
+        $stmt->execute();
+        
         echo '1';
     } catch (Exception $e) {
         echo '0';
@@ -110,6 +158,14 @@ elseif ($funcion == 'actualizarEpiteto') {
         $query = "UPDATE `epiteto` SET `nombre_epiteto`= '$nombre_epiteto' WHERE idEpiteto='$id_epiteto'";
         $stmt = $pdoConn->prepare($query);
         $stmt->execute(array($nombre_epiteto));
+        
+        $registro = 'Epíteto. ' . str_pad($id_epiteto, 3, "0", STR_PAD_LEFT);
+
+        $sql = "INSERT INTO `historial`(`fecha_historial`, `registro`, `accion`, `Usuario_idUsuario`)
+                VALUES (NOW(), '$registro', 'Actualización', $id_usuario)";
+        $stmt = $pdoConn->prepare($sql);
+        $stmt->execute();
+        
         echo '1';
     } catch (Exception $e) {
         echo '0';
@@ -124,6 +180,14 @@ elseif ($funcion == 'actualizarColor') {
         $query = "UPDATE `color` SET `nombre_color`= '$nombre_color' WHERE idColor='$id_color'";
         $stmt = $pdoConn->prepare($query);
         $stmt->execute(array($nombre_color));
+        
+        $registro = 'Color. ' . str_pad($id_color, 3, "0", STR_PAD_LEFT);
+
+        $sql = "INSERT INTO `historial`(`fecha_historial`, `registro`, `accion`, `Usuario_idUsuario`)
+                VALUES (NOW(), '$registro', 'Actualización', $id_usuario)";
+        $stmt = $pdoConn->prepare($sql);
+        $stmt->execute();
+        
         echo '1';
     } catch (Exception $e) {
         echo '0';
@@ -138,6 +202,14 @@ elseif ($funcion == 'actualizarDeterminado') {
         $query = "UPDATE `determinadapor` SET `nombre_determinado`= '$nombre_determinado' WHERE idDeterminadaPor='$id_determinado'";
         $stmt = $pdoConn->prepare($query);
         $stmt->execute(array($nombre_determinado));
+        
+        $registro = 'Determinación. ' . str_pad($id_determinado, 3, "0", STR_PAD_LEFT);
+
+        $sql = "INSERT INTO `historial`(`fecha_historial`, `registro`, `accion`, `Usuario_idUsuario`)
+                VALUES (NOW(), '$registro', 'Actualización', $id_usuario)";
+        $stmt = $pdoConn->prepare($sql);
+        $stmt->execute();
+        
         echo '1';
     } catch (Exception $e) {
         echo '0';
@@ -152,6 +224,14 @@ elseif ($funcion == 'actualizarForma') {
         $query = "UPDATE `forma` SET `nombre_forma`= '$nombre_forma' WHERE idForma='$id_forma'";
         $stmt = $pdoConn->prepare($query);
         $stmt->execute(array($nombre_forma));
+        
+        $registro = 'Forma. ' . str_pad($id_forma, 3, "0", STR_PAD_LEFT);
+
+        $sql = "INSERT INTO `historial`(`fecha_historial`, `registro`, `accion`, `Usuario_idUsuario`)
+                VALUES (NOW(), '$registro', 'Actualización', $id_usuario)";
+        $stmt = $pdoConn->prepare($sql);
+        $stmt->execute();
+        
         echo '1';
     } catch (Exception $e) {
         echo '0';
@@ -166,6 +246,14 @@ elseif ($funcion == 'actualizarTipo') {
         $query = "UPDATE `tipohoja` SET `nombre_hoja`= '$nombre_tipo' WHERE idTipoHoja='$id_tipo'";
         $stmt = $pdoConn->prepare($query);
         $stmt->execute(array($nombre_tipo));
+        
+        $registro = 'Tipo de Hoja. ' . str_pad($id_tipo, 3, "0", STR_PAD_LEFT);
+
+        $sql = "INSERT INTO `historial`(`fecha_historial`, `registro`, `accion`, `Usuario_idUsuario`)
+                VALUES (NOW(), '$registro', 'Actualización', $id_usuario)";
+        $stmt = $pdoConn->prepare($sql);
+        $stmt->execute();
+        
         echo '1';
     } catch (Exception $e) {
         echo '0';
@@ -180,9 +268,17 @@ elseif ($funcion == 'actualizarUso') {
         $query = "UPDATE `uso` SET `nombre_uso`= '$nombre_uso' WHERE idUso='$id_uso'";
         $stmt = $pdoConn->prepare($query);
         $stmt->execute(array($nombre_uso));
+        
+        $registro = 'Uso. ' . str_pad($id_uso, 3, "0", STR_PAD_LEFT);
+
+        $sql = "INSERT INTO `historial`(`fecha_historial`, `registro`, `accion`, `Usuario_idUsuario`)
+                VALUES (NOW(), '$registro', 'Actualización', $id_usuario)";
+        $stmt = $pdoConn->prepare($sql);
+        $stmt->execute();
+        
         echo '1';
     } catch (Exception $e) {
-        echo '0';
+        echo '0'; 
     }
 }
 
@@ -194,6 +290,14 @@ elseif ($funcion == 'actualizarEstado') {
         $query = "UPDATE `estadosalud` SET `nombre_estado`= '$nombre_estado' WHERE idEstadoSalud='$id_estado'";
         $stmt = $pdoConn->prepare($query);
         $stmt->execute(array($nombre_estado));
+        
+        $registro = 'Estado de salud. ' . str_pad($id_estado, 3, "0", STR_PAD_LEFT);
+
+        $sql = "INSERT INTO `historial`(`fecha_historial`, `registro`, `accion`, `Usuario_idUsuario`)
+                VALUES (NOW(), '$registro', 'Actualización', $id_usuario)";
+        $stmt = $pdoConn->prepare($sql);
+        $stmt->execute();
+        
         echo '1';
     } catch (Exception $e) {
         echo '0';
@@ -238,10 +342,7 @@ elseif ($funcion == 'actualizarRegistro') {
     }
 
     //$usuario = $_SESSION['nombre_usuario'];
-
     //Agregar una advertencia de actualizacion en cada tabla
-
-
     //$usuario = $_SESSION['nombre_usuario'];
 
     try {
@@ -252,6 +353,13 @@ elseif ($funcion == 'actualizarRegistro') {
                 . "`division_idDivision`='$id_division_r' WHERE idPlanta='$id_planta_r'";
 
         $stmt = $pdoConn->prepare($query);
+        $stmt->execute();
+        
+        $registro = 'Planta. ' . str_pad($id_planta_r, 3, "0", STR_PAD_LEFT);
+
+        $sql = "INSERT INTO `historial`(`fecha_historial`, `registro`, `accion`, `Usuario_idUsuario`)
+                VALUES (NOW(), '$registro', 'Actualización', $id_usuario)";
+        $stmt = $pdoConn->prepare($sql);
         $stmt->execute();
 
         echo '1';
@@ -311,6 +419,76 @@ elseif ($funcion == 'ponerExportacion') {
         for ($i = 0; $i < sizeof($seleccion); $i++) {
             $stmt->execute(array($seleccion[$i]));
         }
+
+        echo '1';
+    } catch (Exception $e) {
+        echo '0';
+    }
+}
+
+// ********QUITAR DE FAVORITOS
+elseif ($funcion == 'quitarFavoritos') {
+    $seleccion = $_POST["seleccion_f"];
+    try {
+
+        $query = "DELETE FROM `favorito` WHERE Planta_idPlanta=? AND Usuario_idUsuario=$id_usuario";
+        $stmt = $pdoConn->prepare($query);
+
+        for ($i = 0; $i < sizeof($seleccion); $i++) {
+            $stmt->execute(array($seleccion[$i]));
+        }
+
+        echo '1';
+    } catch (Exception $e) {
+        echo '0';
+    }
+}
+
+// ********QUITAR DE EXPORTACION
+elseif ($funcion == 'quitarExportacion') {
+    $seleccion = $_POST["seleccion_e"];
+    try {
+
+        $query = "DELETE FROM `exportar` WHERE Planta_idPlanta=? AND Usuario_idUsuario=$id_usuario";
+        $stmt = $pdoConn->prepare($query);
+
+        for ($i = 0; $i < sizeof($seleccion); $i++) {
+            $stmt->execute(array($seleccion[$i]));
+        }
+
+        echo '1';
+    } catch (Exception $e) {
+        echo '0';
+    }
+}
+
+// ********ELIMINAR NOMBRE COMUN
+elseif ($funcion == 'eliminarComun') {
+    $id = $_POST["id"];
+    
+    //obtener el nombre comun junto con el id de la planta asociado
+
+    try {
+        $query = "DELETE FROM `nombrecomun` WHERE idNombreComun=$id";
+
+        $stmt = $pdoConn->prepare($query);
+        $stmt->execute();
+
+        echo '1';
+    } catch (Exception $e) {
+        echo '0';
+    }
+}
+
+// ********ELIMINAR IMAGEN
+elseif ($funcion == 'eliminarImagen') {
+    $id = $_POST["id"];
+
+    try {
+        $query = "DELETE FROM `imagen` WHERE id=$id";
+
+        $stmt = $pdoConn->prepare($query);
+        $stmt->execute();
 
         echo '1';
     } catch (Exception $e) {

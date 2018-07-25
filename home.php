@@ -188,62 +188,29 @@ include_once 'plantillas/head-dashboard.php';
                                             <th>Usuario</th>
                                             <th>Registro</th>
                                             <th>Actividad</th>
-                                            <th>Revisión</th>
                                         </tr>
                                     </thead>
                                     <tbody>
 
                                         <?php
-                                        $sql_historial = "SELECT planta.idPlanta, planta.revision, usuario.nombre_usuario, historial.fecha_historial, historial.accion, planta.fecha_ingreso
-                                                                    FROM historial
-                                                                    INNER JOIN planta ON historial.Planta_idPlanta=planta.idPlanta
-                                                                    INNER JOIN usuario ON historial.Usuario_idUsuario=usuario.idUsuario
-                                                                    ORDER BY historial.fecha_historial ASC";
+                                        $sql_historial = "SELECT historial.fecha_historial, historial.accion, usuario.nombre_usuario, historial.registro
+                                                            FROM historial 
+                                                            INNER JOIN usuario ON historial.Usuario_idUsuario=usuario.idUsuario
+                                                            ORDER BY historial.fecha_historial DESC";
 
-                                        $consulta_historial = Conexion::obtener_conexion()->query($sql_historial);
+                                        $consulta_historial= $pdoConn->prepare($sql_historial);
+                                        $consulta_historial->execute();
 
-                                        while ($file_historial = $consulta_historial->fetch(PDO::FETCH_ASSOC)) {
-
-                                            $nombre_usuario_historial = $file_historial['nombre_usuario'];
-                                            $id_historial = $file_historial['idPlanta'];
-                                            $revision_historial = $file_historial['revision'];
-
-                                            $fecha_historial = $file_historial['fecha_ingreso'];
-                                            $fecha_historial = explode('-', $fecha_historial);
-                                            $anno_historial = $fecha_historial[0];
-                                            $mes_historial = $fecha_historial[1];
-                                            $dia_historial = $fecha_historial[2];
-
-                                            $id_historial = str_pad($id_historial, 4, "0", STR_PAD_LEFT);
-
-                                            $idMasc_historial = $anno_historial . $mes_historial . $dia_historial . $id_historial;
-
-                                            /* ingreso de iconos de revision */
-                                            if ($revision_historial == 0) {
-
-                                                $revision_historial = '
-                                                        <a style="color: #E74C3C">
-                                                            <i class="material-icons">close</i>
-                                                        </a>
-                                                        ';
-                                            } else {
-                                                $revision_historial = '
-                                                        <a style="color: #27AE60">
-                                                            <i class="material-icons">check</i>
-                                                        </a>
-                                                        ';
+                                        while ($fila_historial= $consulta_historial->fetch(PDO::FETCH_ASSOC)) {
+                                            ?>
+                                            <tr valign="top">
+                                                <td> <?php echo $fila_historial['fecha_historial']; ?></td>
+                                                <td> <?php echo $fila_historial['registro']; ?></td>
+                                                <td> <?php echo $fila_historial['accion']; ?></td>
+                                                <td> <?php echo $fila_historial['nombre_usuario']; ?></td>
+                                                <?php
                                             }
-
-                                            echo'
-                                                <tr valign="top">
-                                                <td>' . $file_historial['fecha_historial'] . '</td>
-                                                <td>' . $nombre_usuario_historial . '</td>
-                                                <td>' . $idMasc_historial . '</td>
-                                                <td>' . $file_historial['accion'] . '</td>
-                                                <td style="text-align:center;">' . $revision_historial . '</td>
-                                                ';
-                                        }
-                                        ?>
+                                            ?>
                                     </tbody>
                                 </table>
                             </div>

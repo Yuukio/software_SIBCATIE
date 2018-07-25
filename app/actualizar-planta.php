@@ -22,6 +22,7 @@ $id_planta = $_POST["id-planta"];
 $imagen = $_FILES["imagen-a"];
 $directorio = 'fotos/';
 $sentencia = 0;
+$reproduccion = 0;
 
 if ($altura <= 0) {
     $altura = 0;
@@ -39,8 +40,6 @@ if (isset($_POST["asexual-a"])) {
 } else {
     $asexual = 0;
 }
-
-$reproduccion = 0;
 
 if ($sexual == 0 && $asexual == 0) {
     $reproduccion = 0;
@@ -72,8 +71,6 @@ $fila = $consulta->fetch(PDO::FETCH_ASSOC);
 $ruta_vieja = $fila["url_img"];
 $id_mascara = $fila["idMascara"];
 
-$sentencia = 9;
-
 if ($imagen["name"] != '') {//HAY IMAGEN NUEVA??
     if ($imagen["type"] == "image/jpg" || $imagen["type"] == "image/jpeg" || $imagen["type"] == "image/png") {//TIENE EL FORMATO CORRECTO
         $temporal = $imagen["tmp_name"];
@@ -81,37 +78,26 @@ if ($imagen["name"] != '') {//HAY IMAGEN NUEVA??
 
         if (!file_exists($directorio)) {
             mkdir("fotos/", 0777);
-            echo 'no existia el directorio fotos, pero se creo *** ';
         }
 
         $cargar_imagen = move_uploaded_file($imagen["tmp_name"], $ruta);
 
         if ($cargar_imagen) {
-            echo 'se cargo la imagen al servidor *** ';
             $sentencia = 1; //paras al sql
         } else {
-            echo 'error del servidor *** ';
             $sentencia = 3;
         }
-
-        echo 'creada nueva ruta *** ';
     } else {
         $sentencia = 0; //formato incorrecto
     }
 } else {
     if ($ruta_vieja != '') {//EXISTE UNA RUTA VIEJA??
-        echo 'ruta es igual a la vieja *** ';
         $ruta = $ruta_vieja;
     } else {//NO EXISTE UNA RUTA VIEJA
-        echo 'no hay ni ruta nueva ni vieja, la ruta es null *** ';
         $ruta = '';
     }
     $sentencia = 1;
 }
-
-echo $reino . '-' . $division . '-' . $clase . '-' . $orden . '-' . $familia . '-' . $genero . '-' . $epiteto . '-' . $determinado . '-' . $color . '-' .
- $forma . '-' . $tipo . '-' . $autor . '-' . $fuente . '-' . $altura . '-' . $id_planta . '-' . $reproduccion . '-' . $revision . '-' . $visible . ' ****** ' .
- $ruta_vieja . ' ****** ' . $ruta;
 
 if ($sentencia == 1) {
     try {
@@ -123,27 +109,20 @@ if ($sentencia == 1) {
         $stmt = $pdoConn->prepare($sql_update);
         $stmt->execute();
         $sentencia = 2; //se inserto la ruta nueva en la tabla
-        echo '  *** actualizado en bd *** ';
+        echo '1';//correcto
     } catch (Exception $exc) {
         $sentencia = 3; //error en el servidor
-        echo '  *** error del servidor *** ';
+        echo '2';
     }
 } elseif ($sentencia == 0) {
-    echo '  *** formato incorrecto *** ';
+    echo '0';//formato incorrecto
 }
 
 //BORRAR IMAGEN VIEJA SI Y SOLO SI: EXISTE, SI SE INSERTO LA NUEVA RUTA EN BD Y SE CARGO LA IMAGEN AL SERVIDOR
 if ($sentencia == 2 && $ruta_vieja != '' && $ruta_vieja != $ruta) {
     if (file_exists($ruta_vieja)) {
         unlink($ruta_vieja);
-        echo 'se elimino imagen vieja *** ';
-    } else {
-        echo 'no hay imagen vieja que borrar *** ';
     }
-}
-
-if ($sentencia == 9) {
-    echo '  *** no paso nada de nada *** ';
 }
 
 

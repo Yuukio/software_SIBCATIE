@@ -2,6 +2,7 @@
 include_once '../app/Conexion.inc.php';
 include_once '../app/conexion2.php';
 include_once '../plantillas/dataTable.inc.php';
+include_once '../app/Redireccion.inc.php';
 ?>
 
 
@@ -10,10 +11,8 @@ include_once '../plantillas/dataTable.inc.php';
     <table class="table table-bordered table-striped table-hover js-basic-example dataTable">
         <thead>
             <tr>
-                <!--<th>Imagen</th>-->
                 <th>Imagen</th>
                 <th>ID</th>
-                <th>ID MASCARA</th>
                 <th>Familia</th>
                 <th>Género</th>
                 <th>Epíteto</th>
@@ -24,10 +23,8 @@ include_once '../plantillas/dataTable.inc.php';
         </thead>
         <tfoot>
             <tr>
-                <!--<th>Imagen</th>-->
                 <th>Imagen</th>
                 <th>ID</th>
-                <th>ID MASCARA</th>
                 <th>Familia</th>
                 <th>Género</th>
                 <th>Epíteto</th>
@@ -166,16 +163,23 @@ include_once '../plantillas/dataTable.inc.php';
                 /* asignando en tabla */
                 ?>
                 <tr valign="top">
-                    <td style="text-align:center" ><a style="cursor: pointer"><img src="app/<?php echo $fila['url_img']; ?>" width="80" height="50"></a></td>
-                    <td><?php echo $fila['idPlanta'] ?></td>
+                    <td>
+                        <div class="tz-gallery">
+                            <div class="thumbnail" style="margin-bottom: 0px;">
+                                <a class="lightbox" href="app/<?php echo $fila['url_img']; ?>">
+                                    <img src="app/<?php echo $fila['url_img']; ?>" alt="Bridge" width="80" height="50">
+                                </a>
+                            </div>
+                        </div>
+                    </td>
                     <td><?php echo $fila['idMascara'] ?></td>
                     <td><?php echo $fila['nombre_familia'] ?></td>
                     <td><?php echo $fila['nombre_genero'] ?></td>
                     <td><?php echo $fila['nombre_epiteto'] ?></td>
                     <td style="text-align:center; width: 5px;"><?php echo $visible ?></td>
                     <td style="text-align:center;">
-                        <a href="#" style="color: #17c4cb">
-                            <i class="material-icons" data-toggle="modal" data-target="#modalVer">search</i>
+                        <a href="<?php echo 'http://localhost/software_SIBCATIE/especie.php' . '?id=' . "$id"; ?>" style="color: #17c4cb">
+                            <i class="material-icons">search</i>
                         </a>
                         <i>&nbsp;</i>
                         <a href="#" style="color: #ffc122">
@@ -184,10 +188,6 @@ include_once '../plantillas/dataTable.inc.php';
                         <i>&nbsp;</i>
                         <a href="#" style="color: #2a445f" name="btn-comun">
                             <i class="material-icons" data-toggle="modal" data-target="#modalAgregarComun" onclick="obtenerID('<?php echo $id ?>')">playlist_add</i>
-                        </a>
-                        <i>&nbsp;</i>
-                        <a href="#" style="color: #ff6d3a">
-                            <i class="material-icons" data-toggle="modal" data-target="#modalComun">add_a_photo</i>
                         </a>
                     </td>
                     <td style="text-align:center;">
@@ -204,3 +204,9 @@ include_once '../plantillas/dataTable.inc.php';
         </tbody>
     </table>
 </div>
+
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/baguettebox.js/1.8.1/baguetteBox.min.js"></script>
+<script>
+    baguetteBox.run('.tz-gallery');
+</script>

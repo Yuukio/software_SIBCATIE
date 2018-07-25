@@ -47,6 +47,9 @@ Conexion::abrir_conexion();
     <link rel="stylesheet" type="text/css" href="css/css/alertify.css">
     <link rel="stylesheet" type="text/css" href="css/css/themes/default.css">
 
+    <link rel="stylesheet" href="css/gallery-clean.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/baguettebox.js/1.8.1/baguetteBox.min.css">
+
     <!-- Jquery Core Js -->
     <script src="plugins/jquery/jquery.min.js"></script>
 
@@ -84,7 +87,7 @@ Conexion::abrir_conexion();
     <script src="js/script.js"></script>
 
     <script src="plugins/bootstrap-notify/bootstrap-notify.js"></script>
-    
+
     <script src="js/alertify.js"></script>
 </head>
 

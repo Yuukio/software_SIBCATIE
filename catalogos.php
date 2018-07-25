@@ -90,7 +90,7 @@ include_once 'plantillas/head-dashboard.php';
 
                                                     while ($fila_reino = $consulta_reino->fetch(PDO::FETCH_ASSOC)) {
 
-                                                        $datos_reino = $fila_reino['idReino'] . '-' . $fila_reino['nombre_reino'];
+                                                        $datos_reino = $fila_reino['idReino'] . '*' . $fila_reino['nombre_reino'];
 
                                                         $id_reino = $fila_reino['idReino'];
 
@@ -111,7 +111,7 @@ include_once 'plantillas/head-dashboard.php';
                                                         </tr>
                                                         <?php
                                                     }
-                                                    ?>                                            
+                                                    ?>
                                                 </tbody>
                                             </table>
                                         </div>
@@ -158,7 +158,7 @@ include_once 'plantillas/head-dashboard.php';
 
                                                     while ($fila_division = $consulta_division->fetch(PDO::FETCH_ASSOC)) {
 
-                                                        $datos_division = $fila_division['idDivision'] . '-' . $fila_division['nombre_division'];
+                                                        $datos_division = $fila_division['idDivision'] . '*' . $fila_division['nombre_division'];
 
                                                         $id_division = $fila_division['idDivision'];
 
@@ -179,7 +179,7 @@ include_once 'plantillas/head-dashboard.php';
                                                         </tr>
                                                         <?php
                                                     }
-                                                    ?>                                                    
+                                                    ?>
                                                 </tbody>
                                             </table>
                                         </div>
@@ -226,7 +226,7 @@ include_once 'plantillas/head-dashboard.php';
 
                                                     while ($fila_clase = $consulta_clase->fetch(PDO::FETCH_ASSOC)) {
 
-                                                        $datos_clase = $fila_clase['idClase'] . '-' . $fila_clase['nombre_clase'];
+                                                        $datos_clase = $fila_clase['idClase'] . '*' . $fila_clase['nombre_clase'];
 
                                                         $id_clase = $fila_clase['idClase'];
 
@@ -247,7 +247,7 @@ include_once 'plantillas/head-dashboard.php';
                                                         </tr>
                                                         <?php
                                                     }
-                                                    ?>                                                    
+                                                    ?>
                                                 </tbody>
                                             </table>
                                         </div>
@@ -294,7 +294,7 @@ include_once 'plantillas/head-dashboard.php';
 
                                                     while ($fila_orden = $consulta_orden->fetch(PDO::FETCH_ASSOC)) {
 
-                                                        $datos_orden = $fila_orden['idOrden'] . '-' . $fila_orden['nombre_orden'];
+                                                        $datos_orden = $fila_orden['idOrden'] . '*' . $fila_orden['nombre_orden'];
 
                                                         $id_orden = $fila_orden['idOrden'];
 
@@ -362,7 +362,7 @@ include_once 'plantillas/head-dashboard.php';
 
                                                     while ($fila_familia = $consulta_familia->fetch(PDO::FETCH_ASSOC)) {
 
-                                                        $datos_familia = $fila_familia['idFamilia'] . '-' . $fila_familia['nombre_familia'];
+                                                        $datos_familia = $fila_familia['idFamilia'] . '*' . $fila_familia['nombre_familia'];
 
                                                         $id_familia = $fila_familia['idFamilia'];
 
@@ -430,7 +430,7 @@ include_once 'plantillas/head-dashboard.php';
 
                                                     while ($fila_genero = $consulta_genero->fetch(PDO::FETCH_ASSOC)) {
 
-                                                        $datos_genero = $fila_genero['idGenero'] . '-' . $fila_genero['nombre_genero'];
+                                                        $datos_genero = $fila_genero['idGenero'] . '*' . $fila_genero['nombre_genero'];
 
                                                         $id_genero = $fila_genero['idGenero'];
 
@@ -498,7 +498,7 @@ include_once 'plantillas/head-dashboard.php';
 
                                                     while ($fila_epiteto = $consulta_epiteto->fetch(PDO::FETCH_ASSOC)) {
 
-                                                        $datos_epiteto = $fila_epiteto['idEpiteto'] . '-' . $fila_epiteto['nombre_epiteto'];
+                                                        $datos_epiteto = $fila_epiteto['idEpiteto'] . '*' . $fila_epiteto['nombre_epiteto'];
 
                                                         $id_epiteto = $fila_epiteto['idEpiteto'];
 
@@ -567,7 +567,7 @@ include_once 'plantillas/head-dashboard.php';
 
                                                     while ($fila_color = $consulta_color->fetch(PDO::FETCH_ASSOC)) {
 
-                                                        $datos_color = $fila_color['idColor'] . '-' . $fila_color['nombre_color'];
+                                                        $datos_color = $fila_color['idColor'] . '*' . $fila_color['nombre_color'];
 
                                                         $id_color = $fila_color['idColor'];
 
@@ -609,7 +609,7 @@ include_once 'plantillas/head-dashboard.php';
                                                     <i class="material-icons">more_vert</i>
                                                 </a>
                                                 <ul class="dropdown-menu pull-right">
-                                                    <li><a data-toggle="modal" data-target="#modalDeterminadaPor">Agregar nuevo Determinador</a></li>
+                                                    <li><a data-toggle="modal" data-target="#modalDeterminadaPor">Agregar nueva Determinación</a></li>
                                                 </ul>
                                             </li>
                                         </ul>
@@ -635,7 +635,7 @@ include_once 'plantillas/head-dashboard.php';
 
                                                     while ($fila_determinado = $consulta_determinado->fetch(PDO::FETCH_ASSOC)) {
 
-                                                        $datos_determinado = $fila_determinado['idDeterminadaPor'] . '-' . $fila_determinado['nombre_determinado'];
+                                                        $datos_determinado = $fila_determinado['idDeterminadaPor'] . '*' . $fila_determinado['nombre_determinado'];
 
                                                         $id_determinado = $fila_determinado['idDeterminadaPor'];
 
@@ -703,7 +703,7 @@ include_once 'plantillas/head-dashboard.php';
 
                                                     while ($fila_forma = $consulta_forma->fetch(PDO::FETCH_ASSOC)) {
 
-                                                        $datos_forma = $fila_forma['idForma'] . '-' . $fila_forma['nombre_forma'];
+                                                        $datos_forma = $fila_forma['idForma'] . '*' . $fila_forma['nombre_forma'];
 
                                                         $id_forma = $fila_forma['idForma'];
 
@@ -771,7 +771,7 @@ include_once 'plantillas/head-dashboard.php';
 
                                                     while ($fila_tipo = $consulta_tipo->fetch(PDO::FETCH_ASSOC)) {
 
-                                                        $datos_tipo = $fila_tipo['idTipoHoja'] . '-' . $fila_tipo['nombre_hoja'];
+                                                        $datos_tipo = $fila_tipo['idTipoHoja'] . '*' . $fila_tipo['nombre_hoja'];
 
                                                         $id_tipo = $fila_tipo['idTipoHoja'];
 
@@ -839,7 +839,7 @@ include_once 'plantillas/head-dashboard.php';
 
                                                     while ($fila_uso = $consulta_uso->fetch(PDO::FETCH_ASSOC)) {
 
-                                                        $datos_uso = $fila_uso['idUso'] . '-' . $fila_uso['nombre_uso'];
+                                                        $datos_uso = $fila_uso['idUso'] . '*' . $fila_uso['nombre_uso'];
 
                                                         $id_uso = $fila_uso['idUso'];
 
@@ -903,7 +903,7 @@ include_once 'plantillas/head-dashboard.php';
 
                                                     while ($fila_estado = $consulta_estado->fetch(PDO::FETCH_ASSOC)) {
 
-                                                        $datos_estado = $fila_estado['idEstadoSalud'] . '-' . $fila_estado['nombre_estado'];
+                                                        $datos_estado = $fila_estado['idEstadoSalud'] . '*' . $fila_estado['nombre_estado'];
 
                                                         $id_estado = $fila_estado['idEstadoSalud'];
 
@@ -1146,7 +1146,7 @@ include_once 'plantillas/head-dashboard.php';
                 </div>
             </div>
             <!-- Modal Determinado -->
-            <div class="modal fade" id="modalDeterminado" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+            <div class="modal fade" id="modalDeterminadaPor" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
                 <div class="modal-dialog" role="document" style="width: 600px; margin: 30px auto">
                     <div class="modal-content">
                         <div class="modal-header">
@@ -1615,7 +1615,7 @@ include_once 'plantillas/head-dashboard.php';
                     <div class="modal-content">
                         <div class="card">
                             <div class="header bg-green">
-                                <button type="button" class="close" data-dismiss="modal" aria-label="Close" 
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close"
                                         style="font-size: 40px; line-height: 0.5; color: #fff; opacity: 1"><span aria-hidden="true">&times;</span></button>
                                 <h2>FILTRO SOBRE REINO</h2>
                             </div>
@@ -2663,79 +2663,79 @@ include_once 'plantillas/head-dashboard.php';
         });
 
         function agregarFormReino(datos_reino) {
-            re = datos_reino.split('-');
+            re = datos_reino.split('*');
             $('#id-reino').val(re[0]);
             $('#nombre-reino-e').val(re[1]);
         }
 
         function agregarFormDivision(datos_division) {
-            di = datos_division.split('-');
+            di = datos_division.split('*');
             $('#id-division').val(di[0]);
             $('#nombre-division-e').val(di[1]);
         }
 
         function agregarFormClase(datos_clase) {
-            cl = datos_clase.split('-');
+            cl = datos_clase.split('*');
             $('#id-clase').val(cl[0]);
             $('#nombre-clase-e').val(cl[1]);
         }
 
         function agregarFormOrden(datos_orden) {
-            or = datos_orden.split('-');
+            or = datos_orden.split('*');
             $('#id-orden').val(or[0]);
             $('#nombre-orden-e').val(or[1]);
         }
 
         function agregarFormFamilia(datos_familia) {
-            fa = datos_familia.split('-');
+            fa = datos_familia.split('*');
             $('#id-familia').val(fa[0]);
             $('#nombre-familia-e').val(fa[1]);
         }
 
         function agregarFormGenero(datos_genero) {
-            ge = datos_genero.split('-');
+            ge = datos_genero.split('*');
             $('#id-genero').val(ge[0]);
             $('#nombre-genero-e').val(ge[1]);
         }
 
         function agregarFormEpiteto(datos_epiteto) {
-            ep = datos_epiteto.split('-');
+            ep = datos_epiteto.split('*');
             $('#id-epiteto').val(ep[0]);
             $('#nombre-epiteto-e').val(ep[1]);
         }
 
         function agregarFormColor(datos_color) {
-            co = datos_color.split('-');
+            co = datos_color.split('*');
             $('#id-color').val(co[0]);
             $('#nombre-color-e').val(co[1]);
         }
 
         function agregarFormDeterminado(datos_determinado) {
-            de = datos_determinado.split('-');
+            de = datos_determinado.split('*');
             $('#id-determinado').val(de[0]);
             $('#nombre-determinado-e').val(de[1]);
         }
 
         function agregarFormForma(datos_forma) {
-            fo = datos_forma.split('-');
+            fo = datos_forma.split('*');
             $('#id-forma').val(fo[0]);
             $('#nombre-forma-e').val(fo[1]);
         }
 
         function agregarFormTipoHoja(datos_tipo) {
-            ti = datos_tipo.split('-');
+            ti = datos_tipo.split('*');
             $('#id-tipo').val(ti[0]);
             $('#nombre-tipohoja-e').val(ti[1]);
         }
 
         function agregarFormUso(datos_uso) {
-            us = datos_uso.split('-');
+            us = datos_uso.split('*');
             $('#id-uso').val(us[0]);
             $('#nombre-uso-e').val(us[1]);
         }
 
         function agregarFormEstadoSalud(datos_estado) {
-            es = datos_estado.split('-');
+            es = datos_estado.split('*');
             $('#id-estado').val(es[0]);
             $('#nombre-estadosalud-e').val(es[1]);
         }

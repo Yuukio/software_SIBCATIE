@@ -19,14 +19,14 @@ $id_usuario = $_SESSION['idUsuario'];
 
 <head>
     <meta charset="UTF-8">
-        <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+    <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
 
     <?php
-if (!isset($titulo) || empty($titulo)) {
-    $titulo = 'Administración';
-}
-echo "<title>$titulo</title>";
-?>
+    if (!isset($titulo) || empty($titulo)) {
+        $titulo = 'Administración';
+    }
+    echo "<title>$titulo</title>";
+    ?>
 
     <!-- Favicon-->
     <link rel="icon" type="image/png" href="img/favicon-admin.png" />
@@ -53,6 +53,9 @@ echo "<title>$titulo</title>";
     <link rel="stylesheet" type="text/css" href="css/css/alertify.css">
     <link rel="stylesheet" type="text/css" href="css/css/themes/default.css">
 
+    <link rel="stylesheet" href="css/gallery-clean.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/baguettebox.js/1.8.1/baguetteBox.min.css">
+
     <!-- Jquery Core Js -->
     <script src="plugins/jquery/jquery.min.js"></script>
 
@@ -73,7 +76,7 @@ echo "<title>$titulo</title>";
     <script src="js/jquery.stickytableheaders.js"></script>
     <script src="js/script.js"></script>
     <script src="plugins/bootstrap-notify/bootstrap-notify.js"></script>
-            <script src="js/alertify.js"></script>
+    <script src="js/alertify.js"></script>
 
 
 </head>
@@ -81,12 +84,12 @@ echo "<title>$titulo</title>";
 <body class="theme-red">
 
     <?php
-$registros = "active";
+    $registros = "active";
 
-include_once 'plantillas/cargar-pantalla.php';
-include_once 'plantillas/barra-superior.php';
-include_once 'plantillas/menu-lateral.php';
-?>
+    include_once 'plantillas/cargar-pantalla.php';
+    include_once 'plantillas/barra-superior.php';
+    include_once 'plantillas/menu-lateral.php';
+    ?>
 
     <!-- Centro del Contenido-->
     <section class="content">
@@ -137,72 +140,72 @@ include_once 'plantillas/menu-lateral.php';
                                         <label for="pl-reino">Reino</label>
                                         <select id="id-reino" name="id-reino" class="form-control">
                                             <?php
-$sql = "SELECT nombre_reino, idReino FROM reino ORDER BY nombre_reino";
+                                            $sql = "SELECT nombre_reino, idReino FROM reino ORDER BY nombre_reino";
 
-$consulta = Conexion::obtener_conexion()->query($sql);
-?>
+                                            $consulta = Conexion::obtener_conexion()->query($sql);
+                                            ?>
                                             <option value="0">Indefinido</option>
                                             <?php
-while ($fila = $consulta->fetch(PDO::FETCH_ASSOC)) {
-    ?>
+                                            while ($fila = $consulta->fetch(PDO::FETCH_ASSOC)) {
+                                                ?>
                                                 <option value="<?php echo $fila['idReino'] ?>"><?php echo $fila['nombre_reino'] ?></option>
                                                 <?php
-}
-?>
+                                            }
+                                            ?>
                                         </select>
                                     </div>
                                     <div class="col-md-3">
                                         <label for="pl-division">División</label>
                                         <select class="form-control" name="id-division" id="id-division">
                                             <?php
-$sql = "SELECT nombre_division, idDivision FROM division ORDER BY nombre_division";
+                                            $sql = "SELECT nombre_division, idDivision FROM division ORDER BY nombre_division";
 
-$consulta = Conexion::obtener_conexion()->query($sql);
-?>
+                                            $consulta = Conexion::obtener_conexion()->query($sql);
+                                            ?>
                                             <option value="0">Indefinido</option>
                                             <?php
-while ($fila = $consulta->fetch(PDO::FETCH_ASSOC)) {
-    ?>
+                                            while ($fila = $consulta->fetch(PDO::FETCH_ASSOC)) {
+                                                ?>
                                                 <option value="<?php echo $fila['idDivision'] ?>"><?php echo $fila['nombre_division'] ?></option>
                                                 <?php
-}
-?>
+                                            }
+                                            ?>
                                         </select>
                                     </div>
                                     <div class="col-md-3">
                                         <label for="pl-clase">Clase</label>
                                         <select class="form-control" name="id-clase" id="id-clase">
                                             <?php
-$sql = "SELECT nombre_clase, idClase FROM clase ORDER BY nombre_clase";
+                                            $sql = "SELECT nombre_clase, idClase FROM clase ORDER BY nombre_clase";
 
-$consulta = Conexion::obtener_conexion()->query($sql);
-?>
+                                            $consulta = Conexion::obtener_conexion()->query($sql);
+                                            ?>
                                             <option value="0">Indefinido</option>
                                             <?php
-while ($fila = $consulta->fetch(PDO::FETCH_ASSOC)) {
-    ?>
+                                            while ($fila = $consulta->fetch(PDO::FETCH_ASSOC)) {
+                                                ?>
                                                 <option value="<?php echo $fila['idClase'] ?>"><?php echo $fila['nombre_clase'] ?></option>
                                                 <?php
-}
-?>
+                                            }
+                                            ?>
                                         </select>
                                     </div>
                                     <div class="col-md-3">
                                         <label>Orden</label>
                                         <select class="form-control" name="id-orden" id="id-orden">
                                             <?php
-$sql = "SELECT nombre_orden, idOrden FROM orden ORDER BY nombre_orden";
+                                            $sql = "SELECT nombre_orden, idOrden FROM orden ORDER BY nombre_orden";
 
-$consulta = Conexion::obtener_conexion()->query($sql);
-?>
+                                            $consulta = Conexion::obtener_conexion()->query($sql);
+                                            ?>
                                             <option value="0">Indefinido</option>
                                             <?php
-while ($fila = $consulta->fetch(PDO::FETCH_ASSOC)) {
-    ?>
+                                            while ($fila = $consulta->fetch(PDO::FETCH_ASSOC)) {
+                                                ?>
                                                 <option value="<?php echo $fila['idOrden'] ?>"><?php echo $fila['nombre_orden'] ?></option>
                                                 <?php
-}
-?>
+                                            }
+                                            ?>
                                         </select>
                                     </div>
                                 </div>
@@ -212,54 +215,54 @@ while ($fila = $consulta->fetch(PDO::FETCH_ASSOC)) {
                                         <label>Familia</label>
                                         <select class="form-control" name="id-familia" id="id-familia">
                                             <?php
-$sql = "SELECT nombre_familia, idFamilia FROM familia ORDER BY nombre_familia";
+                                            $sql = "SELECT nombre_familia, idFamilia FROM familia ORDER BY nombre_familia";
 
-$consulta = Conexion::obtener_conexion()->query($sql);
-?>
+                                            $consulta = Conexion::obtener_conexion()->query($sql);
+                                            ?>
                                             <option value="0">Indefinido</option>
                                             <?php
-while ($fila = $consulta->fetch(PDO::FETCH_ASSOC)) {
-    ?>
-                                                        <option value="<?php echo $fila['idFamilia'] ?>"><?php echo $fila['nombre_familia'] ?></option>
-                                                        <?php
-}
-?>
-                                                    </select>
+                                            while ($fila = $consulta->fetch(PDO::FETCH_ASSOC)) {
+                                                ?>
+                                                <option value="<?php echo $fila['idFamilia'] ?>"><?php echo $fila['nombre_familia'] ?></option>
+                                                <?php
+                                            }
+                                            ?>
+                                        </select>
                                     </div>
                                     <div class="col-md-3">
                                         <label>Género</label>
                                         <select class="form-control" name="id-genero" id="id-genero">
                                             <?php
-$sql = "SELECT nombre_genero, idGenero FROM genero ORDER BY nombre_genero";
+                                            $sql = "SELECT nombre_genero, idGenero FROM genero ORDER BY nombre_genero";
 
-$consulta = Conexion::obtener_conexion()->query($sql);
-?>
+                                            $consulta = Conexion::obtener_conexion()->query($sql);
+                                            ?>
                                             <option value="0">Indefinido</option>
                                             <?php
-while ($fila = $consulta->fetch(PDO::FETCH_ASSOC)) {
-    ?>
+                                            while ($fila = $consulta->fetch(PDO::FETCH_ASSOC)) {
+                                                ?>
                                                 <option value="<?php echo $fila['idGenero'] ?>"><?php echo $fila['nombre_genero'] ?></option>
                                                 <?php
-}
-?>
+                                            }
+                                            ?>
                                         </select>
                                     </div>
                                     <div class="col-md-3">
                                         <label>Epíteto</label>
                                         <select class="form-control" name="id-epiteto" id="id-epiteto">
                                             <?php
-$sql = "SELECT nombre_epiteto, idEpiteto FROM epiteto ORDER BY nombre_epiteto";
+                                            $sql = "SELECT nombre_epiteto, idEpiteto FROM epiteto ORDER BY nombre_epiteto";
 
-$consulta = Conexion::obtener_conexion()->query($sql);
-?>
+                                            $consulta = Conexion::obtener_conexion()->query($sql);
+                                            ?>
                                             <option value="0">Indefinido</option>
                                             <?php
-while ($fila = $consulta->fetch(PDO::FETCH_ASSOC)) {
-    ?>
+                                            while ($fila = $consulta->fetch(PDO::FETCH_ASSOC)) {
+                                                ?>
                                                 <option value="<?php echo $fila['idEpiteto'] ?>"><?php echo $fila['nombre_epiteto'] ?></option>
                                                 <?php
-}
-?>
+                                            }
+                                            ?>
                                         </select>
                                     </div>
                                     <div class="col-md-3">
@@ -286,18 +289,18 @@ while ($fila = $consulta->fetch(PDO::FETCH_ASSOC)) {
                                         <label>Color</label>
                                         <select class="form-control" name="id-color" id="id-color">
                                             <?php
-$sql = "SELECT nombre_color, idColor FROM color ORDER BY nombre_color";
+                                            $sql = "SELECT nombre_color, idColor FROM color ORDER BY nombre_color";
 
-$consulta = Conexion::obtener_conexion()->query($sql);
-?>
+                                            $consulta = Conexion::obtener_conexion()->query($sql);
+                                            ?>
                                             <option value="0">Indefinido</option>
                                             <?php
-while ($fila = $consulta->fetch(PDO::FETCH_ASSOC)) {
-    ?>
+                                            while ($fila = $consulta->fetch(PDO::FETCH_ASSOC)) {
+                                                ?>
                                                 <option value="<?php echo $fila['idColor'] ?>"><?php echo $fila['nombre_color'] ?></option>
                                                 <?php
-}
-?>
+                                            }
+                                            ?>
                                         </select>
                                     </div>
                                 </div>
@@ -307,55 +310,55 @@ while ($fila = $consulta->fetch(PDO::FETCH_ASSOC)) {
                                         <label>Forma de la Hoja</label>
                                         <select class="form-control" name="id-forma" id="id-forma">
                                             <?php
-$sql = "SELECT nombre_forma, idForma FROM forma";
+                                            $sql = "SELECT nombre_forma, idForma FROM forma";
 
-$consulta = Conexion::obtener_conexion()->query($sql);
-?>
+                                            $consulta = Conexion::obtener_conexion()->query($sql);
+                                            ?>
                                             <option value="0">Indefinido</option>
                                             <?php
-while ($fila = $consulta->fetch(PDO::FETCH_ASSOC)) {
-    ?>
+                                            while ($fila = $consulta->fetch(PDO::FETCH_ASSOC)) {
+                                                ?>
                                                 <option value="<?php echo $fila['idForma'] ?>"><?php echo $fila['nombre_forma'] ?></option>
                                                 <?php
-}
-?>
+                                            }
+                                            ?>
                                         </select>
                                     </div>
                                     <div class="col-md-4">
                                         <label>Tipo de Hoja</label>
                                         <select class="form-control" name="id-tipo" id="id-tipo">
                                             <?php
-$sql = "SELECT nombre_hoja, idTipoHoja FROM tipohoja";
+                                            $sql = "SELECT nombre_hoja, idTipoHoja FROM tipohoja";
 
-$consulta = Conexion::obtener_conexion()->query($sql);
-?>
+                                            $consulta = Conexion::obtener_conexion()->query($sql);
+                                            ?>
                                             <option value="0">Indefinido</option>
                                             <?php
-while ($fila = $consulta->fetch(PDO::FETCH_ASSOC)) {
-    ?>
+                                            while ($fila = $consulta->fetch(PDO::FETCH_ASSOC)) {
+                                                ?>
                                                 <option value="<?php echo $fila['idTipoHoja'] ?>"><?php echo $fila['nombre_hoja'] ?></option>
                                                 <?php
-}
-?>
+                                            }
+                                            ?>
                                         </select>
                                     </div>
                                     <div class="col-md-4">
                                         <label>Determinación</label>
                                         <select class="form-control" name="id-determinado" id="id-determinado">
                                             <?php
-$sql = "SELECT nombre_determinado, idDeterminadaPor FROM determinadapor";
+                                            $sql = "SELECT nombre_determinado, idDeterminadaPor FROM determinadapor";
 
-$consulta = Conexion::obtener_conexion()->query($sql);
-?>
+                                            $consulta = Conexion::obtener_conexion()->query($sql);
+                                            ?>
                                             <option value="0">Indefinido</option>
                                             <?php
-while ($fila = $consulta->fetch(PDO::FETCH_ASSOC)) {
-    ?>
+                                            while ($fila = $consulta->fetch(PDO::FETCH_ASSOC)) {
+                                                ?>
                                                 <option value="<?php echo $fila['idDeterminadaPor'] ?>"><?php echo $fila['nombre_determinado'] ?></option>
 
                                                 <?php
-}
-?>
+                                            }
+                                            ?>
                                         </select>
                                     </div>
                                 </div>
@@ -364,13 +367,20 @@ while ($fila = $consulta->fetch(PDO::FETCH_ASSOC)) {
 
                                 <div class="row" style="padding-top: 15px; margin-bottom: 15px">
                                     <div class="col-md-4" style="top: 20px; margin-bottom: 15px">
-                                        <div class="col-md-8">
+                                        <div class="col-md-12">
                                             <label>Imagen principal</label>
-                                            <input class="form-control" type="file" name="imagen" id="imagen" required>
-                                            <div id="error"></div>
-                                        </div>
-                                        <div id="respuesta" class="col-md-4" style="top: -10px; text-align: center">
-                                            <!--RESPUESTA-->
+                                            <div class="col-md-10" style="padding-left: 0px !important;">
+                                                <input class="form-control" type="file" name="imagen" id="imagen" required>
+                                            </div>
+                                            <div class="col-md-2" style="top: -12px">
+                                                <button type="button" class="btn bg-light-blue waves-effect">
+                                                    <a href="https://www.iloveimg.com/es/editor-de-fotos" target="_blank">
+                                                        <i class="material-icons">
+                                                            <img src="img/img_1.png" height="30" width="30" style="margin-bottom: 2px">
+                                                        </i>
+                                                    </a>
+                                                </button>
+                                            </div>
                                         </div>
                                     </div>
                                     <div class="col-md-8">
@@ -407,6 +417,10 @@ while ($fila = $consulta->fetch(PDO::FETCH_ASSOC)) {
                                 </div>
                             </div>
                             <div class="modal-footer">
+                                <div id="respuesta" class="col-md-4" style="top: -10px; text-align: center">
+                                    <!--RESPUESTA-->
+                                </div>
+                                <div id="error"></div>
                                 <button type="reset" class="btn btn-link waves-effect" style="margin-right: 100px">BORRAR</button>
                                 <button type="submit" class="btn btn-link waves-effect" id="agregar-registro">AGREGAR</button>
                                 <button type="button" class="btn btn-link waves-effect" data-dismiss="modal" aria-label="Close">CERRAR</button>
@@ -438,72 +452,72 @@ while ($fila = $consulta->fetch(PDO::FETCH_ASSOC)) {
                                         <label for="pl-reino">Reino</label>
                                         <select id="id-reino-a" name="id-reino-a" class="form-control">
                                             <?php
-$sql = "SELECT nombre_reino, idReino FROM reino ORDER BY nombre_reino";
+                                            $sql = "SELECT nombre_reino, idReino FROM reino ORDER BY nombre_reino";
 
-$consulta = Conexion::obtener_conexion()->query($sql);
-?>
+                                            $consulta = Conexion::obtener_conexion()->query($sql);
+                                            ?>
                                             <option>Indefinido</option>
                                             <?php
-while ($fila = $consulta->fetch(PDO::FETCH_ASSOC)) {
-    ?>
+                                            while ($fila = $consulta->fetch(PDO::FETCH_ASSOC)) {
+                                                ?>
                                                 <option value="<?php echo $fila['idReino'] ?>"><?php echo $fila['nombre_reino'] ?></option>
                                                 <?php
-}
-?>
+                                            }
+                                            ?>
                                         </select>
                                     </div>
                                     <div class="col-md-3">
                                         <label for="pl-division">División</label>
                                         <select class="form-control" name="id-division-a" id="id-division-a">
                                             <?php
-$sql = "SELECT nombre_division, idDivision FROM division ORDER BY nombre_division";
+                                            $sql = "SELECT nombre_division, idDivision FROM division ORDER BY nombre_division";
 
-$consulta = Conexion::obtener_conexion()->query($sql);
-?>
+                                            $consulta = Conexion::obtener_conexion()->query($sql);
+                                            ?>
                                             <option>Indefinido</option>
                                             <?php
-while ($fila = $consulta->fetch(PDO::FETCH_ASSOC)) {
-    ?>
+                                            while ($fila = $consulta->fetch(PDO::FETCH_ASSOC)) {
+                                                ?>
                                                 <option value="<?php echo $fila['idDivision'] ?>"><?php echo $fila['nombre_division'] ?></option>
                                                 <?php
-}
-?>
+                                            }
+                                            ?>
                                         </select>
                                     </div>
                                     <div class="col-md-3">
                                         <label for="pl-clase">Clase</label>
                                         <select class="form-control" name="id-clase-a" id="id-clase-a">
                                             <?php
-$sql = "SELECT nombre_clase, idClase FROM clase ORDER BY nombre_clase";
+                                            $sql = "SELECT nombre_clase, idClase FROM clase ORDER BY nombre_clase";
 
-$consulta = Conexion::obtener_conexion()->query($sql);
-?>
+                                            $consulta = Conexion::obtener_conexion()->query($sql);
+                                            ?>
                                             <option>Indefinido</option>
                                             <?php
-while ($fila = $consulta->fetch(PDO::FETCH_ASSOC)) {
-    ?>
+                                            while ($fila = $consulta->fetch(PDO::FETCH_ASSOC)) {
+                                                ?>
                                                 <option value="<?php echo $fila['idClase'] ?>"><?php echo $fila['nombre_clase'] ?></option>
                                                 <?php
-}
-?>
+                                            }
+                                            ?>
                                         </select>
                                     </div>
                                     <div class="col-md-3">
                                         <label>Orden</label>
                                         <select class="form-control" name="id-orden-a" id="id-orden-a">
                                             <?php
-$sql = "SELECT nombre_orden, idOrden FROM orden ORDER BY nombre_orden";
+                                            $sql = "SELECT nombre_orden, idOrden FROM orden ORDER BY nombre_orden";
 
-$consulta = Conexion::obtener_conexion()->query($sql);
-?>
+                                            $consulta = Conexion::obtener_conexion()->query($sql);
+                                            ?>
                                             <option>Indefinido</option>
                                             <?php
-while ($fila = $consulta->fetch(PDO::FETCH_ASSOC)) {
-    ?>
+                                            while ($fila = $consulta->fetch(PDO::FETCH_ASSOC)) {
+                                                ?>
                                                 <option value="<?php echo $fila['idOrden'] ?>"><?php echo $fila['nombre_orden'] ?></option>
                                                 <?php
-}
-?>
+                                            }
+                                            ?>
                                         </select>
                                     </div>
                                 </div>
@@ -513,54 +527,54 @@ while ($fila = $consulta->fetch(PDO::FETCH_ASSOC)) {
                                         <label>Familia</label>
                                         <select class="form-control" name="id-familia-a" id="id-familia-a">
                                             <?php
-$sql = "SELECT nombre_familia, idFamilia FROM familia ORDER BY nombre_familia";
+                                            $sql = "SELECT nombre_familia, idFamilia FROM familia ORDER BY nombre_familia";
 
-$consulta = Conexion::obtener_conexion()->query($sql);
-?>
+                                            $consulta = Conexion::obtener_conexion()->query($sql);
+                                            ?>
                                             <option>Indefinido</option>
                                             <?php
-while ($fila = $consulta->fetch(PDO::FETCH_ASSOC)) {
-    ?>
+                                            while ($fila = $consulta->fetch(PDO::FETCH_ASSOC)) {
+                                                ?>
                                                 <option value="<?php echo $fila['idFamilia'] ?>"><?php echo $fila['nombre_familia'] ?></option>
                                                 <?php
-}
-?>
+                                            }
+                                            ?>
                                         </select>
                                     </div>
                                     <div class="col-md-3">
                                         <label>Género</label>
                                         <select class="form-control" name="id-genero-a" id="id-genero-a">
                                             <?php
-$sql = "SELECT nombre_genero, idGenero FROM genero ORDER BY nombre_genero";
+                                            $sql = "SELECT nombre_genero, idGenero FROM genero ORDER BY nombre_genero";
 
-$consulta = Conexion::obtener_conexion()->query($sql);
-?>
+                                            $consulta = Conexion::obtener_conexion()->query($sql);
+                                            ?>
                                             <option>Indefinido</option>
                                             <?php
-while ($fila = $consulta->fetch(PDO::FETCH_ASSOC)) {
-    ?>
+                                            while ($fila = $consulta->fetch(PDO::FETCH_ASSOC)) {
+                                                ?>
                                                 <option value="<?php echo $fila['idGenero'] ?>"><?php echo $fila['nombre_genero'] ?></option>
                                                 <?php
-}
-?>
+                                            }
+                                            ?>
                                         </select>
                                     </div>
                                     <div class="col-md-3">
                                         <label>Epíteto</label>
                                         <select class="form-control" name="id-epiteto-a" id="id-epiteto-a">
                                             <?php
-$sql = "SELECT nombre_epiteto, idEpiteto FROM epiteto ORDER BY nombre_epiteto";
+                                            $sql = "SELECT nombre_epiteto, idEpiteto FROM epiteto ORDER BY nombre_epiteto";
 
-$consulta = Conexion::obtener_conexion()->query($sql);
-?>
+                                            $consulta = Conexion::obtener_conexion()->query($sql);
+                                            ?>
                                             <option>Indefinido</option>
                                             <?php
-while ($fila = $consulta->fetch(PDO::FETCH_ASSOC)) {
-    ?>
+                                            while ($fila = $consulta->fetch(PDO::FETCH_ASSOC)) {
+                                                ?>
                                                 <option value="<?php echo $fila['idEpiteto'] ?>"><?php echo $fila['nombre_epiteto'] ?></option>
                                                 <?php
-}
-?>
+                                            }
+                                            ?>
                                         </select>
                                     </div>
                                     <div class="col-md-3">
@@ -587,18 +601,18 @@ while ($fila = $consulta->fetch(PDO::FETCH_ASSOC)) {
                                         <label>Color</label>
                                         <select class="form-control" name="id-color-a" id="id-color-a">
                                             <?php
-$sql = "SELECT nombre_color, idColor FROM color ORDER BY nombre_color";
+                                            $sql = "SELECT nombre_color, idColor FROM color ORDER BY nombre_color";
 
-$consulta = Conexion::obtener_conexion()->query($sql);
-?>
+                                            $consulta = Conexion::obtener_conexion()->query($sql);
+                                            ?>
                                             <option>Indefinido</option>
                                             <?php
-while ($fila = $consulta->fetch(PDO::FETCH_ASSOC)) {
-    ?>
+                                            while ($fila = $consulta->fetch(PDO::FETCH_ASSOC)) {
+                                                ?>
                                                 <option value="<?php echo $fila['idColor'] ?>"><?php echo $fila['nombre_color'] ?></option>
                                                 <?php
-}
-?>
+                                            }
+                                            ?>
                                         </select>
                                     </div>
                                 </div>
@@ -608,55 +622,55 @@ while ($fila = $consulta->fetch(PDO::FETCH_ASSOC)) {
                                         <label>Forma de la Hoja</label>
                                         <select class="form-control" name="id-forma-a" id="id-forma-a">
                                             <?php
-$sql = "SELECT nombre_forma, idForma FROM forma";
+                                            $sql = "SELECT nombre_forma, idForma FROM forma";
 
-$consulta = Conexion::obtener_conexion()->query($sql);
-?>
+                                            $consulta = Conexion::obtener_conexion()->query($sql);
+                                            ?>
                                             <option>Indefinido</option>
                                             <?php
-while ($fila = $consulta->fetch(PDO::FETCH_ASSOC)) {
-    ?>
+                                            while ($fila = $consulta->fetch(PDO::FETCH_ASSOC)) {
+                                                ?>
                                                 <option value="<?php echo $fila['idForma'] ?>"><?php echo $fila['nombre_forma'] ?></option>
                                                 <?php
-}
-?>
+                                            }
+                                            ?>
                                         </select>
                                     </div>
                                     <div class="col-md-4">
                                         <label>Tipo de Hoja</label>
                                         <select class="form-control" name="id-tipo-a" id="id-tipo-a">
                                             <?php
-$sql = "SELECT nombre_hoja, idTipoHoja FROM tipohoja";
+                                            $sql = "SELECT nombre_hoja, idTipoHoja FROM tipohoja";
 
-$consulta = Conexion::obtener_conexion()->query($sql);
-?>
+                                            $consulta = Conexion::obtener_conexion()->query($sql);
+                                            ?>
                                             <option>Indefinido</option>
                                             <?php
-while ($fila = $consulta->fetch(PDO::FETCH_ASSOC)) {
-    ?>
+                                            while ($fila = $consulta->fetch(PDO::FETCH_ASSOC)) {
+                                                ?>
                                                 <option value="<?php echo $fila['idTipoHoja'] ?>"><?php echo $fila['nombre_hoja'] ?></option>
                                                 <?php
-}
-?>
+                                            }
+                                            ?>
                                         </select>
                                     </div>
                                     <div class="col-md-4">
                                         <label>Determinación</label>
                                         <select class="form-control" name="id-determinado-a" id="id-determinado-a">
                                             <?php
-$sql = "SELECT nombre_determinado, idDeterminadaPor FROM determinadapor";
+                                            $sql = "SELECT nombre_determinado, idDeterminadaPor FROM determinadapor";
 
-$consulta = Conexion::obtener_conexion()->query($sql);
-?>
+                                            $consulta = Conexion::obtener_conexion()->query($sql);
+                                            ?>
                                             <option>Indefinido</option>
                                             <?php
-while ($fila = $consulta->fetch(PDO::FETCH_ASSOC)) {
-    ?>
+                                            while ($fila = $consulta->fetch(PDO::FETCH_ASSOC)) {
+                                                ?>
                                                 <option value="<?php echo $fila['idDeterminadaPor'] ?>"><?php echo $fila['nombre_determinado'] ?></option>
 
                                                 <?php
-}
-?>
+                                            }
+                                            ?>
                                         </select>
                                     </div>
                                 </div>
@@ -665,17 +679,14 @@ while ($fila = $consulta->fetch(PDO::FETCH_ASSOC)) {
 
                                 <div class="row" style="padding-top: 15px">
                                     <div class="col-md-4" style="top: 20px; margin-bottom: 15px">
-                                        <div class="col-md-8">
+                                        <div class="col-md-12">
                                             <label>Imagen principal</label>
                                             <input class="form-control" type="file" name="imagen-a" id="imagen-a">
-                                            <input class="form-control" type="text" name="borrar-imagen" id="borrar-imagen">
-                                            <div id="error"></div>
+
                                         </div>
-                                        <div id="respuesta-a" class="col-md-4" style="top: -10px; text-align: center">
-                                            <!--RESPUESTA-->
-                                        </div>
+
                                     </div>
-                                    <div class="col-md-8">
+                                    <div class="col-md-8" style="margin-top: 20px">
                                         <div class="col-md-4" style="text-align: center">
                                             <label>Reproducción</label>
                                             <div class="row centrar" style="text-align: center; padding-top: 8px">
@@ -712,6 +723,12 @@ while ($fila = $consulta->fetch(PDO::FETCH_ASSOC)) {
                                 </div>
                             </div>
                             <div class="modal-footer">
+                                <div class="row" style="margin-bottom: -20px; margin-left: 10px; margin-top: 10px">
+                                    <div id="respuesta-a" class="col-md-1" style="top: -10px; text-align: left">
+                                        <!--RESPUESTA-->
+                                    </div>
+                                    <div id="error-a" class="col-md-3" style="text-align: center"></div>
+                                </div>
                                 <button type="submit" class="btn btn-link waves-effect" id="actualizar-planta">ACTUALIZAR</button>
                                 <button type="button" class="btn btn-link waves-effect" data-dismiss="modal" aria-label="Close">CERRAR</button>
                             </div>
@@ -735,7 +752,7 @@ while ($fila = $consulta->fetch(PDO::FETCH_ASSOC)) {
                             <div class="modal-body">
 
                                 <!--style="display:none"-->
-                                <input class="form-control" style="display:none" type="text" name="id-comun" id="id-comun" >
+                                <input style="display: none" type="text" name="id-comun" id="id-comun" >
 
                                 <div class="col-md-12">
                                     <h4 style="text-align: center">AGREGAR DATOS</h4>
@@ -773,7 +790,6 @@ while ($fila = $consulta->fetch(PDO::FETCH_ASSOC)) {
                                         </table>-->
                                     </div>
                                 </div>
-
                             </div>
                             <div class="modal-footer" style="padding-top: 30px">
                             </div>
@@ -781,7 +797,6 @@ while ($fila = $consulta->fetch(PDO::FETCH_ASSOC)) {
                     </div>
                 </div>
             </div>
-
         </div>
     </section>
 
@@ -791,12 +806,12 @@ while ($fila = $consulta->fetch(PDO::FETCH_ASSOC)) {
         });
     </script>
 
-    <script type="text/javascript">
-        $(document).ready(function () {
-            $('#tabla-comun').load('tablas/tablaNombreComun.php');
-        });
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/baguettebox.js/1.8.1/baguetteBox.min.js"></script>
+    <script>
+        baguetteBox.run('.tz-gallery');
     </script>
 
+    <!-- AGREGAR PLANTA -->
     <script>
 
         $(document).ready(function () {
@@ -819,13 +834,13 @@ while ($fila = $consulta->fetch(PDO::FETCH_ASSOC)) {
                         if (r == 1) {
                             $('#tabla-registro').load('tablas/tablaRegistros.php');
                             $("#respuesta").html("<img src='img/bien.gif' height='75'>");
-                            $("#error").html("<br><p style='text-align: center; font-style: oblique'><b>Agregado exitosamente</b></p>");
+                            $("#error").html("<br><p style='font-style: oblique'><b>Agregado exitosamente</b></p>");
                         } else if (r == 2) {
                             $("#respuesta").html("<img src='img/mal.png' height='75'>");
-                            $("#error").html("<br><p id='mensaje' style='text-align: center; font-style: oblique'><b>Fallo del servidor</b></p>");
+                            $("#error").html("<br><p id='mensaje' style='font-style: oblique'><b>Fallo del servidor</b></p>");
                         } else if (r == 3) {
                             $("#respuesta").html("<img src='img/mal.png' height='75'>");
-                            $("#error").html("<br><p style='text-align: center; font-style: oblique'><b>Formato incorrecto</b></p>");
+                            $("#error").html("<br><p style='font-style: oblique'><b>Formato incorrecto</b></p>");
                         }
                     }
                 });
@@ -834,69 +849,7 @@ while ($fila = $consulta->fetch(PDO::FETCH_ASSOC)) {
 
     </script>
 
-    <!-- CREAR -->
-    <script>
-
-        //AGREGAR NOMBRE COMUN
-        $('#agregar-comun').click(function ()
-        {
-            nombre_comun = $('#nombre-comun').val();
-            lengua = $('#lengua').val();
-            id = $('#id-comun').val();
-
-            if (!nombre_comun)
-            {
-                alertify.warning('Debe agregar al menos el nombre común');
-            } else
-            {
-
-                $.ajax({
-                    type: "POST",
-                    url: "app/insertarDatos.php",
-                    data: {'funcion': 'insertarNombreComun', 'comun': nombre_comun, 'lengua': lengua, 'id-comun': id},
-                    success: function (r) {
-
-                        if (r == 1) {
-                            $('#tabla-comun').load('tablas/tablaNombreComun.php');
-                            alertify.success("Agregado con éxito");
-
-                        } else {
-                            alertify.error("Error del servidor");
-                        }
-                    }
-                });
-            }
-        });
-
-        function obtenerID(id) {
-            $('#id-comun').val(id);
-            row = '<button type="submit" class="btn btn-xl waves-effect btn-danger">ELIMINAR</button>';
-
-            $.ajax({
-                type: "POST",
-                url: "app/filtrarDatos.php",
-                data: {'funcion': 'filtrarComun', 'id': id},
-
-                success: function (r) {
-                    var datos = $.parseJSON(r);
-                    var t = $('#tablaComun').DataTable();
-                    t.clear().draw();
-                    $.each(datos, function (i, item)
-                    {
-                        t.row.add([
-                            item.nombre_nombre_comun,
-                            item.lengua,
-                            row
-
-                        ]).draw(false);
-                    });
-                }
-            });
-        }
-
-    </script>
-
-    <!-- ACTUALIZAR -->
+    <!-- ACTUALIZAR PLANTA -->
     <script>
 
         $(document).ready(function () {
@@ -906,6 +859,7 @@ while ($fila = $consulta->fetch(PDO::FETCH_ASSOC)) {
             function actualizarPlanta(evento) {
                 evento.preventDefault();
                 var datos = new FormData($("#actualizar-planta")[0]);
+                $("#error-a").html("<br><p id='mensaje' style='font-style: oblique'><b></b></p>");
                 $("#respuesta-a").html("<img src='img/cargando8.gif' height='75'>");
 
                 $.ajax({
@@ -918,13 +872,14 @@ while ($fila = $consulta->fetch(PDO::FETCH_ASSOC)) {
                         console.log(r);
                         if (r == 1) {
                             $('#tabla-registro').load('tablas/tablaRegistros.php');
-                            $("#respuesta").html("<img src='img/bien.gif' height='75'>");
-                            $("#error").html("<br><p style='text-align: center; font-style: oblique'><b>Actualizado exitosamente</b></p>");
+                            $("#respuesta-a").html("<img src='img/bien.gif' height='75'>");
+                            $("#error-a").html("<br><p style='font-style: oblique'><b>Actualizado exitosamente</b></p>");
                         } else if (r == 0) {
-                            $("#respuesta").html("<img src='img/mal.png' height='75'>");
-                            $("#error").html("<br><p id='mensaje' style='text-align: center; font-style: oblique'><b>Fallo del servidor</b></p>");
-                        } else {
-                            $("#error").html("<br><p id='mensaje' style='text-align: center; font-style: oblique'><b>Fallo del servidor</b></p>");
+                            $("#respuesta-a").html("<img src='img/mal.png' height='75'>");
+                            $("#error-a").html("<br><p id='mensaje' style='font-style: oblique'><b>Formato incorrecto</b></p>");
+                        } else if (r == 2) {
+                            $("#respuesta-a").html("<img src='img/mal.png' height='75'>");
+                            $("#error-a").html("<br><p id='mensaje' style='font-style: oblique'><b>Fallo del servidor</b></p>");
                         }
                     }
                 });
@@ -987,130 +942,45 @@ while ($fila = $consulta->fetch(PDO::FETCH_ASSOC)) {
         }
 
     </script>
-    <!--<script>
-        //***** ACTUALIZAR REGISTRO
-        $('#actualizar-registro').click(function ()
+
+    <!-- CREAR NOMBRE COMUN -->
+    <script>
+        function obtenerID(id) {
+            $('#id-comun').val(id);
+            $('#tabla-comun').load('tablas/tablaNombreComun.php?id=' + id);
+        }
+
+        //AGREGAR NOMBRE COMUN
+        $('#agregar-comun').click(function ()
         {
-            id_planta = $('#id-planta').val();
-            id_reino = $('#id-reino-a').val();
-            id_division = $('#id-division-a').val();
-            id_clase = $('#id-clase-a').val();
-            id_orden = $('#id-orden-a').val();
-            id_familia = $('#id-familia-a').val();
-            id_genero = $('#id-genero-a').val();
-            id_epiteto = $('#id-epiteto-a').val();
-            id_determinado = $('#id-determinado-a').val();
-            id_color = $('#id-color-a').val();
-            id_forma = $('#id-forma-a').val();
-            id_tipo = $('#id-tipo-a').val();
-            autor = $('#autor-a').val();
-            fuente = $('#fuente-a').val();
-            altura = $('#altura-a').val();
+            nombre_comun = $('#nombre-comun').val();
+            lengua = $('#lengua').val();
+            id = $('#id-comun').val();
 
-            if ($('#sexual-a').is(':checked')) {
-                sexual = 1;
-            } else {
-                sexual = 0;
-            }
-
-            if ($('#asexual-a').is(':checked')) {
-                asexual = 1;
-            } else {
-                asexual = 0;
-            }
-
-            if ($('#visible-a').is(':checked')) {
-                visible = 1;
-            } else {
-                visible = 0;
-            }
-
-            if ($('#revision-a').is(':checked')) {
-                revision = 1;
-            } else {
-                revision = 0;
-            }
-
-            if (id_familia == "Indefinido")
+            if (!nombre_comun)
             {
-                alertify.warning('Debe seleccionar al menos el campo Familia');
+                alertify.warning('Debe agregar al menos el nombre común');
             } else
             {
 
                 $.ajax({
                     type: "POST",
-                    url: "app/actualizarDatos.php",
-                    data: {'funcion': 'actualizarRegistro', 'reino': id_reino, 'division': id_division, 'clase': id_clase, 'orden': id_orden, 'familia': id_familia,
-                        'genero': id_genero, 'epiteto': id_epiteto, 'determinado': id_determinado, 'color': id_color, 'forma': id_forma, 'tipo': id_tipo, 'autor': autor,
-                        'fuente': fuente, 'altura': altura, 'revision': revision, 'visible': visible, 'sexual': sexual, 'asexual': asexual, 'id-planta': id_planta},
+                    url: "app/insertarDatos.php",
+                    data: {'funcion': 'insertarNombreComun', 'comun': nombre_comun, 'lengua': lengua, 'id-comun': id},
                     success: function (r) {
 
                         if (r == 1) {
-                            $('#tabla-registro').load('tablas/tablaRegistros.php');
-                            alertify.success("Registro agregado");
-                            console.log(r);
-
+                            $('#tabla-comun').load('tablas/tablaNombreComun.php?id=' + id);
+                            alertify.success("Agregado correctamente");
                         } else {
-                            alertify.error("Error del servidor");
-                            console.log(r);
+                            alertify.success("Error del servidor");
                         }
                     }
                 });
             }
         });
 
-        function agregarForm(datos) {
-            re = datos.split('-');
-
-            $('#id-reino-a').val(re[0]);
-            $('#id-division-a').val(re[1]);
-            $('#id-clase-a').val(re[2]);
-            $('#id-orden-a').val(re[3]);
-            $('#id-familia-a').val(re[4]);
-            $('#id-genero-a').val(re[5]);
-            $('#id-epiteto-a').val(re[6]);
-            $('#autor-a').val(re[7]);
-            $('#fuente-a').val(re[8]);
-            $('#altura-a').val(re[9]);
-            $('#id-color-a').val(re[10]);
-            $('#id-forma-a').val(re[11]);
-            $('#id-tipo-a').val(re[12]);
-            $('#id-determinado-a').val(re[13]);
-            $('#reproduccion-a').val(re[14]);
-            $('#revision-a').val(re[15]);
-            $('#visible-a').val(re[16]);
-            $('#id-planta').val(re[17]);
-
-            //COMPROBAR ESTADO REPRODUCCION
-            if (re[14] == 0) {
-                $('#sexual-a').prop('checked', false);
-                $('#asexual-a').prop('checked', false);
-            } else if (re[14] == 1) {
-                $('#sexual-a').prop('checked', true);
-                $('#asexual-a').prop('checked', false);
-            } else if (re[14] == 2) {
-                $('#sexual-a').prop('checked', false);
-                $('#asexual-a').prop('checked', true);
-            } else if (re[14] == 3) {
-                $('#sexual-a').prop('checked', true);
-                $('#asexual-a').prop('checked', true);
-            }
-
-            //COMPROBAR REVISION
-            if (re[15] == 1) {
-                $('#revision-a').prop('checked', true);
-            } else {
-                $('#revision-a').prop('checked', false);
-            }
-
-            //COMPROBAR VISIBILIDAD
-            if (re[16] == 1) {
-                $('#visible-a').prop('checked', true);
-            } else {
-                $('#visible-a').prop('checked', false);
-            }
-        }
-    </script>-->
+    </script>
 
     <!--FUNCIONES CHECKBOX-->
     <script>
@@ -1169,7 +1039,7 @@ while ($fila = $consulta->fetch(PDO::FETCH_ASSOC)) {
 
                         if (r == 1) {
                             $('#tabla-registro').load('tablas/tablaRegistros.php');
-                            alertify.success("Ocultos correctamente");
+                            alertify.success("Añadido a favoritos");
                         } else {
                             alertify.error("Error del servidor");
                         }
@@ -1212,7 +1082,7 @@ while ($fila = $consulta->fetch(PDO::FETCH_ASSOC)) {
     </script>
 
     <?php
-Conexion::cerrar_conexion();
-?>
+    Conexion::cerrar_conexion();
+    ?>
 
 </body>

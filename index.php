@@ -9,7 +9,7 @@ include_once 'plantillas/navbar.inc.php';
 ?>
 
 <!-- Header -->
-<header class="masthead" style="background-image: url(img/header-bg2.jpg)">
+<header class="masthead" style="background-image: url(img/fondo-portada.jpg)">
     <div class="col-md-6">
         <div class="container-fluid" style="text-align:right; padding-right: 200px" >
             <div class="intro-text">
