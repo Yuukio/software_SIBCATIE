@@ -2,6 +2,14 @@
 
 date_default_timezone_set('America/Costa_Rica');
 include_once '../app/conexion2.php';
+include_once 'ControlSesion.inc.php';
+
+//VALIDAR INICIO DE SESION
+if (!ControlSesion::sesionIniciada() OR ControlSesion::rolVisitante()) {
+    Redireccion::redirigir(SERVIDOR);
+}
+
+$id_usuario = $_SESSION['idUsuario'];
 
 //$reino = $_POST["id-reino"];
 $reino = $_POST["id-reino"];
@@ -116,6 +124,22 @@ if ($imagen["type"] == "image/jpg" || $imagen["type"] == "image/jpeg" || $imagen
 
     if ($insertado) {
         //carga correcta
+        $sql_planta = "SELECT `idMascara` FROM planta ORDER BY `idPlanta` DESC LIMIT 1";
+
+        $consulta_planta = $pdoConn->prepare($sql_planta);
+        $consulta_planta->execute();
+
+        $fila_planta = $consulta_planta->fetch(PDO::FETCH_ASSOC);
+
+        $id_planta = $fila_planta['idMascara'];
+
+        $registro = 'Planta. ' . $id_planta;
+
+        $sql_historial = "INSERT INTO `historial`(`fecha_historial`, `registro`, `accion`, `Usuario_idUsuario`)
+                VALUES (NOW(), '$registro', 'Nuevo registro', $id_usuario)";
+        $stmt_historial = $pdoConn->prepare($sql_historial);
+        $stmt_historial->execute();
+
         echo '1';
     } else {
         //falló el servidor

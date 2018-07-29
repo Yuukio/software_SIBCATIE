@@ -2,6 +2,7 @@
 include_once 'app/ControlSesion.inc.php';
 include_once 'app/config.inc.php';
 include_once 'app/Redireccion.inc.php';
+include_once 'app/conexion2.php';
 
 //VALIDAR INICIO DE SESION
 if (!ControlSesion::sesionIniciada() OR ControlSesion::rolVisitante()) {
@@ -11,6 +12,9 @@ if (!ControlSesion::sesionIniciada() OR ControlSesion::rolVisitante()) {
 $titulo = 'Home';
 include_once 'plantillas/head-dashboard.php';
 ?>
+
+<link rel="stylesheet" href="css/gallery-clean.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/baguettebox.js/1.8.1/baguetteBox.min.css">
 
 <body class="theme-red">
 
@@ -26,39 +30,109 @@ include_once 'plantillas/head-dashboard.php';
     <section class="content">
         <div class="container-fluid">
             <div class="row clearfix">
-                <div class="col-md-2" style="height: 384px">
-                    <div class="container-fluid" style="vertical-align: middle">
-                        <div class="row">
-                            <div class="datos col-md-12">
-                                <div class="info-box-3 bg-teal hover-expand-effect">
-                                    <div class="icon">
-                                        <i class="material-icons">speaker_notes</i>
-                                    </div>
-                                    <div class="content">
-                                        <div class="text">IDENTIFICADAS</div>
-                                        <div class="number">1250</div>
+
+                <div class="col-md-5">
+                    <!--Registro de actividad-->
+                    <div class="col-md-12" style="padding: 0px">
+                        <div class="card">
+                            <div class="header bg-green">
+                                <h2>REGISTRO DE ACTIVIDAD</h2>
+                                <ul class="header-dropdown m-r--5">
+                                    <li>
+                                        <a href="javascript:void(0);" class=" waves-effect waves-block" data-toggle="modal" data-target="#modalRegistroActividad">
+                                            <i class="material-icons">zoom_out_map</i>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </div>
+                            <div>
+                                <div class="scrollable-area">
+                                    <div class="row">
+                                        <div class="table-responsive">
+                                            <table class="table table-bordered table-striped table-hover js-basic-example dataTable">
+                                                <thead>
+                                                    <tr style="background-color: white">
+                                                        <th>Fecha</th>
+                                                        <th>Usuario</th>
+                                                        <th>Registro</th>
+                                                        <th>Actividad</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <?php
+                                                    $sql_historial = "SELECT historial.fecha_historial, historial.accion, usuario.nombre_usuario, historial.registro
+                                                                        FROM historial 
+                                                                        LEFT JOIN usuario ON historial.Usuario_idUsuario=usuario.idUsuario
+                                                                        ORDER BY historial.fecha_historial DESC";
+
+                                                    $consulta_historial = $pdoConn->prepare($sql_historial);
+                                                    $consulta_historial->execute();
+
+                                                    while ($fila_historial = $consulta_historial->fetch(PDO::FETCH_ASSOC)) {
+                                                        ?>
+                                                        <tr valign="top">
+                                                            <td> <?php echo $fila_historial['fecha_historial']; ?></td>
+                                                            <td> <?php echo $fila_historial['nombre_usuario']; ?></td>
+                                                            <td> <?php echo $fila_historial['registro']; ?></td>
+                                                            <td> <?php echo $fila_historial['accion']; ?></td>
+                                                            <?php
+                                                        }
+                                                        ?>
+                                                </tbody>
+                                            </table>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
-                            <div class="datos col-md-12">
-                                <div class="info-box-3 bg-green hover-expand-effect">
-                                    <div class="icon">
-                                        <i class="material-icons">speaker_notes_off</i>
-                                    </div>
-                                    <div class="content">
-                                        <div class="text">INDEFINIDAS</div>
-                                        <div class="number">25</div>
-                                    </div>
-                                </div>
+                        </div>
+                    </div>
+
+                    <!--Usuarios registrados-->
+                    <div class="col-md-12" style="padding: 0px">
+                        <div class="card">
+                            <div class="header bg-cyan">
+                                <h2>USUARIOS ADMINISTRADORES</h2>
+                                <ul class="header-dropdown m-r--5">
+                                    <li>
+                                        <a href="javascript:void(0);" class=" waves-effect waves-block" data-toggle="modal" data-target="#modalUsuariosAdministradores">
+                                            <i class="material-icons">zoom_out_map</i>
+                                        </a>
+                                    </li>
+                                </ul>
                             </div>
-                            <div class="datos col-md-12">
-                                <div class="info-box-3 bg-light-green hover-expand-effect">
-                                    <div class="icon">
-                                        <i class="material-icons">folder_shared</i>
-                                    </div>
-                                    <div class="content">
-                                        <div class="text">USUARIOS</div>
-                                        <div class="number">75</div>
+                            <div>
+                                <div class="scrollable-area">
+                                    <div class="row">
+                                        <div class="table-responsive">
+                                            <table class="table table-bordered table-striped table-hover js-basic-example dataTable">
+                                                <thead>
+                                                    <tr style="background: white">
+                                                        <th>Nombre</th>
+                                                        <th>Email</th>
+                                                        <th>Teléfono</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <?php
+                                                    $sql_usuarios = "SELECT nombre, apellido, email, telefono FROM usuario WHERE seccion_idseccion=1 AND activo=1 AND (rol_idrol=0 OR rol_idrol=1) ORDER BY apellido ASC";
+
+                                                    $consulta_usuarios = Conexion::obtener_conexion()->query($sql_usuarios);
+
+                                                    while ($file_usuarios = $consulta_usuarios->fetch(PDO::FETCH_ASSOC)) {
+
+                                                        $nombre_completo = $file_usuarios['nombre'] . ' ' . $file_usuarios['apellido'];
+
+                                                        echo'
+                                                        <tr valign="top">
+                                                        <td>' . $nombre_completo . '</td>
+                                                        <td>' . $file_usuarios['email'] . '</td>
+                                                        <td>' . $file_usuarios['telefono'] . '</td>
+                                                        ';
+                                                    }
+                                                    ?>
+                                                </tbody>
+                                            </table>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -66,38 +140,109 @@ include_once 'plantillas/head-dashboard.php';
                     </div>
                 </div>
 
-                <!--Especies no identificadas-->
-                <div class="col-md-10">
-                    <div class="card">
-                        <div class="header bg-red">
-                            <h2>ESPECIES INDEFINIDAS</h2>
-                            <ul class="header-dropdown m-r--5">
-                                <li>
-                                    <a href="javascript:void(0);" class=" waves-effect waves-block" data-toggle="modal" data-target="#modalNoIdentificadas">
-                                        <i class="material-icons">zoom_out_map</i>
-                                    </a>
-                                </li>
-                            </ul>
+                <div class="col-md-7" style="padding: 0px">
+                    <div class="col-md-12">
+                        <div class="container-fluid" style="vertical-align: middle">
+                            <div class="row">
+                                <div class="col-md-4" style="padding-left: 0px">
+                                    <div class="info-box-3 bg-teal hover-expand-effect">
+                                        <div class="icon">
+                                            <i class="material-icons">speaker_notes</i>
+                                        </div>
+                                        <div class="content">
+                                            <div class="text">IDENTIFICADAS</div>
+                                            <div class="number">
+                                                <?php 
+                                                $sql_indefinidas = "SELECT COUNT(*) as total FROM planta WHERE revision=1";
+                                                $consulta_indefinidas = $pdoConn->prepare($sql_indefinidas);
+                                                $consulta_indefinidas->execute();
+
+                                                $total_indefinidas = $consulta_indefinidas->fetch(PDO::FETCH_ASSOC);
+
+                                                echo $total_indefinidas['total'];
+                                                ?>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="info-box-3 bg-green hover-expand-effect">
+                                        <div class="icon">
+                                            <i class="material-icons">speaker_notes_off</i>
+                                        </div>
+                                        <div class="content">
+                                            <div class="text">INDEFINIDAS</div>
+                                            <div class="number">
+                                                <?php 
+                                                $sql_indefinidas = "SELECT COUNT(*) as total FROM planta WHERE revision=0";
+                                                $consulta_indefinidas = $pdoConn->prepare($sql_indefinidas);
+                                                $consulta_indefinidas->execute();
+
+                                                $total_indefinidas = $consulta_indefinidas->fetch(PDO::FETCH_ASSOC);
+
+                                                echo $total_indefinidas['total'];
+                                                ?>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-4" style="padding-right: 0px">
+                                    <div class="info-box-3 bg-light-green hover-expand-effect">
+                                        <div class="icon">
+                                            <i class="material-icons">folder_shared</i>
+                                        </div>
+                                        <div class="content">
+                                            <div class="text">USUARIOS</div>
+                                            <div class="number">
+                                                <?php 
+                                                $sql_indefinidas = "SELECT COUNT(*) as total FROM usuario WHERE rol_idRol=2";
+                                                $consulta_indefinidas = $pdoConn->prepare($sql_indefinidas);
+                                                $consulta_indefinidas->execute();
+
+                                                $total_indefinidas = $consulta_indefinidas->fetch(PDO::FETCH_ASSOC);
+
+                                                echo $total_indefinidas['total'];
+                                                ?>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
-                        <div>
-                            <div class="scrollable-area">
-                                <div class="row">
+                    </div>
+
+                    <!--Especies no identificadas-->
+                    <div class="col-md-12">
+                        <div class="card">
+                            <div class="header bg-red">
+                                <h2>ESPECIES INDEFINIDAS</h2>
+                                <ul class="header-dropdown m-r--5">
+                                    <li>
+                                        <a href="javascript:void(0);" class=" waves-effect waves-block" data-toggle="modal" data-target="#modalNoIdentificadas">
+                                            <i class="material-icons">zoom_out_map</i>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </div>
+                            <div>
+                                <div class="body">
                                     <div class="table-responsive">
                                     <!--<table class="table table-bordered table-striped table-hover">-->
                                         <table class="table table-bordered table-striped table-hover js-basic-example dataTable">
                                             <thead>
                                                 <tr style="background: white">
+                                                    <th>Imagen</th>
                                                     <th>ID</th>
                                                     <th>Familia</th>
                                                     <th>Género</th>
                                                     <th>Epíteto</th>
                                                     <th>Ingreso</th>
-                                                    <th>Opciones</th>
+                                                    <!--<th>Opciones</th>-->
                                                 </tr>
                                             </thead>
                                             <tbody>
                                                 <?php
-                                                $sql_no_identificadas = "SELECT f.nombre_familia, p.fecha_ingreso, p.idPlanta, g.nombre_genero, e.nombre_epiteto
+                                                $sql_no_identificadas = "SELECT p.idMascara, f.nombre_familia, p.fecha_ingreso, p.idPlanta, g.nombre_genero, e.nombre_epiteto, p.url_img
                                                                             FROM planta p
                                                                             LEFT JOIN familia f ON p.Familia_idFamilia = f.idFamilia
                                                                             LEFT JOIN genero g ON p.Genero_idGenero=g.idGenero
@@ -107,27 +252,24 @@ include_once 'plantillas/head-dashboard.php';
                                                 $consulta_no_identificadas = Conexion::obtener_conexion()->query($sql_no_identificadas);
 
                                                 while ($file_no_identificada = $consulta_no_identificadas->fetch(PDO::FETCH_ASSOC)) {
-
-                                                    $id_no_identificada = $file_no_identificada['idPlanta'];
-
-                                                    $fecha = $file_no_identificada['fecha_ingreso'];
-                                                    $fecha = explode('-', $fecha);
-                                                    $anno = $fecha[0];
-                                                    $mes = $fecha[1];
-                                                    $dia = $fecha[2];
-
-                                                    $id_nuevo = str_pad($id_no_identificada, 4, "0", STR_PAD_LEFT);
-
-                                                    $idMasc_no_identificada = $anno . $mes . $dia . $id_nuevo;
                                                     ?>
 
                                                     <tr valign="top">
-                                                        <td><?php echo $id_nuevo ?></td>
+                                                        <td>
+                                                            <div class="tz-gallery">
+                                                                <div class="thumbnail" style="margin-bottom: 0px;">
+                                                                    <a class="lightbox" href="app/<?php echo $file_no_identificada['url_img']; ?>">
+                                                                        <img src="app/<?php echo $file_no_identificada['url_img']; ?>" alt="Bridge" width="80" height="50">
+                                                                    </a>
+                                                                </div>
+                                                            </div>
+                                                        </td>
+                                                        <td><?php echo $file_no_identificada['idMascara'] ?></td>
                                                         <td><?php echo $file_no_identificada['nombre_familia'] ?></td>
                                                         <td><?php echo $file_no_identificada['nombre_genero'] ?></td>
                                                         <td><?php echo $file_no_identificada['nombre_epiteto'] ?></td>
                                                         <td><?php echo $file_no_identificada['fecha_ingreso'] ?></td>
-                                                        <td style="text-align:center;">
+                                                        <!--<td style="text-align:center;">
                                                             <a href="#" style="color: #17c4cb">
                                                                 <i class="material-icons" data-toggle="modal" data-target="#modalVer">search</i>
                                                             </a>
@@ -147,13 +289,18 @@ include_once 'plantillas/head-dashboard.php';
                                                             <a href="#" style="color: #E74C3C">
                                                                 <i class="material-icons">delete</i>
                                                             </a>
-                                                        </td>
+                                                        </td>-->
                                                     </tr>
                                                     <?php
                                                 }
                                                 ?>
                                             </tbody>
                                         </table>
+                                        <script src="https://cdnjs.cloudflare.com/ajax/libs/baguettebox.js/1.8.1/baguetteBox.min.js"></script>
+                                        <script>
+                                            baguetteBox.run('.tz-gallery');
+                                        </script>
+
                                     </div>
                                 </div>
                             </div>
@@ -161,114 +308,6 @@ include_once 'plantillas/head-dashboard.php';
                     </div>
                 </div>
 
-            </div>
-        </div>
-
-        <!--Registro de actividad-->
-        <div class="col-md-7">
-            <div class="card">
-                <div class="header bg-green">
-                    <h2>REGISTRO DE ACTIVIDAD</h2>
-                    <ul class="header-dropdown m-r--5">
-                        <li>
-                            <a href="javascript:void(0);" class=" waves-effect waves-block" data-toggle="modal" data-target="#modalRegistroActividad">
-                                <i class="material-icons">zoom_out_map</i>
-                            </a>
-                        </li>
-                    </ul>
-                </div>
-                <div>
-                    <div class="scrollable-area">
-                        <div class="row">
-                            <div class="table-responsive">
-                                <table class="table table-bordered table-striped table-hover js-basic-example dataTable">
-                                    <thead>
-                                        <tr style="background-color: white">
-                                            <th>Fecha</th>
-                                            <th>Usuario</th>
-                                            <th>Registro</th>
-                                            <th>Actividad</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-
-                                        <?php
-                                        $sql_historial = "SELECT historial.fecha_historial, historial.accion, usuario.nombre_usuario, historial.registro
-                                                            FROM historial 
-                                                            INNER JOIN usuario ON historial.Usuario_idUsuario=usuario.idUsuario
-                                                            ORDER BY historial.fecha_historial DESC";
-
-                                        $consulta_historial= $pdoConn->prepare($sql_historial);
-                                        $consulta_historial->execute();
-
-                                        while ($fila_historial= $consulta_historial->fetch(PDO::FETCH_ASSOC)) {
-                                            ?>
-                                            <tr valign="top">
-                                                <td> <?php echo $fila_historial['fecha_historial']; ?></td>
-                                                <td> <?php echo $fila_historial['registro']; ?></td>
-                                                <td> <?php echo $fila_historial['accion']; ?></td>
-                                                <td> <?php echo $fila_historial['nombre_usuario']; ?></td>
-                                                <?php
-                                            }
-                                            ?>
-                                    </tbody>
-                                </table>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <!--Usuarios registrados-->
-        <div class="col-md-5">
-            <div class="card">
-                <div class="header bg-cyan">
-                    <h2>USUARIOS ADMINISTRADORES</h2>
-                    <ul class="header-dropdown m-r--5">
-                        <li>
-                            <a href="javascript:void(0);" class=" waves-effect waves-block" data-toggle="modal" data-target="#modalUsuariosAdministradores">
-                                <i class="material-icons">zoom_out_map</i>
-                            </a>
-                        </li>
-                    </ul>
-                </div>
-                <div>
-                    <div class="scrollable-area">
-                        <div class="row">
-                            <div class="table-responsive">
-                                <table class="table table-bordered table-striped table-hover js-basic-example dataTable">
-                                    <thead>
-                                        <tr style="background: white">
-                                            <th>Nombre</th>
-                                            <th>Email</th>
-                                            <th>Teléfono</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <?php
-                                        $sql_usuarios = "SELECT nombre, apellido, email, telefono FROM usuario WHERE seccion_idseccion=1 AND activo=1 AND (rol_idrol=0 OR rol_idrol=1) ORDER BY apellido ASC";
-
-                                        $consulta_usuarios = Conexion::obtener_conexion()->query($sql_usuarios);
-
-                                        while ($file_usuarios = $consulta_usuarios->fetch(PDO::FETCH_ASSOC)) {
-
-                                            $nombre_completo = $file_usuarios['nombre'] . ' ' . $file_usuarios['apellido'];
-
-                                            echo'
-                                                <tr valign="top">
-                                                <td>' . $nombre_completo . '</td>
-                                                <td>' . $file_usuarios['email'] . '</td>
-                                                <td>' . $file_usuarios['telefono'] . '</td>
-                                                ';
-                                        }
-                                        ?>
-                                    </tbody>
-                                </table>
-                            </div>
-                        </div>
-                    </div>
-                </div>
             </div>
         </div>
 
@@ -404,61 +443,28 @@ include_once 'plantillas/head-dashboard.php';
                                         <th>Fecha</th>
                                         <th>Usuario</th>
                                         <th>Registro</th>
-                                        <th>Actividad</th>
-                                        <th>Revisión</th>
+                                        <th>Actividad</th>                                    
                                     </tr>
                                 </thead>
                                 <tbody>
-
                                     <?php
-                                    $sql_historial = "SELECT planta.idPlanta, planta.revision, usuario.nombre_usuario, historial.fecha_historial, historial.accion, planta.fecha_ingreso
-                                                        FROM historial
-                                                        INNER JOIN planta ON historial.Planta_idPlanta=planta.idPlanta
-                                                        INNER JOIN usuario ON historial.Usuario_idUsuario=usuario.idUsuario
-                                                        ORDER BY historial.fecha_historial ASC";
+                                    $sql_historial_m = "SELECT historial.fecha_historial, historial.accion, usuario.nombre_usuario, historial.registro
+                                                        FROM historial 
+                                                        LEFT JOIN usuario ON historial.Usuario_idUsuario=usuario.idUsuario
+                                                        ORDER BY historial.fecha_historial DESC";
 
-                                    $consulta_historial = Conexion::obtener_conexion()->query($sql_historial);
+                                    $consulta_historial_m = $pdoConn->prepare($sql_historial_m);
+                                    $consulta_historial_m->execute();
 
-                                    while ($file_historial = $consulta_historial->fetch(PDO::FETCH_ASSOC)) {
-
-                                        $nombre_usuario_historial = $file_historial['nombre_usuario'];
-                                        $id_historial = $file_historial['idPlanta'];
-                                        $revision_historial = $file_historial['revision'];
-
-                                        $fecha_historial = $file_historial['fecha_ingreso'];
-                                        $fecha_historial = explode('-', $fecha_historial);
-                                        $anno_historial = $fecha_historial[0];
-                                        $mes_historial = $fecha_historial[1];
-                                        $dia_historial = $fecha_historial[2];
-
-                                        $id_historial = str_pad($id_historial, 4, "0", STR_PAD_LEFT);
-
-                                        $idMasc_historial = $anno_historial . $mes_historial . $dia_historial . $id_historial;
-
-                                        /* ingreso de iconos de revision */
-                                        if ($revision_historial == 0) {
-
-                                            $revision_historial = '
-                                                        <a style="color: #E74C3C">
-                                                            <i class="material-icons">close</i>
-                                                        </a>
-                                                        ';
-                                        } else {
-                                            $revision_historial = '
-                                                        <a style="color: #27AE60">
-                                                            <i class="material-icons">check</i>
-                                                        </a>
-                                                        ';
-                                        }
-
-                                        echo'
-                                                <tr valign="top">
-                                                <td>' . $file_historial['fecha_historial'] . '</td>
-                                                <td>' . $nombre_usuario_historial . '</td>
-                                                <td>' . $idMasc_historial . '</td>
-                                                <td>' . $file_historial['accion'] . '</td>
-                                                <td style="text-align:center;">' . $revision_historial . '</td>
-                                                ';
+                                    while ($fila_historial_m = $consulta_historial_m->fetch(PDO::FETCH_ASSOC)) {
+                                        ?>
+                                        <tr valign="top">
+                                            <td> <?php echo $fila_historial_m['fecha_historial']; ?></td>
+                                            <td> <?php echo $fila_historial_m['registro']; ?></td>
+                                            <td> <?php echo $fila_historial_m['accion']; ?></td>
+                                            <td> <?php echo $fila_historial_m['nombre_usuario']; ?></td>
+                                        </tr>
+                                        <?php
                                     }
                                     ?>
                                 </tbody>
@@ -518,3 +524,4 @@ include_once 'plantillas/head-dashboard.php';
             </div>
         </div>
     </section>
+

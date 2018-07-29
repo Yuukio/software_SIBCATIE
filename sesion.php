@@ -99,7 +99,7 @@ include_once 'plantillas/documento-declaracion.inc.php';
             <div class="col-md-4">
                 <div class="col-md-12 col-all">
                     <h2>Inicia sesion</h2>
-                    <p class="subhead">Ya tienes cuenta? Inicia sesión más abajo.</p>
+                    <p class="subhead">No tienes cuenta? Regístrate en el siguiente formulario.</p>
                 </div>
                 <form role="form" method="post" action="<?php echo $_SERVER['PHP_SELF'] ?>">
                     <div class="col-md-12 col-all">

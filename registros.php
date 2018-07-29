@@ -417,10 +417,12 @@ $id_usuario = $_SESSION['idUsuario'];
                                 </div>
                             </div>
                             <div class="modal-footer">
-                                <div id="respuesta" class="col-md-4" style="top: -10px; text-align: center">
-                                    <!--RESPUESTA-->
+                                <div class="row" style="margin-bottom: -20px; margin-left: 10px; margin-top: 10px">
+                                    <div id="respuesta" class="col-md-1" style="top: -10px; text-align: left">
+                                        <!--RESPUESTA-->
+                                    </div>
+                                    <div id="error" class="col-md-3" style="text-align: center"></div>
                                 </div>
-                                <div id="error"></div>
                                 <button type="reset" class="btn btn-link waves-effect" style="margin-right: 100px">BORRAR</button>
                                 <button type="submit" class="btn btn-link waves-effect" id="agregar-registro">AGREGAR</button>
                                 <button type="button" class="btn btn-link waves-effect" data-dismiss="modal" aria-label="Close">CERRAR</button>
@@ -679,12 +681,19 @@ $id_usuario = $_SESSION['idUsuario'];
 
                                 <div class="row" style="padding-top: 15px">
                                     <div class="col-md-4" style="top: 20px; margin-bottom: 15px">
-                                        <div class="col-md-12">
+                                        <div class="col-md-10">
                                             <label>Imagen principal</label>
                                             <input class="form-control" type="file" name="imagen-a" id="imagen-a">
-
                                         </div>
-
+                                        <div class="col-md-2" style="top: 12px">
+                                            <button type="button" class="btn bg-light-blue waves-effect">
+                                                <a href="https://www.iloveimg.com/es/editor-de-fotos" target="_blank">
+                                                    <i class="material-icons">
+                                                        <img src="img/img_1.png" height="30" width="30" style="margin-bottom: 2px">
+                                                    </i>
+                                                </a>
+                                            </button>
+                                        </div>
                                     </div>
                                     <div class="col-md-8" style="margin-top: 20px">
                                         <div class="col-md-4" style="text-align: center">
@@ -821,7 +830,7 @@ $id_usuario = $_SESSION['idUsuario'];
             function insertarPlanta(evento) {
                 evento.preventDefault();
                 var datos = new FormData($("#insertar-planta")[0]);
-                $("#respuesta").html("<img src='img/cargando8.gif' height='75'>");
+                $("#respuesta").html("<img src='img/cargando.gif' height='75'>");
 
                 $.ajax({
                     url: 'app/insertar-planta.php',
@@ -860,7 +869,7 @@ $id_usuario = $_SESSION['idUsuario'];
                 evento.preventDefault();
                 var datos = new FormData($("#actualizar-planta")[0]);
                 $("#error-a").html("<br><p id='mensaje' style='font-style: oblique'><b></b></p>");
-                $("#respuesta-a").html("<img src='img/cargando8.gif' height='75'>");
+                $("#respuesta-a").html("<img src='img/cargando.gif' height='75'>");
 
                 $.ajax({
                     url: 'app/actualizar-planta.php',
@@ -888,9 +897,6 @@ $id_usuario = $_SESSION['idUsuario'];
 
         function formActualizarDatos(datos) {
             re = datos.split('*');
-
-            console.log(datos);
-            console.log(re[17]);
 
             $('#id-reino-a').val(re[0]);
             $('#id-division-a').val(re[1]);

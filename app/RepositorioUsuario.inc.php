@@ -24,38 +24,47 @@ class RepositorioUsuario {
         return $total_usuarios;
     }
 
-    public static function insertarUsuario($conexion, $usuario) {
+    public static function agregarAdmin($conexion, $usuario) {
 
         $usuario_insertado = false;
 
         if (isset($conexion)) {
             try {
 
-                $sql = "INSERT INTO `bd_sibcatie`.`usuario` (`idUsuario`, `nombre`, `apellido`, `email`, `nombre_usuario`, `password`, `fecha_registro`, `activo`, "
-                        . "`telefono`, `rol_idrol`, `seccion_idseccion`) VALUES ('', :nombre, :apellido, :email, :nombre_usuario, :password, NOW(), "
-                        . ":activo, :telefono, :rol_idrol, :seccion_idseccion)";
+                function sa($longitud) {
+                    $caracteres = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
+                    $numero_caracteres = strlen($caracteres);
+                    $string_aleatorio = '';
+
+                    for ($i = 0; $i < $longitud; $i++) {
+                        $string_aleatorio .= $caracteres[rand(0, $numero_caracteres - 1)];
+                    }
+
+                    return $string_aleatorio;
+                }
+                
+                $password = sa(6);
+
+                $sql = "INSERT INTO usuario (idUsuario, nombre, apellido, email, nombre_usuario, password, fecha_registro, activo,
+                        telefono, rol_idrol, seccion_idseccion) VALUES ('', :nombre, :apellido, :email, '', '$password', NOW(),
+                        1, :telefono, :rol_idrol, 2)";
 
                 $sentencia = $conexion->prepare($sql);
 
                 $nombre = $usuario->getNombre();
                 $apellido = $usuario->getApellido();
-                $email = $usuario->getEmail();
-                $nombre_usuario = $usuario->getNombre_usuario();
-                $password = $usuario->getPassword();
-                $activo = $usuario->getActivo();
-                $seccion_idseccion = $usuario->getSeccion();
+                $email = $usuario->getCorreo();
+                //$nombre_usuario = $usuario->getNombre_usuario();
                 $rol_idrol = $usuario->getRol();
                 $telefono = $usuario->getTelefono();
+                
 
                 $sentencia->bindParam(':nombre', $nombre, PDO::PARAM_STR);
                 $sentencia->bindParam(':apellido', $apellido, PDO::PARAM_STR);
                 $sentencia->bindParam(':email', $email, PDO::PARAM_STR);
-                $sentencia->bindParam(':nombre_usuario', $nombre_usuario, PDO::PARAM_STR);
-                $sentencia->bindParam(':password', $password, PDO::PARAM_STR);
+                //$sentencia->bindParam(':nombre_usuario', $nombre_usuario, PDO::PARAM_STR);
                 $sentencia->bindParam(':telefono', $telefono, PDO::PARAM_STR);
                 $sentencia->bindParam(':rol_idrol', $rol_idrol, PDO::PARAM_STR);
-                $sentencia->bindParam(':seccion_idseccion', $seccion_idseccion, PDO::PARAM_STR);
-                $sentencia->bindParam(':activo', $activo, PDO::PARAM_STR);
 
 
                 $usuario_insertado = $sentencia->execute();
@@ -72,7 +81,7 @@ class RepositorioUsuario {
 
         if (isset($conexion)) {
             try {
-                $sql = "INSERT INTO usuario (nombre_usuario, password, email, fecha_registro, rol_idRol, activo) VALUES(:nombre_usuario, :password, :email, NOW(), 2, 0)";
+                $sql = "INSERT INTO usuario (nombre_usuario, password, email, fecha_registro, rol_idRol, activo) VALUES(:nombre_usuario, :password, :email, NOW(), 2, 1)";
                 $sentencia = $conexion->prepare($sql);
 
                 $nombre_usuario = $usuario->getNombre_usuario();
@@ -143,7 +152,7 @@ class RepositorioUsuario {
         if (isset($conexion)) {
             try {
                 include_once 'Usuario.inc.php';
-                
+
                 $sql = "SELECT * FROM usuario WHERE nombre_usuario = :nombre_usuario";
                 $sentencia = $conexion->prepare($sql);
                 $sentencia->bindParam(':nombre_usuario', $nombre_usuario, PDO::PARAM_STR);
@@ -151,9 +160,7 @@ class RepositorioUsuario {
                 $resultado = $sentencia->fetch();
 
                 if (!empty($resultado)) {
-                    $usuario = new Usuario($resultado['idUsuario'], $resultado['nombre'], $resultado['apellido'], 
-                            $resultado['nombre_usuario'], $resultado['email'], $resultado['password'], $resultado['fecha_registro'], 
-                            $resultado['activo'], $resultado['rol_idrol'], $resultado['seccion_idseccion'], $resultado['telefono']);
+                    $usuario = new Usuario($resultado['idUsuario'], $resultado['nombre'], $resultado['apellido'], $resultado['nombre_usuario'], $resultado['email'], $resultado['password'], $resultado['fecha_registro'], $resultado['activo'], $resultado['rol_idrol'], $resultado['seccion_idseccion'], $resultado['telefono']);
                 }
             } catch (PDOException $ex) {
                 print 'ERROR ' . $ex->getMessage();

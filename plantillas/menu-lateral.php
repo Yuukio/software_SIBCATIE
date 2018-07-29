@@ -90,6 +90,9 @@
         if (!isset($usuarios) || empty($usuarios)) {
             $usuarios = '';
         }
+        if (!isset($indefinidos) || empty($indefinidos)) {
+            $indefinidos = '';
+        }
         ?>
 
 
@@ -116,6 +119,12 @@
                         <a href="registros.php">
                             <i class="material-icons">chrome_reader_mode</i>
                             <span>Registro de Especies</span>
+                        </a>
+                    </li>
+                    <li class= "<?php echo $indefinidos ?>" >
+                        <a href="indefinidos.php">
+                            <i class="material-icons">cancel</i>
+                            <span>Especies indefinidas</span>
                         </a>
                     </li>
                     <li class= "<?php echo $usuarios ?>" >

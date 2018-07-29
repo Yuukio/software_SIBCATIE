@@ -13,3 +13,4 @@ define("RUTA_REGISTRO_CORRECTO", SERVIDOR . "/sesion_correcta.php");
 define("RUTA_LOGIN", SERVIDOR . "/sesion.php");
 define("RUTA_DASHBOARD", SERVIDOR . "/home.php");
 define("RUTA_REGISTRO_ESPECIES", "http://localhost/software_SIBCATIE/registros.php");
+define("RUTA_VER_ESPECIES", "http://localhost/software_SIBCATIE/especie.php");

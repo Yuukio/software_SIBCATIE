@@ -44,11 +44,7 @@ include_once 'plantillas/head-dashboard.php';
         });
     </script>
 
-    <script type="text/javascript" src="js/export/tableexport.min.js"></script>
-
-    <script>
-        $('table').tableExport();
-    </script>
+    
 </body>
 
 

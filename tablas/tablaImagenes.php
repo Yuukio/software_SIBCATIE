@@ -55,7 +55,7 @@ include_once '../app/conexion2.php';
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/baguettebox.js/1.8.1/baguetteBox.min.js"></script>
 <script>
-                                    baguetteBox.run('.tz-gallery');
+    baguetteBox.run('.tz-gallery');
 </script>
 
 <script>
@@ -71,8 +71,9 @@ include_once '../app/conexion2.php';
             data: {'funcion': 'eliminarImagen', 'id': id},
             success: function (r) {
                 if (r == 1) {
-                    $('#tabla-imagenes').load('tablaImagenes.php?id=' + "<?php echo $id; ?>");
-                    alertify.success("Se eliminó correctamente");
+                    //$('#tabla-imagenes').load('tablaImagenes.php?id=' + "<?php //echo $id; ?>");
+                    location.reload();
+                    //alertify.success("Se eliminó correctamente");
                 } else if (r == 0) {
                     alertify.error("Falló el servidor");
                 } else if (r == id) {

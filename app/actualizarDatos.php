@@ -26,12 +26,12 @@ if ($funcion == 'actualizarReino') {
         $query = "UPDATE `reino` SET `nombre_reino`= '$nombre_reino' WHERE idReino='$id_reino'";
         $stmt = $pdoConn->prepare($query);
         $stmt->execute(array($nombre_reino));
-
         $registro = 'Reino. ' . str_pad($id_reino, 3, "0", STR_PAD_LEFT);
 
         $sql = "INSERT INTO `historial`(`fecha_historial`, `registro`, `accion`, `Usuario_idUsuario`)
                 VALUES (NOW(), '$registro', 'Actualización', $id_usuario)";
         $stmt = $pdoConn->prepare($sql);
+
         $stmt->execute();
 
         echo '1';

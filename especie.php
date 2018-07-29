@@ -117,130 +117,167 @@ $echo = $idMascara . ' - ' . $reino . ' - ' . $division . ' - ' . $clase . ' - '
     <section class="content">
 
         <div class="container-fluid">
-            <div class="card">
 
-                <div class="header" style="padding-left: 48px; padding-right: 48px; padding-bottom: 5px; padding-top: 5px">
-                    <h1><?php echo 'ID: ' . $idMascara . ' - ' . $nombre_cientifico; ?></h1>
-                    <a href="<?php echo RUTA_REGISTRO_ESPECIES; ?>" class="btn bg-light-blue waves-effect close esquina" style="opacity: 1">
-                        <i class="material-icons">keyboard_return</i>
-                        <span class="icono" style="font-size: 16px">Regresar al registro</span>
-                    </a>
-                </div>
+            <div class="row">
 
-                <div class="body">
-                    <div class="container-fluid">
-                        <div class="row" style="margin-top: 30px">
+                <div class="col-md-8">
+                    <div class="card">
 
-                            <div class="col-md-4">
-                                <div class="tz-gallery">
-                                    <div class="thumbnail" style="margin-top: 20px; padding-bottom: 20px">
-                                        <img src="<?php echo 'app/' . $url ?>" alt="Park">
+                        <div class="header" style="padding-left: 30px; padding-bottom: 5px; padding-top: 5px">
+                            <h1><?php echo 'ID: ' . $idMascara . ' - ' . $nombre_cientifico; ?></h1>
+                        </div>
+
+                        <div class="body" style="margin-top: 22px">
+                            <div class="container-fluid">
+                                <div class="row">
+
+                                    <div class="col-md-7">
+                                        <div class="tz-gallery">
+                                            <div class="thumbnail" style="margin-top: 20px; padding-bottom: 20px">
+                                                <img src="<?php echo 'app/' . $url ?>" alt="Park">
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-5" style="padding-left: 40px; padding-right: 40px">
+                                        <table class="table">
+                                            <h4 style="margin-bottom: 40px; text-align: center">TAXONOMÍA</h4>
+                                            <tbody>
+                                                <tr>
+                                                    <th>Reino:</th>
+                                                    <td><?php echo $reino; ?></td>
+                                                </tr>
+                                                <tr>
+                                                    <th>División:</th>
+                                                    <td><?php echo $division; ?></td>
+                                                </tr>
+                                                <tr>
+                                                    <th>Clase:</th>
+                                                    <td><?php echo $orden; ?></td>
+                                                </tr>
+                                                <tr>
+                                                    <th>Orden:</th>
+                                                    <td><?php echo $orden; ?></td>
+                                                </tr>
+                                                <tr>
+                                                    <th>Familia:</th>
+                                                    <td><?php echo $division; ?></td>
+                                                </tr>
+                                                <tr>
+                                                    <th>Género:</th>
+                                                    <td><?php echo $division; ?></td>
+                                                </tr>
+                                                <tr>
+                                                    <th>Epíteto:</th>
+                                                    <td><?php echo $division; ?></td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
                                     </div>
                                 </div>
                             </div>
-
-                            <div class="col-md-3" style="padding-left: 40px; padding-right: 40px">
-                                <table class="table">
-                                    <h4 style="margin-bottom: 40px; text-align: center">TAXONOMÍA</h4>
-                                    <tbody>
-                                        <tr>
-                                            <th>Reino:</th>
-                                            <td><?php echo $reino; ?></td>
-                                        </tr>
-                                        <tr>
-                                            <th>División:</th>
-                                            <td><?php echo $division; ?></td>
-                                        </tr>
-                                        <tr>
-                                            <th>Clase:</th>
-                                            <td><?php echo $orden; ?></td>
-                                        </tr>
-                                        <tr>
-                                            <th>Orden:</th>
-                                            <td><?php echo $orden; ?></td>
-                                        </tr>
-                                        <tr>
-                                            <th>Familia:</th>
-                                            <td><?php echo $division; ?></td>
-                                        </tr>
-                                        <tr>
-                                            <th>Género:</th>
-                                            <td><?php echo $division; ?></td>
-                                        </tr>
-                                        <tr>
-                                            <th>Epíteto:</th>
-                                            <td><?php echo $division; ?></td>
-                                        </tr>
-                                    </tbody>
-                                </table>
-                            </div>
-
-                            <div class="col-md-5" style="padding-left: 40px; padding-right: 40px">
-                                <table class="table">
-                                    <h4 style="margin-bottom: 40px; text-align: center">CARACTERÍSTICAS</h4>
-                                    <tbody>
-                                        <tr>
-                                            <th>Autor:</th>
-                                            <td><?php echo $autor; ?></td>
-                                        </tr>
-                                        <tr>
-                                            <th>Estatura:</th>
-                                            <td><?php echo $altura . ' cm'; ?></td>
-                                        </tr>
-                                        <tr>
-                                            <th>Color predominante:</th>
-                                            <td><?php echo $color; ?></td>
-                                        </tr>
-                                        <tr>
-                                            <th>Forma de la hoja:</th>
-                                            <td><?php echo $forma; ?></td>
-                                        </tr>
-                                        <tr>
-                                            <th>Tipo de hoja:</th>
-                                            <td><?php echo $tipo; ?></td>
-                                        </tr>
-                                        <tr>
-                                            <th>Determinada por:</th>
-                                            <td><?php echo $determinado; ?></td>
-                                        </tr>
-                                        <tr>
-                                            <th>Fuente de información:</th>
-                                            <td><?php echo $fuente; ?></td>
-                                        </tr>
-                                    </tbody>
-                                </table>
-                            </div>
                         </div>
-                        <hr style="padding-bottom: 10px; padding-top: 10px">
+                    </div>
+                </div>
+
+                <div class="col-md-4">
+
+                    <div class="card">
+
+                        <div class="header" style="height: 80px">
+                            <a href="javascript:history.go(-1);" class="btn bg-light-blue waves-effect" style="opacity: 1; float: right">
+                                <i class="material-icons">keyboard_return</i>
+                                <span class="icono" style="font-size: 16px">Regresar</span>
+                            </a>
+                        </div>
+
+                        <div class="body" style="padding-left: 30px; padding-right: 30px">
+
+                            <table class="table">
+                                <h4 style="margin-bottom: 40px; text-align: center">CARACTERÍSTICAS</h4>
+                                <tbody>
+                                    <tr>
+                                        <th>Autor:</th>
+                                        <td><?php echo $autor; ?></td>
+                                    </tr>
+                                    <tr>
+                                        <th>Estatura:</th>
+                                        <td><?php echo $altura . ' cm'; ?></td>
+                                    </tr>
+                                    <tr>
+                                        <th>Color predominante:</th>
+                                        <td><?php echo $color; ?></td>
+                                    </tr>
+                                    <tr>
+                                        <th>Forma de la hoja:</th>
+                                        <td><?php echo $forma; ?></td>
+                                    </tr>
+                                    <tr>
+                                        <th>Tipo de hoja:</th>
+                                        <td><?php echo $tipo; ?></td>
+                                    </tr>
+                                    <tr>
+                                        <th>Determinada por:</th>
+                                        <td><?php echo $determinado; ?></td>
+                                    </tr>
+                                    <tr>
+                                        <th>Fuente de información:</th>
+                                        <td><?php echo $fuente; ?></td>
+                                    </tr>
+                                    <tr>
+                                        <th>Reproducción:</th>
+                                        <?php
+                                        if ($reproduccion == 1) {
+                                            $reproduccion = 'Sexual';
+                                        } elseif ($reproduccion == 2) {
+                                            $reproduccion = 'Asexual';
+                                        } elseif ($reproduccion == 3) {
+                                            $reproduccion = 'Sexual y asexual';
+                                        } else {
+                                            $reproduccion = '';
+                                        }
+                                        ?>
+                                        <td><?php echo $reproduccion; ?></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
                     </div>
 
-                    <!-- GALERIA -->
-                    <div class="container-fluid gallery-container" style="margin-top: 10px">
-                        <div class="col-md-3">
-                            <form action="" id="insertar-galeria" enctype="multipart/form-data">
-                                <input style="display: none" type="text" value="<?php echo $id_planta ?>" name="id-planta" id="id-planta">
-                                <input type="text" name="creditos" class="form-control" placeholder="Créditos">
-                                <br>
-                                <select class="form-control" name="id-estado" id="id-estado">
-                                    <?php
-                                    $sql_estado = "SELECT `idEstadoSalud`, `nombre_estado` FROM `estadosalud` WHERE 1";
-                                    $consulta_estado = Conexion::obtener_conexion()->query($sql_estado);
+                </div>
 
-                                    while ($fila_estado = $consulta_estado->fetch(PDO::FETCH_ASSOC)) {
-                                        ?>
-                                        <option value="<?php echo $fila_estado['idEstadoSalud'] ?>"><?php echo $fila_estado['nombre_estado'] ?></option>
-                                        <?php
-                                    }
-                                    ?>
-                                </select>
-                                <br>
-                                <input type="file" name="imagen" required>
-                                <br>
-                                <button type="submit" class="btn btn-success waves-effect" id="agregar-registro" style="width: 100%">AGREGAR NUEVA IMAGEN</button>
-                            </form>
-                        </div>
-                        <div class="col-md-9" id="tabla-imagenes">
+                <div class="col-md-12">
 
+                    <div class="card">
+                        <div class="body">
+                            <div class="container-fluid gallery-container" style="margin-top: 10px">
+                                <div class="col-md-3">
+                                    <form action="" id="insertar-galeria" enctype="multipart/form-data">
+                                        <input style="display: none" type="text" value="<?php echo $id_planta ?>" name="id-planta" id="id-planta">
+                                        <input type="text" name="creditos" class="form-control" placeholder="Créditos">
+                                        <br>
+                                        <select class="form-control" name="id-estado" id="id-estado">
+                                            <?php
+                                            $sql_estado = "SELECT `idEstadoSalud`, `nombre_estado` FROM `estadosalud` WHERE 1";
+                                            $consulta_estado = Conexion::obtener_conexion()->query($sql_estado);
+
+                                            while ($fila_estado = $consulta_estado->fetch(PDO::FETCH_ASSOC)) {
+                                                ?>
+                                                <option value="<?php echo $fila_estado['idEstadoSalud'] ?>"><?php echo $fila_estado['nombre_estado'] ?></option>
+                                                <?php
+                                            }
+                                            ?>
+                                        </select>
+                                        <br>
+                                        <input type="file" name="imagen" required>
+                                        <br>
+                                        <button type="submit" class="btn btn-success waves-effect" id="agregar-registro" style="width: 100%">AGREGAR NUEVA IMAGEN</button>
+                                    </form>
+                                </div>
+                                <div class="col-md-9" id="tabla-imagenes" style="margin-bottom: 0px">
+
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>

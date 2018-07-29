@@ -14,7 +14,7 @@ if (!ControlSesion::sesionIniciada() OR ControlSesion::rolVisitante()) {
 <div id="favoritos" class="tab-pane fade in active">
     <div class="container-fluid">
         <div class="card" style="margin-top: 20px">
-            <div class="header bg-green">
+            <div class="header bg-light-green">
                 <button type="submit" name="quitar-favoritos" id="quitar-favoritos" class="btn btn-default waves-effect close" 
                         style="line-height: 0.5; color: black; opacity: 1; margin-right: 30px; margin-top: -4px; width: 50px; height: 30px;">
                     <i class="material-icons" style="color: #2196f3 !important; width: 30px; top: 1px;">delete</i>
@@ -78,10 +78,12 @@ if (!ControlSesion::sesionIniciada() OR ControlSesion::rolVisitante()) {
     <div class="container-fluid">
         <div class="card" style="margin-top: 20px">
             <div class="header bg-green">
-                <button type="button" onClick = "$('#tabla-exportar').tableExport({type: 'pdf', escape: 'false'});" class="btn btn-default waves-effect close" 
-                        style="line-height: 0.5; color: black; opacity: 1; margin-right: 30px; margin-top: -4px; width: 50px; height: 30px;">
-                    <i class="material-icons" style="color: #2196f3 !important; width: 30px; top: 1px;">list</i>
-                </button>
+                <form method="post" action="app/exportar.php">
+                    <button type="submit" name="exportar" class="btn btn-default waves-effect close" 
+                            style="line-height: 0.5; color: black; opacity: 1; margin-right: 30px; margin-top: -4px; width: 50px; height: 30px;">
+                        <i class="material-icons" style="color: #2196f3 !important; width: 30px; top: 1px;">file_download</i>
+                    </button>
+                </form>
                 <button type="submit" name="exportar" id="exportar" class="btn btn-default waves-effect close" 
                         style="line-height: 0.5; color: black; opacity: 1; margin-right: 30px; margin-top: -4px; width: 50px; height: 30px;">
                     <i class="material-icons" style="color: #2196f3 !important; width: 30px; top: 1px;">delete</i>
@@ -206,8 +208,6 @@ if (!ControlSesion::sesionIniciada() OR ControlSesion::rolVisitante()) {
     });
 
 </script>
-
-
 
 
 
