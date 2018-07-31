@@ -21,7 +21,7 @@ if (isset($_POST['enviar'])) {
 
     $sentencia = 9;
 
-//******GENERAR PASWORD
+//******GENERAR PASSWORD
     function sa($longitud) {
         $caracteres = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
         $numero_caracteres = strlen($caracteres);
@@ -88,20 +88,26 @@ if (isset($_POST['enviar'])) {
             }
 
             $destino = "ruisu.08@gmail.com";
-            
+
             $contenido = "Bienvenido a SIBCATIE " . $nombre . ' ' . $apellido . '!! \n \n' . "Te han registrado como " . $nombre_rol . " en nuestro Sistema de Informaón Botánica del CATIE.\n\n" .
-                        "Para iniciar sesión, ingresa en el siguiente link y utiliza los siguientes datos:" . "\n    - Usuario: " . $nombre_usuario . "\n    - Contraseña: " . $password .
-                        "\n\nEsta contraseña es momentánea, por favor ingresa a tu perfil de usuario y cámbiala por una personal.";
+                    "Para iniciar sesión, ingresa en el siguiente link y utiliza los siguientes datos:" . "\n    - Usuario: " . $nombre_usuario . "\n    - Contraseña: " . $password .
+                    "\n\nEsta contraseña es momentánea, por favor ingresa a tu perfil de usuario y cámbiala por una personal.";
 
             mail($destino, "Nueva cuenta SIBCATIE", $contenido);
             header("Location:usuarios.php");
-            
-            echo '1';
+
+            echo "<script>
+                alert('Usuario registrado correctamente.');
+            </script>";
         } catch (Exception $e) {
-            echo '0';
+            echo "<script>
+                alert('Error de servidor.');
+            </script>";
         }
     } elseif ($sentencia == 0) {
-        echo '2';
+        echo "<script>
+                alert('Este correo ya se encuentra registrado.');
+            </script>";
     }
 }
 
@@ -149,8 +155,8 @@ include_once 'plantillas/head-dashboard.php';
                                             <table class="table table-bordered table-striped table-hover js-basic-example dataTable">
                                                 <thead>
                                                     <tr style="background: white">
-                                                        <th>Apellido</th>
-                                                        <th>Nombre</th>
+                                                        <!--<th>Apellido</th>
+                                                        <th>Nombre</th>-->
                                                         <th>Usuario</th>
                                                         <th>Email</th>
                                                         <th>Teléfono</th>
@@ -166,17 +172,32 @@ include_once 'plantillas/head-dashboard.php';
                                                     $consulta_admin = Conexion::obtener_conexion()->query($sql_admin);
 
                                                     while ($file_admin = $consulta_admin->fetch(PDO::FETCH_ASSOC)) {
-
-                                                        echo'
-                                                            <tr valign="top">
-                                                                <td>' . $file_admin['apellido'] . '</td> 
-                                                                <td>' . $file_admin['nombre'] . '</td>
-                                                                <td>' . $file_admin['nombre_usuario'] . '</td>
-                                                                <td>' . $file_admin['email'] . '</td>
-                                                                <td>' . $file_admin['telefono'] . '</td>
-                                                                <td>' . $file_admin['activo'] . '</td>
-                                                            </td>
-                                                            ';
+                                                        ?>
+                                                        <tr valign="top">
+                                                            <!--<td><?php // echo $file_admin['apellido'];    ?></td> 
+                                                            <td><?php //echo $file_admin['nombre'];    ?></td>-->
+                                                            <td><?php echo $file_admin['nombre_usuario']; ?></td>
+                                                            <td><?php echo $file_admin['email']; ?></td>
+                                                            <td><?php echo $file_admin['telefono']; ?></td>
+                                                            <?php
+                                                            if ($file_admin['activo'] == 1) {
+                                                                ?>
+                                                                <td style="text-align:center; width: 5px;"><a style="color: #1C9708">
+                                                                        <i class="material-icons">lock_open</i>
+                                                                    </a>
+                                                                </td>
+                                                                <?php
+                                                            } elseif ($file_admin['activo'] == 0) {
+                                                                ?>
+                                                                <td style="text-align:center; width: 5px;"><a style="color: #BB0808">
+                                                                        <i class="material-icons">lock_outline</i>
+                                                                    </a>
+                                                                </td>
+                                                                <?php
+                                                            }
+                                                            ?>
+                                                        </tr>
+                                                        <?php
                                                     }
                                                     ?>                                                    
                                                 </tbody>
@@ -194,8 +215,6 @@ include_once 'plantillas/head-dashboard.php';
                                                 <table class="table table-bordered table-striped table-hover js-basic-example dataTable">
                                                     <thead>
                                                         <tr style="background: white">
-                                                            <th>Apellido</th>
-                                                            <th>Nombre</th>
                                                             <th>Usuario</th>
                                                             <th>Email</th>
                                                             <th>Teléfono</th>
@@ -211,17 +230,32 @@ include_once 'plantillas/head-dashboard.php';
                                                         $consulta_ayudante = Conexion::obtener_conexion()->query($sql_ayudante);
 
                                                         while ($file_ayudante = $consulta_ayudante->fetch(PDO::FETCH_ASSOC)) {
-
-                                                            echo'
-                                                                <tr valign="top">
-                                                                    <td>' . $file_ayudante['apellido'] . '</td> 
-                                                                    <td>' . $file_ayudante['nombre'] . '</td>
-                                                                    <td>' . $file_ayudante['nombre_usuario'] . '</td>
-                                                                    <td>' . $file_ayudante['email'] . '</td>
-                                                                    <td>' . $file_ayudante['telefono'] . '</td>
-                                                                    <td>' . $file_ayudante['activo'] . '</td>
-                                                                </td>
-                                                                ';
+                                                            ?>
+                                                            <tr valign="top">
+                                                                <!--<td><?php // echo $file_admin['apellido'];    ?></td> 
+                                                                <td><?php //echo $file_admin['nombre'];    ?></td>-->
+                                                                <td><?php echo $file_ayudante['nombre_usuario']; ?></td>
+                                                                <td><?php echo $file_ayudante['email']; ?></td>
+                                                                <td><?php echo $file_ayudante['telefono']; ?></td>
+                                                                <?php
+                                                                if ($file_ayudante['activo'] == 1) {
+                                                                    ?>
+                                                                    <td style="text-align:center; width: 5px;"><a style="color: #1C9708">
+                                                                            <i class="material-icons">lock_open</i>
+                                                                        </a>
+                                                                    </td>
+                                                                    <?php
+                                                                } elseif ($file_ayudante['activo'] == 0) {
+                                                                    ?>
+                                                                    <td style="text-align:center; width: 5px;"><a style="color: #BB0808">
+                                                                            <i class="material-icons">lock_outline</i>
+                                                                        </a>
+                                                                    </td>
+                                                                    <?php
+                                                                }
+                                                                ?>
+                                                            </tr>
+                                                            <?php
                                                         }
                                                         ?>                                                    
                                                     </tbody>
@@ -252,14 +286,31 @@ include_once 'plantillas/head-dashboard.php';
                                                         $consulta_publico = Conexion::obtener_conexion()->query($sql_publico);
 
                                                         while ($file_publico = $consulta_publico->fetch(PDO::FETCH_ASSOC)) {
-
-                                                            echo'
-                                                                <tr valign="top">
-                                                                    <td>' . $file_publico['nombre_usuario'] . '</td>
-                                                                    <td>' . $file_publico['email'] . '</td>
-                                                                    <td>' . $file_publico['activo'] . '</td>
-                                                                </td>
-                                                                ';
+                                                            ?>
+                                                            <tr valign="top">
+                                                                <!--<td><?php // echo $file_admin['apellido'];    ?></td> 
+                                                                <td><?php //echo $file_admin['nombre'];    ?></td>-->
+                                                                <td><?php echo $file_publico['nombre_usuario']; ?></td>
+                                                                <td><?php echo $file_publico['email']; ?></td>
+                                                                <?php
+                                                                if ($file_publico['activo'] == 1) {
+                                                                    ?>
+                                                                    <td style="text-align:center; width: 5px;"><a style="color: #1C9708">
+                                                                            <i class="material-icons">lock_open</i>
+                                                                        </a>
+                                                                    </td>
+                                                                    <?php
+                                                                } elseif ($file_publico['activo'] == 0) {
+                                                                    ?>
+                                                                    <td style="text-align:center; width: 5px;"><a style="color: #BB0808">
+                                                                            <i class="material-icons">lock_outline</i>
+                                                                        </a>
+                                                                    </td>
+                                                                    <?php
+                                                                }
+                                                                ?>
+                                                            </tr>
+                                                            <?php
                                                         }
                                                         ?>                                                    
                                                     </tbody>
@@ -340,24 +391,51 @@ include_once 'plantillas/head-dashboard.php';
                                     <div class="container-fluid">
                                         <div class="row clearfix">
                                             <form role="form">
-                                                <h4 style="margin-bottom: 20px; margin-top: 5px; text-align: center; width: 100%">Suspender cuenta de SIBCATIE</h4>
+                                                <a href="#" data-toggle="admin-usuarios" title="
+                                                    Al ingresar el nombre de usuario y contraseña, podrá suspender o activar su cuenta. El color verde indica que la cuenta será activada y el color rojo indica que la cuenta será suspendida. Si selecciona un rol administrativo, podrá modificar los permisos del usuario al precionar el botón 'Cambiar'.
+                                                " data-placement='left' class="close">?</a>
+                                                <h4 style="margin-bottom: 20px; margin-top: 5px; text-align: center; width: 100%">Administrar cuenta de SIBCATIE</h4>
                                                 <div class="row">
                                                     <div class="col-md-6 mb-3">
-                                                        <input type="text" class="form-control" id="nombre" placeholder="Nombre de usuario" value="" required>
+                                                        <input type="text" class="form-control" id="usuario" placeholder="Nombre de usuario" value="" required>
                                                         <!--<div class="invalid-feedback">
                                                             Valid first name is required.
                                                         </div>-->
                                                     </div>
 
                                                     <div class="col-md-6 mb-3">
-                                                        <input type="text" class="form-control" id="apellido" placeholder="Correo electrónico" value="" required>
+                                                        <input type="text" class="form-control" id="correo" placeholder="Correo electrónico" value="" required>
                                                         <!--<div class="invalid-feedback">
                                                             Valid last name is required.
                                                         </div>-->
                                                     </div>
                                                 </div>
                                                 <hr class="mb-4" style="margin-top: 0px">
-                                                <button class="btn btn-danger btn-lg btn-block" type="submit">Suspender cuenta</button>
+
+                                                <div class="col-md-6 col-sm-12 col-xs-12" style="padding: 0px">
+                                                    <div class="col-md-3" style="padding: 0px; padding-right: 10px">
+                                                        <button type="button" class="btn btn-success waves-effect" id="activar-cuenta">
+                                                            <i class="material-icons" style="top: -0.5px">lock_open</i>
+                                                        </button>
+                                                    </div>
+                                                    <div class="col-md-3" style="padding: 0px; padding-right: 10px">
+                                                        <button type="button" class="btn bg-red waves-effect" id="suspender-cuenta">
+                                                            <i class="material-icons" style="top: -0.5px">lock_outline</i>
+                                                        </button>
+                                                    </div>
+                                                    <div class="col-md-6" style="padding: 0px; padding-right: 10px">
+                                                        <button class="btn btn-info btn-block" type="submit" id="suspender-cuenta" style="height: 33px">
+                                                            Cambiar</button>
+                                                    </div>
+                                                </div>
+
+                                                <div class="col-md-6 col-sm-12 col-xs-12">
+                                                    <select id="rol" name="rol" class="form-control">
+                                                        <option value="0">Administrador</option>
+                                                        <option value="1">Colaborador</option>
+                                                    </select>
+                                                </div>
+
                                             </form>
 
                                             <!---->
@@ -373,13 +451,16 @@ include_once 'plantillas/head-dashboard.php';
     </section>
 
     <script>
-        $('#registrar-admin').click(function ()
+        $(document).ready(function(){
+            $('[data-toggle="admin-usuarios"]').tooltip(); 
+        });
+    </script>
+
+    <script>
+        $('#suspender-cuenta').click(function ()
         {
-            nombre = $('#nombre').val();
-            apellido = $('#apellido').val();
-            correo = $('#email').val();
-            telefono = $('#telefono').val();
-            rol = $('#rol').val();
+            usuario = $('#usuario').val();
+            correo = $('#correo').val();
 
             /*if (!nombre_forma)
              {

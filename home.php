@@ -233,9 +233,6 @@ include_once 'plantillas/head-dashboard.php';
                                                 <tr style="background: white">
                                                     <th>Imagen</th>
                                                     <th>ID</th>
-                                                    <th>Familia</th>
-                                                    <th>Género</th>
-                                                    <th>Epíteto</th>
                                                     <th>Ingreso</th>
                                                     <!--<th>Opciones</th>-->
                                                 </tr>
@@ -259,15 +256,12 @@ include_once 'plantillas/head-dashboard.php';
                                                             <div class="tz-gallery">
                                                                 <div class="thumbnail" style="margin-bottom: 0px;">
                                                                     <a class="lightbox" href="app/<?php echo $file_no_identificada['url_img']; ?>">
-                                                                        <img src="app/<?php echo $file_no_identificada['url_img']; ?>" alt="Bridge" width="80" height="50">
+                                                                        <img src="app/<?php echo $file_no_identificada['url_img']; ?>" alt="Bridge" width="50" height="25">
                                                                     </a>
                                                                 </div>
                                                             </div>
                                                         </td>
                                                         <td><?php echo $file_no_identificada['idMascara'] ?></td>
-                                                        <td><?php echo $file_no_identificada['nombre_familia'] ?></td>
-                                                        <td><?php echo $file_no_identificada['nombre_genero'] ?></td>
-                                                        <td><?php echo $file_no_identificada['nombre_epiteto'] ?></td>
                                                         <td><?php echo $file_no_identificada['fecha_ingreso'] ?></td>
                                                         <!--<td style="text-align:center;">
                                                             <a href="#" style="color: #17c4cb">

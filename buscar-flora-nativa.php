@@ -1,166 +1,133 @@
 <?php
 include_once 'app/Conexion.inc.php';
+include_once 'app/conexion2.php';
 
 $titulo = 'FLORA NATIVA';
 
 include_once 'plantillas/documento-declaracion.inc.php';
+include_once 'plantillas/navbar-buscar.inc.php';
 ?>
 <?php
 Conexion::abrir_conexion();
 ?>
 
-<body id="page-top" data-spy="scroll" data-target=".navbar" data-offset="60">
+<link href="css/buscar-especies.css" rel="stylesheet">
 
-    <!-- Navigation -->
-    <nav class="navbar navbar-expand-lg" style="background-color: black">
-        <div class="container">
-            <a class="navbar-brand" href="index.php">
-                <img  src="img/sibcatie-logo.png">
-            </a>
-            <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
-                Menu
-                <i class="fa fa-bars"></i>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarResponsive">
-                <ul class="navbar-nav text-uppercase ml-auto">
-                    <li class="nav-item" style="padding-right: 30px">
-                        <a class="regresar-home" href="index.php">Home</a>
-                    </li>
-                    <li class="nav-item" style="padding-right: 30px">
-                        <a class="regresar-home" href="index.php">Secciones</a>
-                    </li>
-                    <li class="nav-item" style="padding-right: 30px">
-                        <a class="regresar-home" href="index.php">listas</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="regresar-home" href="index.php">Perfil</a>
-                    </li>
-                </ul>
-            </div>
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-12" style="color: white; background-image: url(img/nativa2.jpg); text-align: center">
+            <h1 style="padding-top: 140px; padding-bottom: 60px; text-align: center">Flora Nativa del Jardín Botánico del CATIE</h1>
         </div>
-    </nav>
+        <div class="col-md-12 col-lg-2" style="background-color: #e9e9e9; border-right: ridge;">
 
-    <div class="container-fluid">
-        <div class="row">
-            <div class="col-md-12" style="color: white; height: 160px; background-color: #1d1f21; text-align: center">
-                <h1 style="padding-top: 60px; padding-bottom: 60px">Flora Nativa del Jardín Botánico del CATIE</h1>
-            </div>
-            <div class="col-md-2" style="background-color: #C9C9C9">
-                <h5 style="text-align: center; padding: 10px; padding-top: 30px">Filtros de Búsqueda</h5>
-                <hr style="background-color: #1d1f21;">
-                <label style="padding-top: 10px">Reino</label>
-                <select class="form-control" style="width: 100%">
-                    <option>...</option>
-                    <option>Reino 1</option>
-                    <option>Reino 2</option>
-                    <option>Reino 3</option>
-                    <option>Reino 4</option>
-                </select>
-                <label style="padding-top: 10px">División</label>
-                <select class="form-control" style="width: 100%">
-                    <option>...</option>
-                    <option>División 1</option>
-                    <option>División 2</option>
-                    <option>División 3</option>
-                    <option>División 4</option>
-                </select>
-                <label style="padding-top: 10px">Clase</label>
-                <select class="form-control" style="width: 100%">
-                    <option>...</option>
-                    <option>Clase 1</option>
-                    <option>Clase 2</option>
-                    <option>Clase 3</option>
-                    <option>Clase 4</option>
-                </select>
-                <label style="padding-top: 10px">Orden</label>
-                <select class="form-control" style="width: 100%">
-                    <option>...</option>
-                    <option>Orden 1</option>
-                    <option>Orden 2</option>
-                    <option>Orden 3</option>
-                    <option>Orden 4</option>
-                </select>
-                <label style="padding-top: 10px">Familia</label>
-                <select class="form-control" style="width: 100%">
-                    <option>...</option>
-                    <option>Familia 1</option>
-                    <option>Familia 2</option>
-                    <option>Familia 3</option>
-                    <option>Familia 4</option>
-                </select>
-                <label style="padding-top: 10px">Género</label>
-                <select class="form-control" style="width: 100%">
-                    <option>...</option>
-                    <option>Género 1</option>
-                    <option>Género 2</option>
-                    <option>Género 3</option>
-                    <option>Género 4</option>
-                </select>
-                <label style="padding-top: 10px">Epíteto</label>
-                <select class="form-control" style="width: 100%">
-                    <option>...</option>
-                    <option>Epíteto 1</option>
-                    <option>Epíteto 2</option>
-                    <option>Epíteto 3</option>
-                    <option>Epíteto 4</option>
-                </select>
-                <label style="padding-top: 10px">Color</label>
-                <select class="form-control" style="width: 100%">
-                    <option>...</option>
-                    <option>Color 1</option>
-                    <option>Color 2</option>
-                    <option>Color 3</option>
-                    <option>Color 4</option>
-                </select>
-            </div>
-            <div class="col-md-10">
-                <div class="container-fluid">
-                    <div class="row">
-
-
-
-                        <?php
-                        $sql_mostrar = "SELECT genero.nombre_genero, epiteto.nombre_epiteto, planta.idMascara, planta.idPlanta FROM `planta` INNER JOIN genero ON planta.Genero_idGenero=genero.idGenero INNER JOIN epiteto ON planta.Epiteto_idEpiteto=epiteto.idEpiteto";
-
-                        $consulta_mostra = Conexion::obtener_conexion()->query($sql_mostrar);
-
-                        while ($fila_muestra = $consulta_mostra->fetch(PDO::FETCH_ASSOC)) {
-
-                            $id_muestra = $fila_muestra['idPlanta'];
-
-                            $id_muestra_nuevo = str_pad($id_muestra, 4, "0", STR_PAD_LEFT);
-
-                            echo'
-
-                            <div class="col-md-2 centrar" style="padding: 10px; padding-top: 20px">
-                                <div style="height: 100%; width: 100%">
-                                    <div class="card mb-4 box-shadow">
-                                        <img class="card-img-top" data-src="holder.js/100px225?theme=thumb&amp;bg=55595c&amp;fg=eceeef&amp;text=Thumbnail" alt="Thumbnail [100%x100%]" style="width: 100%; display: block;" src="img/image-gallery/1.jpg" data-holder-rendered="true">
-                                        <div class="card-body" style="text-align: center">
-
-                                            <h6>' . $fila_muestra['nombre_genero'] . '</h6>
-                                            <p><i>' . $fila_muestra['nombre_epiteto'] . '</i></p>
-                                            <div class="d-flex justify-content-between align-items-center">
-                                                <div class="btn-group">
-                                                    <button type="button" class="btn btn-sm btn-outline-secondary">Ver</button>
-                                                    <button type="button" class="btn btn-sm btn-outline-secondary">Guardar</button>
-                                                </div>
-                                                <small class="text-muted">' . 'ID - ' . $id_muestra_nuevo . '</small>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            ';
-                        }
-                        ?>
-
+            <form style="margin-top: 20px">
+                <div class="row no-gutters align-items-center">
+                    <div class="col">
+                        <input class="form-control" type="search" placeholder="Buscar...">
+                    </div>
+                    <div class="col-auto">
+                        <button class="btn btn-info" type="submit">
+                            <i class="material-icons">search</i>
+                        </button>
                     </div>
                 </div>
+            </form>
+
+            <h5 style="padding: 10px; padding-top: 30px; text-align: center;">Buscador avanzado</h5>
+            <div style="background-color: #00b0e4; height: 2px; margin: 0px 70px 10px 70px"></div>
+
+            <label style="padding-top: 10px">Género</label>
+            <select id="genero" class="form-control" style="width: 100%; color: black">
+                <option>Todos</option>
+                <?php
+                $sql_genero = "SELECT DISTINCT genero.nombre_genero FROM `planta` 
+                                    INNER JOIN genero ON planta.Genero_idGenero=genero.idGenero
+                                    WHERE planta.activo=1
+                                    ORDER BY genero.nombre_genero ASC";
+                $consulta_genero = $pdoConn->prepare($sql_genero);
+                $consulta_genero->execute();
+
+                while ($fila_genero = $consulta_genero->fetch(PDO::FETCH_ASSOC)) {
+                    ?>
+                    <option><?php echo $fila_genero['nombre_genero']; ?></option>
+                    <?php
+                }
+                ?>
+            </select>
+            <label style="padding-top: 10px">Epíteto</label>
+            <select class="form-control" style="width: 100%">
+                <option>Todos</option>
+                <?php
+                $sql_epiteto = "SELECT DISTINCT epiteto.nombre_epiteto FROM `planta` 
+                                    INNER JOIN epiteto ON planta.Epiteto_idEpiteto=epiteto.idEpiteto
+                                    WHERE planta.activo=1
+                                    ORDER BY epiteto.nombre_epiteto ASC";
+                $consulta_epiteto = $pdoConn->prepare($sql_epiteto);
+                $consulta_epiteto->execute();
+
+                while ($fila_epiteto = $consulta_epiteto->fetch(PDO::FETCH_ASSOC)) {
+                    ?>
+                    <option><?php echo $fila_epiteto['nombre_epiteto']; ?></option>
+                    <?php
+                }
+                ?>
+            </select>
+            <label style="padding: 10px 0px 10px 0px;">Color</label>
+
+            <div style="text-align: center; padding-bottom: 10px">
+                <label class="containerCheck rojo">
+                    <input type="checkbox" name="seleccion[]" value="<?php echo $id ?>">
+                    <span class="checkmark checkmark-rojo"></span>
+                </label>
+                <label class="containerCheck naranja">
+                    <input type="checkbox" name="seleccion[]" value="<?php echo $id ?>">
+                    <span class="checkmark checkmark-naranja"></span>
+                </label>
+                <label class="containerCheck amarillo">
+                    <input type="checkbox" name="seleccion[]" value="<?php echo $id ?>">
+                    <span class="checkmark checkmark-amarillo"></span>
+                </label>
+                <label class="containerCheck verde">
+                    <input type="checkbox" name="seleccion[]" value="<?php echo $id ?>">
+                    <span class="checkmark checkmark-verde"></span>
+                </label>
             </div>
+
+            <div style="text-align: center; padding-bottom: 10px">
+                <label class="containerCheck azul">
+                    <input type="checkbox" name="seleccion[]" value="<?php echo $id ?>">
+                    <span class="checkmark checkmark-azul"></span>
+                </label>
+                <label class="containerCheck morado">
+                    <input type="checkbox" name="seleccion[]" value="<?php echo $id ?>">
+                    <span class="checkmark checkmark-morado"></span>
+                </label>
+                <label class="containerCheck rosado">
+                    <input type="checkbox" name="seleccion[]" value="<?php echo $id ?>">
+                    <span class="checkmark checkmark-rosado"></span>
+                </label>
+                <label class="containerCheck blanco">
+                    <input type="checkbox" name="seleccion[]" value="<?php echo $id ?>">
+                    <span class="checkmark checkmark-blanco"></span>
+                </label>
+            </div>
+
+            <button type="button" class="btn btn-block btn-lg btn-info" style="margin-bottom: 20px">FILTRAR</button>
+            <div style="background-color: #00b0e4; height: 2px; margin: 0px 70px 10px 70px"></div>
+
+        </div>
+        <div class="col-md-12 col-lg-10" id="elementos-busqueda">
+            
         </div>
     </div>
+</div>
 
-    <?php
-    include_once './plantillas/documento-cierre.inc.php';
-    ?>
+<?php
+include_once './plantillas/documento-cierre.inc.php';
+?>
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('#elementos-busqueda').load('tablas/elementos-busqueda.php');
+    });
+</script>
