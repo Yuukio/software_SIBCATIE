@@ -61,20 +61,12 @@ Conexion::abrir_conexion();
                         } elseif (!ControlSesion::sesionIniciada() OR ControlSesion::rolVisitante()) {
                             ?>
 
-                            <li class="nav-item">
-                                <a class="nav-link js-scroll-trigger" href="#"><?php echo '' . $_SESSION['rol_idRol']; ?></a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link js-scroll-trigger" href="#"><?php echo '' . $_SESSION['seccion_idSeccion']; ?></a>
-                            </li>
-
                             <li class="nav-item dropdown">
                                 <a class="dropdown-toggle nav-link" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false" href="#">
-                                    <?php echo '' . $_SESSION['nombre_usuario']; ?>
+                                    <?php echo $_SESSION['nombre_usuario']; ?>
                                 </a>
                                 <div class="dropdown-menu" style="left: -60px">
-                                    <a class="dropdown-item" style="" href="#">Perfil</a>
-                                    <a class="dropdown-item" href="#">Listas</a>
+                                    <a class="dropdown-item" style="" href="perfil.php">Perfil</a>
                                     <a class="dropdown-item" href="#">Hacer consulta</a>
                                     <div class="dropdown-divider"></div>
                                     <a class="dropdown-item" href="app/cerrarSesion.inc.php">Cerrar sesión</a>

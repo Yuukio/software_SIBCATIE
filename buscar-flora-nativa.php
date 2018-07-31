@@ -41,9 +41,9 @@ Conexion::abrir_conexion();
                 <option>Todos</option>
                 <?php
                 $sql_genero = "SELECT DISTINCT genero.nombre_genero FROM `planta` 
-                                    INNER JOIN genero ON planta.Genero_idGenero=genero.idGenero
-                                    WHERE planta.activo=1
-                                    ORDER BY genero.nombre_genero ASC";
+                                INNER JOIN genero ON planta.Genero_idGenero=genero.idGenero
+                                WHERE planta.activo=1
+                                ORDER BY genero.nombre_genero ASC";
                 $consulta_genero = $pdoConn->prepare($sql_genero);
                 $consulta_genero->execute();
 
@@ -121,6 +121,12 @@ Conexion::abrir_conexion();
         </div>
     </div>
 </div>
+
+<!-- Footer -->
+<footer class="container-fluid text-center" style="background-color: #C9C9C9">
+    <!--<a class="nav-link js-scroll-trigger" href="#page-top" style="font-size: 50px;">^</a>-->
+    <p>Copyright &copy; 2018 - SIBCATIE creado por <a href="https://www.catie.ac.cr/">www.catie.ac.cr</a></p>
+</footer>
 
 <?php
 include_once './plantillas/documento-cierre.inc.php';
