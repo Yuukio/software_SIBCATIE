@@ -1,410 +1,764 @@
--- MySQL Workbench Forward Engineering
+-- phpMyAdmin SQL Dump
+-- version 4.7.7
+-- https://www.phpmyadmin.net/
+--
+-- Servidor: localhost:3306
+-- Tiempo de generación: 01-08-2018 a las 18:57:13
+-- Versión del servidor: 5.6.39-cll-lve
+-- Versión de PHP: 5.6.30
 
-SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0;
-SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0;
-SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='TRADITIONAL,ALLOW_INVALID_DATES';
-
--- -----------------------------------------------------
--- Schema BD_SIBCATIE
--- -----------------------------------------------------
-
--- -----------------------------------------------------
--- Schema BD_SIBCATIE
--- -----------------------------------------------------
-CREATE SCHEMA IF NOT EXISTS `BD_SIBCATIE` DEFAULT CHARACTER SET utf8 ;
-USE `BD_SIBCATIE` ;
-
--- -----------------------------------------------------
--- Table `BD_SIBCATIE`.`Forma`
--- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `BD_SIBCATIE`.`Forma` (
-  `idForma` INT NOT NULL AUTO_INCREMENT,
-  `nombre_forma` VARCHAR(45) NOT NULL,
-  `caracteristicas` VARCHAR(255) NOT NULL,
-  PRIMARY KEY (`idForma`),
-  UNIQUE INDEX `idForma_UNIQUE` (`idForma` ASC))
-ENGINE = InnoDB;
+SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+SET AUTOCOMMIT = 0;
+START TRANSACTION;
+SET time_zone = "+00:00";
 
 
--- -----------------------------------------------------
--- Table `BD_SIBCATIE`.`EstadoSalud`
--- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `BD_SIBCATIE`.`EstadoSalud` (
-  `idEstadoSalud` INT NOT NULL AUTO_INCREMENT,
-  `nombre_estado` VARCHAR(45) NOT NULL,
-  PRIMARY KEY (`idEstadoSalud`),
-  UNIQUE INDEX `idEstadoSalud_UNIQUE` (`idEstadoSalud` ASC))
-ENGINE = InnoDB;
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
+/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
+/*!40101 SET NAMES utf8mb4 */;
 
+--
+-- Base de datos: `bd_sibcatie`
+--
 
--- -----------------------------------------------------
--- Table `BD_SIBCATIE`.`Color`
--- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `BD_SIBCATIE`.`Color` (
-  `idColor` INT NOT NULL AUTO_INCREMENT,
-  `nombre_color` VARCHAR(45) NOT NULL,
-  PRIMARY KEY (`idColor`),
-  UNIQUE INDEX `idColor_UNIQUE` (`idColor` ASC))
-ENGINE = InnoDB;
+-- --------------------------------------------------------
 
+--
+-- Estructura de tabla para la tabla `clase`
+--
 
--- -----------------------------------------------------
--- Table `BD_SIBCATIE`.`TipoHoja`
--- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `BD_SIBCATIE`.`TipoHoja` (
-  `idTipoHoja` INT NOT NULL AUTO_INCREMENT,
-  `nombre_hoja` VARCHAR(45) NOT NULL,
-  PRIMARY KEY (`idTipoHoja`),
-  UNIQUE INDEX `idTipoHoja_UNIQUE` (`idTipoHoja` ASC))
-ENGINE = InnoDB;
+CREATE TABLE `clase` (
+  `idClase` int(11) NOT NULL,
+  `nombre_clase` varchar(45) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+-- --------------------------------------------------------
 
--- -----------------------------------------------------
--- Table `BD_SIBCATIE`.`ZonaCardinal`
--- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `BD_SIBCATIE`.`ZonaCardinal` (
-  `idZonaCardinal` INT NOT NULL AUTO_INCREMENT,
-  `nombre_cardinal` VARCHAR(45) NOT NULL,
-  PRIMARY KEY (`idZonaCardinal`),
-  UNIQUE INDEX `idZonaCardinal_UNIQUE` (`idZonaCardinal` ASC))
-ENGINE = InnoDB;
+--
+-- Estructura de tabla para la tabla `color`
+--
 
+CREATE TABLE `color` (
+  `idColor` int(11) NOT NULL,
+  `nombre_color` varchar(45) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
--- -----------------------------------------------------
--- Table `BD_SIBCATIE`.`Continente`
--- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `BD_SIBCATIE`.`Continente` (
-  `idContinente` INT NOT NULL AUTO_INCREMENT,
-  `nombre_continente` VARCHAR(45) NOT NULL,
-  `ZonaCardinal_idZonaCardinal` INT NOT NULL,
-  PRIMARY KEY (`idContinente`),
-  INDEX `fk_Continente_ZonaCardinal1_idx` (`ZonaCardinal_idZonaCardinal` ASC),
-  UNIQUE INDEX `idContinente_UNIQUE` (`idContinente` ASC),
-  CONSTRAINT `fk_Continente_ZonaCardinal1`
-    FOREIGN KEY (`ZonaCardinal_idZonaCardinal`)
-    REFERENCES `BD_SIBCATIE`.`ZonaCardinal` (`idZonaCardinal`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
-ENGINE = InnoDB;
+-- --------------------------------------------------------
 
+--
+-- Estructura de tabla para la tabla `consulta`
+--
 
--- -----------------------------------------------------
--- Table `BD_SIBCATIE`.`Familia`
--- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `BD_SIBCATIE`.`Familia` (
-  `idFamilia` INT NOT NULL AUTO_INCREMENT,
-  `nombre_familia` VARCHAR(45) NOT NULL,
-  PRIMARY KEY (`idFamilia`))
-ENGINE = InnoDB;
+CREATE TABLE `consulta` (
+  `idConsulta` int(11) NOT NULL,
+  `consulta` text,
+  `fecha_consulta` datetime NOT NULL,
+  `url_foto` varchar(255) NOT NULL,
+  `latitud` decimal(10,0) DEFAULT NULL,
+  `longitud` decimal(10,0) DEFAULT NULL,
+  `Usuario_idUsuario` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+-- --------------------------------------------------------
 
--- -----------------------------------------------------
--- Table `BD_SIBCATIE`.`DeterminadaPor`
--- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `BD_SIBCATIE`.`DeterminadaPor` (
-  `idDeterminadaPor` INT NOT NULL AUTO_INCREMENT,
-  `nombre_determinada` VARCHAR(45) NOT NULL,
-  `fecha` DATE NOT NULL,
-  PRIMARY KEY (`idDeterminadaPor`),
-  UNIQUE INDEX `idDeterminadaPor_UNIQUE` (`idDeterminadaPor` ASC))
-ENGINE = InnoDB;
+--
+-- Estructura de tabla para la tabla `continente`
+--
 
+CREATE TABLE `continente` (
+  `idContinente` int(11) NOT NULL,
+  `nombre_continente` varchar(45) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
--- -----------------------------------------------------
--- Table `BD_SIBCATIE`.`Genero`
--- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `BD_SIBCATIE`.`Genero` (
-  `idGenero` INT NOT NULL AUTO_INCREMENT,
-  `nombre_genero` VARCHAR(45) NOT NULL,
-  PRIMARY KEY (`idGenero`),
-  UNIQUE INDEX `idGenero_UNIQUE` (`idGenero` ASC))
-ENGINE = InnoDB;
+-- --------------------------------------------------------
 
+--
+-- Estructura de tabla para la tabla `determinadapor`
+--
 
--- -----------------------------------------------------
--- Table `BD_SIBCATIE`.`Epiteto`
--- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `BD_SIBCATIE`.`Epiteto` (
-  `idEpiteto` INT NOT NULL AUTO_INCREMENT,
-  `nombre_epiteto` VARCHAR(45) NOT NULL,
-  `referencia` VARCHAR(45) NULL,
-  PRIMARY KEY (`idEpiteto`),
-  UNIQUE INDEX `idEpiteto_UNIQUE` (`idEpiteto` ASC))
-ENGINE = InnoDB;
+CREATE TABLE `determinadapor` (
+  `idDeterminadaPor` int(11) NOT NULL,
+  `nombre_determinado` varchar(45) NOT NULL,
+  `fecha_determinado` date NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+-- --------------------------------------------------------
 
--- -----------------------------------------------------
--- Table `BD_SIBCATIE`.`Planta`
--- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `BD_SIBCATIE`.`Planta` (
-  `idPlanta` INT NOT NULL AUTO_INCREMENT,
-  `fecha_ingreso` DATE NOT NULL,
-  `fuente_informacion` VARCHAR(45) NULL,
-  `autor` VARCHAR(45) NULL,
-  `altura` DECIMAL NOT NULL,
-  `reproduccion` TINYINT NULL,
-  `visible` TINYINT NOT NULL,
-  `Forma_idForma` INT NOT NULL,
-  `EstadoSalud_idEstadoSalud` INT NULL,
-  `Color_idColor` INT NOT NULL,
-  `TipoHoja_idTipoHoja` INT NOT NULL,
-  `Continente_idContinente` INT NOT NULL,
-  `ZonaCardinal_idZonaCardinal` INT NOT NULL,
-  `Familia_idFamilia` INT NULL,
-  `DeterminadaPor_idDeterminadaPor` INT NULL,
-  `Genero_idGenero` INT NULL,
-  `Epiteto_idEpiteto` INT NULL,
-  PRIMARY KEY (`idPlanta`),
-  INDEX `fk_Planta_Forma1_idx` (`Forma_idForma` ASC),
-  INDEX `fk_Planta_EstadoSalud1_idx` (`EstadoSalud_idEstadoSalud` ASC),
-  INDEX `fk_Planta_Color1_idx` (`Color_idColor` ASC),
-  INDEX `fk_Planta_TipoHoja1_idx` (`TipoHoja_idTipoHoja` ASC),
-  INDEX `fk_Planta_Continente1_idx` (`Continente_idContinente` ASC),
-  INDEX `fk_Planta_ZonaCardinal1_idx` (`ZonaCardinal_idZonaCardinal` ASC),
-  INDEX `fk_Planta_Familia1_idx` (`Familia_idFamilia` ASC),
-  INDEX `fk_Planta_DeterminadaPor1_idx` (`DeterminadaPor_idDeterminadaPor` ASC),
-  INDEX `fk_Planta_Genero1_idx` (`Genero_idGenero` ASC),
-  INDEX `fk_Planta_Epiteto1_idx` (`Epiteto_idEpiteto` ASC),
-  UNIQUE INDEX `idPlanta_UNIQUE` (`idPlanta` ASC),
-  CONSTRAINT `fk_Planta_Forma1`
-    FOREIGN KEY (`Forma_idForma`)
-    REFERENCES `BD_SIBCATIE`.`Forma` (`idForma`)
-    ON DELETE NO ACTION
-    ON UPDATE CASCADE,
-  CONSTRAINT `fk_Planta_EstadoSalud1`
-    FOREIGN KEY (`EstadoSalud_idEstadoSalud`)
-    REFERENCES `BD_SIBCATIE`.`EstadoSalud` (`idEstadoSalud`)
-    ON DELETE NO ACTION
-    ON UPDATE CASCADE,
-  CONSTRAINT `fk_Planta_Color1`
-    FOREIGN KEY (`Color_idColor`)
-    REFERENCES `BD_SIBCATIE`.`Color` (`idColor`)
-    ON DELETE NO ACTION
-    ON UPDATE CASCADE,
-  CONSTRAINT `fk_Planta_TipoHoja1`
-    FOREIGN KEY (`TipoHoja_idTipoHoja`)
-    REFERENCES `BD_SIBCATIE`.`TipoHoja` (`idTipoHoja`)
-    ON DELETE NO ACTION
-    ON UPDATE CASCADE,
-  CONSTRAINT `fk_Planta_Continente1`
-    FOREIGN KEY (`Continente_idContinente`)
-    REFERENCES `BD_SIBCATIE`.`Continente` (`idContinente`)
-    ON DELETE NO ACTION
-    ON UPDATE CASCADE,
-  CONSTRAINT `fk_Planta_ZonaCardinal1`
-    FOREIGN KEY (`ZonaCardinal_idZonaCardinal`)
-    REFERENCES `BD_SIBCATIE`.`ZonaCardinal` (`idZonaCardinal`)
-    ON DELETE NO ACTION
-    ON UPDATE CASCADE,
-  CONSTRAINT `fk_Planta_Familia1`
-    FOREIGN KEY (`Familia_idFamilia`)
-    REFERENCES `BD_SIBCATIE`.`Familia` (`idFamilia`)
-    ON DELETE NO ACTION
-    ON UPDATE CASCADE,
-  CONSTRAINT `fk_Planta_DeterminadaPor1`
-    FOREIGN KEY (`DeterminadaPor_idDeterminadaPor`)
-    REFERENCES `BD_SIBCATIE`.`DeterminadaPor` (`idDeterminadaPor`)
-    ON DELETE NO ACTION
-    ON UPDATE CASCADE,
-  CONSTRAINT `fk_Planta_Genero1`
-    FOREIGN KEY (`Genero_idGenero`)
-    REFERENCES `BD_SIBCATIE`.`Genero` (`idGenero`)
-    ON DELETE NO ACTION
-    ON UPDATE CASCADE,
-  CONSTRAINT `fk_Planta_Epiteto1`
-    FOREIGN KEY (`Epiteto_idEpiteto`)
-    REFERENCES `BD_SIBCATIE`.`Epiteto` (`idEpiteto`)
-    ON DELETE NO ACTION
-    ON UPDATE CASCADE)
-ENGINE = InnoDB;
+--
+-- Estructura de tabla para la tabla `division`
+--
 
+CREATE TABLE `division` (
+  `idDivision` int(11) NOT NULL,
+  `nombre_division` varchar(45) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
--- -----------------------------------------------------
--- Table `BD_SIBCATIE`.`Uso`
--- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `BD_SIBCATIE`.`Uso` (
-  `idUso` INT NOT NULL AUTO_INCREMENT,
-  `nombre_uso` VARCHAR(45) NOT NULL,
-  PRIMARY KEY (`idUso`),
-  UNIQUE INDEX `idUso_UNIQUE` (`idUso` ASC))
-ENGINE = InnoDB;
+-- --------------------------------------------------------
 
+--
+-- Estructura de tabla para la tabla `epiteto`
+--
 
--- -----------------------------------------------------
--- Table `BD_SIBCATIE`.`NombreComun`
--- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `BD_SIBCATIE`.`NombreComun` (
-  `idNombreComun` INT NOT NULL AUTO_INCREMENT,
-  `nombre_comun` VARCHAR(45) NOT NULL,
-  `lengua` VARCHAR(45) NULL,
-  `Planta_idPlanta` INT NOT NULL,
-  PRIMARY KEY (`idNombreComun`),
-  INDEX `fk_NombreComun_Planta1_idx` (`Planta_idPlanta` ASC),
-  UNIQUE INDEX `idNombreComun_UNIQUE` (`idNombreComun` ASC),
-  CONSTRAINT `fk_NombreComun_Planta1`
-    FOREIGN KEY (`Planta_idPlanta`)
-    REFERENCES `BD_SIBCATIE`.`Planta` (`idPlanta`)
-    ON DELETE NO ACTION
-    ON UPDATE CASCADE)
-ENGINE = InnoDB;
+CREATE TABLE `epiteto` (
+  `idEpiteto` int(11) NOT NULL,
+  `nombre_epiteto` varchar(45) NOT NULL,
+  `referencia` varchar(45) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+-- --------------------------------------------------------
 
--- -----------------------------------------------------
--- Table `BD_SIBCATIE`.`Foto`
--- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `BD_SIBCATIE`.`Foto` (
-  `idFoto` INT NOT NULL AUTO_INCREMENT,
-  `fecha` DATE NOT NULL,
-  `latitud` DECIMAL NULL,
-  `longitud` DECIMAL NULL,
-  `Planta_idPlanta` INT NOT NULL,
-  `url` VARCHAR(100) NOT NULL,
-  PRIMARY KEY (`idFoto`),
-  INDEX `fk_Foto_Planta_idx` (`Planta_idPlanta` ASC),
-  UNIQUE INDEX `idFoto_UNIQUE` (`idFoto` ASC),
-  CONSTRAINT `fk_Foto_Planta`
-    FOREIGN KEY (`Planta_idPlanta`)
-    REFERENCES `BD_SIBCATIE`.`Planta` (`idPlanta`)
-    ON DELETE NO ACTION
-    ON UPDATE CASCADE)
-ENGINE = InnoDB;
+--
+-- Estructura de tabla para la tabla `estadosalud`
+--
 
+CREATE TABLE `estadosalud` (
+  `idEstadoSalud` int(11) NOT NULL,
+  `nombre_estado` varchar(100) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
--- -----------------------------------------------------
--- Table `BD_SIBCATIE`.`Planta_has_Uso`
--- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `BD_SIBCATIE`.`Planta_has_Uso` (
-  `Planta_idPlanta` INT NOT NULL AUTO_INCREMENT,
-  `Uso_idUso` INT NOT NULL,
-  PRIMARY KEY (`Planta_idPlanta`, `Uso_idUso`),
-  INDEX `fk_Planta_has_Uso_Planta1_idx` (`Planta_idPlanta` ASC),
-  INDEX `fk_Planta_has_Uso_Uso1_idx` (`Uso_idUso` ASC),
-  UNIQUE INDEX `Planta_idPlanta_UNIQUE` (`Planta_idPlanta` ASC),
-  CONSTRAINT `fk_Planta_has_Uso_Planta1`
-    FOREIGN KEY (`Planta_idPlanta`)
-    REFERENCES `BD_SIBCATIE`.`Planta` (`idPlanta`)
-    ON DELETE NO ACTION
-    ON UPDATE CASCADE,
-  CONSTRAINT `fk_Planta_has_Uso_Uso1`
-    FOREIGN KEY (`Uso_idUso`)
-    REFERENCES `BD_SIBCATIE`.`Uso` (`idUso`)
-    ON DELETE NO ACTION
-    ON UPDATE CASCADE)
-ENGINE = InnoDB;
+-- --------------------------------------------------------
 
+--
+-- Estructura de tabla para la tabla `exportar`
+--
 
--- -----------------------------------------------------
--- Table `BD_SIBCATIE`.`Usuario`
--- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `BD_SIBCATIE`.`Usuario` (
-  `idUsuario` INT NOT NULL AUTO_INCREMENT,
-  `nombre` VARCHAR(45) NOT NULL,
-  `apellido` VARCHAR(45) NOT NULL,
-  `email` VARCHAR(255) NOT NULL,
-  `usuario` VARCHAR(45) NOT NULL,
-  `password` VARCHAR(255) NOT NULL,
-  `fecha_registro` DATETIME NOT NULL,
-  `activo` TINYINT NOT NULL,
-  `rol` TINYINT NOT NULL,
-  PRIMARY KEY (`idUsuario`),
-  UNIQUE INDEX `idUsuario_UNIQUE` (`idUsuario` ASC))
-ENGINE = InnoDB;
+CREATE TABLE `exportar` (
+  `Planta_idPlanta` int(11) NOT NULL,
+  `Usuario_idUsuario` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+-- --------------------------------------------------------
 
--- -----------------------------------------------------
--- Table `BD_SIBCATIE`.`Historial`
--- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `BD_SIBCATIE`.`Historial` (
-  `idActividad` INT NOT NULL AUTO_INCREMENT,
-  `fecha` DATETIME NOT NULL,
-  `accion` VARCHAR(45) NOT NULL,
-  `Planta_idPlanta` INT NOT NULL,
-  `Usuario_idUsuario` INT NOT NULL,
-  PRIMARY KEY (`idActividad`),
-  INDEX `fk_Historial_Planta1_idx` (`Planta_idPlanta` ASC),
-  INDEX `fk_Historial_Usuario1_idx` (`Usuario_idUsuario` ASC),
-  UNIQUE INDEX `idActividad_UNIQUE` (`idActividad` ASC),
-  CONSTRAINT `fk_Historial_Planta1`
-    FOREIGN KEY (`Planta_idPlanta`)
-    REFERENCES `BD_SIBCATIE`.`Planta` (`idPlanta`)
-    ON DELETE NO ACTION
-    ON UPDATE CASCADE,
-  CONSTRAINT `fk_Historial_Usuario1`
-    FOREIGN KEY (`Usuario_idUsuario`)
-    REFERENCES `BD_SIBCATIE`.`Usuario` (`idUsuario`)
-    ON DELETE NO ACTION
-    ON UPDATE CASCADE)
-ENGINE = InnoDB;
+--
+-- Estructura de tabla para la tabla `familia`
+--
 
+CREATE TABLE `familia` (
+  `idFamilia` int(11) NOT NULL,
+  `nombre_familia` varchar(45) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
--- -----------------------------------------------------
--- Table `BD_SIBCATIE`.`Consulta`
--- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `BD_SIBCATIE`.`Consulta` (
-  `idConsulta` INT NOT NULL AUTO_INCREMENT,
-  `consulta` TEXT CHARACTER SET utf8 NULL,
-  `fecha_consulta` DATETIME NOT NULL,
-  `url_foto` VARCHAR(255) NOT NULL,
-  `latitud` DECIMAL NULL,
-  `longitud` DECIMAL NULL,
-  `Visitante_idVisitante` INT NOT NULL,
-  PRIMARY KEY (`idConsulta`),
-  INDEX `fk_Consulta_Visitante1_idx` (`Visitante_idVisitante` ASC),
-  UNIQUE INDEX `idConsulta_UNIQUE` (`idConsulta` ASC),
-  CONSTRAINT `fk_Consulta_Visitante1`
-    FOREIGN KEY (`Visitante_idVisitante`)
-    REFERENCES `BD_SIBCATIE`.`Visitante` (`idVisitante`)
-    ON DELETE NO ACTION
-    ON UPDATE CASCADE)
-ENGINE = InnoDB;
+-- --------------------------------------------------------
 
+--
+-- Estructura de tabla para la tabla `favorito`
+--
 
--- -----------------------------------------------------
--- Table `BD_SIBCATIE`.`Exportar`
--- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `BD_SIBCATIE`.`Exportar` (
-  `Planta_idPlanta` INT NOT NULL AUTO_INCREMENT,
-  `Visitante_idVisitante` INT NOT NULL,
-  PRIMARY KEY (`Planta_idPlanta`, `Visitante_idVisitante`),
-  INDEX `fk_Exportar_Planta1_idx` (`Planta_idPlanta` ASC),
-  INDEX `fk_Exportar_Visitante1_idx` (`Visitante_idVisitante` ASC),
-  UNIQUE INDEX `Planta_idPlanta_UNIQUE` (`Planta_idPlanta` ASC),
-  CONSTRAINT `fk_Exportar_Planta1`
-    FOREIGN KEY (`Planta_idPlanta`)
-    REFERENCES `BD_SIBCATIE`.`Planta` (`idPlanta`)
-    ON DELETE NO ACTION
-    ON UPDATE CASCADE,
-  CONSTRAINT `fk_Exportar_Visitante1`
-    FOREIGN KEY (`Visitante_idVisitante`)
-    REFERENCES `BD_SIBCATIE`.`Visitante` (`idVisitante`)
-    ON DELETE NO ACTION
-    ON UPDATE CASCADE)
-ENGINE = InnoDB;
+CREATE TABLE `favorito` (
+  `Planta_idPlanta` int(11) NOT NULL,
+  `Usuario_idUsuario` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+-- --------------------------------------------------------
 
--- -----------------------------------------------------
--- Table `BD_SIBCATIE`.`Favorito`
--- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `BD_SIBCATIE`.`Favorito` (
-  `idFavorito` INT NOT NULL AUTO_INCREMENT,
-  `Planta_idPlanta` INT NOT NULL,
-  `Visitante_idVisitante` INT NOT NULL,
-  PRIMARY KEY (`idFavorito`),
-  INDEX `fk_Favorito_Planta1_idx` (`Planta_idPlanta` ASC),
-  INDEX `fk_Favorito_Visitante1_idx` (`Visitante_idVisitante` ASC),
-  UNIQUE INDEX `idFavorito_UNIQUE` (`idFavorito` ASC),
-  CONSTRAINT `fk_Favorito_Planta1`
-    FOREIGN KEY (`Planta_idPlanta`)
-    REFERENCES `BD_SIBCATIE`.`Planta` (`idPlanta`)
-    ON DELETE NO ACTION
-    ON UPDATE CASCADE,
-  CONSTRAINT `fk_Favorito_Visitante1`
-    FOREIGN KEY (`Visitante_idVisitante`)
-    REFERENCES `BD_SIBCATIE`.`Visitante` (`idVisitante`)     
-    ON UPDATE CASCADE)
-ENGINE = InnoDB;
+--
+-- Estructura de tabla para la tabla `forma`
+--
 
+CREATE TABLE `forma` (
+  `idForma` int(11) NOT NULL,
+  `nombre_forma` varchar(45) NOT NULL,
+  `caracteristicas` text
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
-SET SQL_MODE=@OLD_SQL_MODE;
-SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;
-SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS;
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `foto`
+--
+
+CREATE TABLE `foto` (
+  `idFoto` int(11) NOT NULL,
+  `fecha` date NOT NULL,
+  `Planta_idPlanta` int(45) NOT NULL,
+  `url` varchar(255) NOT NULL,
+  `EstadoSalud_idEstadoSalud` int(11) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `genero`
+--
+
+CREATE TABLE `genero` (
+  `idGenero` int(11) NOT NULL,
+  `nombre_genero` varchar(45) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `historial`
+--
+
+CREATE TABLE `historial` (
+  `idActividad` int(11) NOT NULL,
+  `fecha_historial` datetime NOT NULL,
+  `accion` varchar(45) NOT NULL,
+  `Usuario_idUsuario` int(11) NOT NULL,
+  `registro` varchar(45) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `imagen`
+--
+
+CREATE TABLE `imagen` (
+  `id` int(11) NOT NULL,
+  `planta_idPlanta` int(11) NOT NULL,
+  `cretido` varchar(45) NOT NULL,
+  `url` varchar(255) NOT NULL,
+  `estado_idEstado` int(11) DEFAULT NULL,
+  `fecha_imagen` date NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `nombrecomun`
+--
+
+CREATE TABLE `nombrecomun` (
+  `idNombreComun` int(11) NOT NULL,
+  `nombre_nombre_comun` varchar(45) NOT NULL,
+  `lengua` varchar(45) DEFAULT NULL,
+  `Planta_idPlanta` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `orden`
+--
+
+CREATE TABLE `orden` (
+  `idOrden` int(11) NOT NULL,
+  `nombre_orden` varchar(45) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `planta`
+--
+
+CREATE TABLE `planta` (
+  `idPlanta` int(11) NOT NULL,
+  `idMascara` varchar(25) DEFAULT NULL,
+  `Familia_idFamilia` int(11) DEFAULT NULL,
+  `Genero_idGenero` int(11) DEFAULT NULL,
+  `Epiteto_idEpiteto` int(11) DEFAULT NULL,
+  `fecha_ingreso` date NOT NULL,
+  `fuente_informacion` varchar(45) DEFAULT NULL,
+  `altura` decimal(10,0) DEFAULT NULL,
+  `autor` varchar(45) DEFAULT NULL,
+  `Forma_idForma` int(11) DEFAULT NULL,
+  `Color_idColor` int(11) DEFAULT NULL,
+  `TipoHoja_idTipoHoja` int(11) DEFAULT NULL,
+  `Continente_idContinente` int(11) DEFAULT NULL,
+  `ZonaCardinal_idZonaCardinal` int(11) DEFAULT NULL,
+  `reproduccion` tinyint(4) DEFAULT NULL,
+  `DeterminadaPor_idDeterminadaPor` int(11) DEFAULT NULL,
+  `visible` tinyint(4) NOT NULL DEFAULT '0',
+  `revision` tinyint(4) NOT NULL DEFAULT '0',
+  `activo` tinyint(4) NOT NULL DEFAULT '1',
+  `excel` tinyint(4) DEFAULT NULL,
+  `orden_idOrden` int(11) DEFAULT NULL,
+  `clase_idClase` int(11) DEFAULT NULL,
+  `reino_idReino` int(11) DEFAULT NULL,
+  `division_idDivision` int(11) DEFAULT NULL,
+  `url_img` varchar(255) DEFAULT NULL,
+  `nombre_cientifico` varchar(100) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `planta_has_uso`
+--
+
+CREATE TABLE `planta_has_uso` (
+  `Planta_idPlanta` int(11) NOT NULL,
+  `Uso_idUso` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `reino`
+--
+
+CREATE TABLE `reino` (
+  `idReino` int(11) NOT NULL,
+  `nombre_reino` varchar(45) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `rol`
+--
+
+CREATE TABLE `rol` (
+  `idRol` int(11) NOT NULL,
+  `nombre_rol` varchar(45) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Volcado de datos para la tabla `rol`
+--
+
+INSERT INTO `rol` (`idRol`, `nombre_rol`) VALUES
+(0, 'Admin'),
+(1, 'Ayudante'),
+(2, 'Publico');
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `seccion`
+--
+
+CREATE TABLE `seccion` (
+  `idseccion` int(11) NOT NULL,
+  `nombre_seccion` varchar(45) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Volcado de datos para la tabla `seccion`
+--
+
+INSERT INTO `seccion` (`idseccion`, `nombre_seccion`) VALUES
+(1, 'Cultivos'),
+(2, 'Flora nativa');
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `tipohoja`
+--
+
+CREATE TABLE `tipohoja` (
+  `idTipoHoja` int(11) NOT NULL,
+  `nombre_hoja` varchar(45) NOT NULL,
+  `forma` varchar(45) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `uso`
+--
+
+CREATE TABLE `uso` (
+  `idUso` int(11) NOT NULL,
+  `nombre_uso` varchar(45) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `usuario`
+--
+
+CREATE TABLE `usuario` (
+  `idUsuario` int(11) NOT NULL,
+  `nombre` varchar(45) DEFAULT NULL,
+  `apellido` varchar(45) DEFAULT NULL,
+  `email` varchar(255) NOT NULL,
+  `nombre_usuario` varchar(45) NOT NULL,
+  `password` varchar(255) NOT NULL,
+  `fecha_registro` date NOT NULL,
+  `activo` tinyint(4) DEFAULT '1',
+  `telefono` varchar(15) DEFAULT NULL,
+  `rol_idrol` int(11) DEFAULT NULL,
+  `seccion_idseccion` int(11) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `zonacardinal`
+--
+
+CREATE TABLE `zonacardinal` (
+  `idZonaCardinal` int(11) NOT NULL,
+  `nombre_cardinal` varchar(45) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Índices para tablas volcadas
+--
+
+--
+-- Indices de la tabla `clase`
+--
+ALTER TABLE `clase`
+  ADD PRIMARY KEY (`idClase`),
+  ADD UNIQUE KEY `nombre_clase_UNIQUE` (`nombre_clase`);
+
+--
+-- Indices de la tabla `color`
+--
+ALTER TABLE `color`
+  ADD PRIMARY KEY (`idColor`);
+
+--
+-- Indices de la tabla `consulta`
+--
+ALTER TABLE `consulta`
+  ADD PRIMARY KEY (`idConsulta`),
+  ADD KEY `fk_Consulta_Visitante1_idx` (`Usuario_idUsuario`);
+
+--
+-- Indices de la tabla `continente`
+--
+ALTER TABLE `continente`
+  ADD PRIMARY KEY (`idContinente`);
+
+--
+-- Indices de la tabla `determinadapor`
+--
+ALTER TABLE `determinadapor`
+  ADD PRIMARY KEY (`idDeterminadaPor`);
+
+--
+-- Indices de la tabla `division`
+--
+ALTER TABLE `division`
+  ADD PRIMARY KEY (`idDivision`),
+  ADD UNIQUE KEY `nombre_division_UNIQUE` (`nombre_division`);
+
+--
+-- Indices de la tabla `epiteto`
+--
+ALTER TABLE `epiteto`
+  ADD PRIMARY KEY (`idEpiteto`);
+
+--
+-- Indices de la tabla `estadosalud`
+--
+ALTER TABLE `estadosalud`
+  ADD PRIMARY KEY (`idEstadoSalud`);
+
+--
+-- Indices de la tabla `exportar`
+--
+ALTER TABLE `exportar`
+  ADD PRIMARY KEY (`Planta_idPlanta`,`Usuario_idUsuario`),
+  ADD KEY `fk_Exportar_Planta1_idx` (`Planta_idPlanta`),
+  ADD KEY `fk_Exportar_Usuario2_idx` (`Usuario_idUsuario`);
+
+--
+-- Indices de la tabla `familia`
+--
+ALTER TABLE `familia`
+  ADD PRIMARY KEY (`idFamilia`);
+
+--
+-- Indices de la tabla `favorito`
+--
+ALTER TABLE `favorito`
+  ADD PRIMARY KEY (`Planta_idPlanta`,`Usuario_idUsuario`),
+  ADD KEY `fk_Favorito_Planta1_idx` (`Planta_idPlanta`),
+  ADD KEY `fk_Favorito_Usuario1_idx` (`Usuario_idUsuario`);
+
+--
+-- Indices de la tabla `forma`
+--
+ALTER TABLE `forma`
+  ADD PRIMARY KEY (`idForma`);
+
+--
+-- Indices de la tabla `foto`
+--
+ALTER TABLE `foto`
+  ADD PRIMARY KEY (`idFoto`),
+  ADD KEY `fk_Foto_Planta_idx` (`Planta_idPlanta`),
+  ADD KEY `fk_Foto_idEstadoSalud_idx` (`EstadoSalud_idEstadoSalud`);
+
+--
+-- Indices de la tabla `genero`
+--
+ALTER TABLE `genero`
+  ADD PRIMARY KEY (`idGenero`);
+
+--
+-- Indices de la tabla `historial`
+--
+ALTER TABLE `historial`
+  ADD PRIMARY KEY (`idActividad`);
+
+--
+-- Indices de la tabla `imagen`
+--
+ALTER TABLE `imagen`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indices de la tabla `nombrecomun`
+--
+ALTER TABLE `nombrecomun`
+  ADD PRIMARY KEY (`idNombreComun`),
+  ADD KEY `fk_NombreComun_idPlanta_idx` (`Planta_idPlanta`);
+
+--
+-- Indices de la tabla `orden`
+--
+ALTER TABLE `orden`
+  ADD PRIMARY KEY (`idOrden`),
+  ADD UNIQUE KEY `nombre_orden_UNIQUE` (`nombre_orden`);
+
+--
+-- Indices de la tabla `planta`
+--
+ALTER TABLE `planta`
+  ADD PRIMARY KEY (`idPlanta`);
+
+--
+-- Indices de la tabla `planta_has_uso`
+--
+ALTER TABLE `planta_has_uso`
+  ADD PRIMARY KEY (`Planta_idPlanta`,`Uso_idUso`),
+  ADD KEY `fk_Planta_has_Uso_Planta1_idx` (`Planta_idPlanta`),
+  ADD KEY `fk_Planta_has_Uso_Uso1_idx` (`Uso_idUso`);
+
+--
+-- Indices de la tabla `reino`
+--
+ALTER TABLE `reino`
+  ADD PRIMARY KEY (`idReino`),
+  ADD UNIQUE KEY `nombre_reino_UNIQUE` (`nombre_reino`);
+
+--
+-- Indices de la tabla `rol`
+--
+ALTER TABLE `rol`
+  ADD PRIMARY KEY (`idRol`);
+
+--
+-- Indices de la tabla `seccion`
+--
+ALTER TABLE `seccion`
+  ADD PRIMARY KEY (`idseccion`);
+
+--
+-- Indices de la tabla `tipohoja`
+--
+ALTER TABLE `tipohoja`
+  ADD PRIMARY KEY (`idTipoHoja`);
+
+--
+-- Indices de la tabla `uso`
+--
+ALTER TABLE `uso`
+  ADD PRIMARY KEY (`idUso`);
+
+--
+-- Indices de la tabla `usuario`
+--
+ALTER TABLE `usuario`
+  ADD PRIMARY KEY (`idUsuario`),
+  ADD KEY `fk_usuario_rol1_idx` (`rol_idrol`),
+  ADD KEY `fk_usuario_seccion1_idx` (`seccion_idseccion`);
+
+--
+-- Indices de la tabla `zonacardinal`
+--
+ALTER TABLE `zonacardinal`
+  ADD PRIMARY KEY (`idZonaCardinal`);
+
+--
+-- AUTO_INCREMENT de las tablas volcadas
+--
+
+--
+-- AUTO_INCREMENT de la tabla `clase`
+--
+ALTER TABLE `clase`
+  MODIFY `idClase` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT de la tabla `color`
+--
+ALTER TABLE `color`
+  MODIFY `idColor` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT de la tabla `consulta`
+--
+ALTER TABLE `consulta`
+  MODIFY `idConsulta` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT de la tabla `continente`
+--
+ALTER TABLE `continente`
+  MODIFY `idContinente` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT de la tabla `determinadapor`
+--
+ALTER TABLE `determinadapor`
+  MODIFY `idDeterminadaPor` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT de la tabla `division`
+--
+ALTER TABLE `division`
+  MODIFY `idDivision` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT de la tabla `epiteto`
+--
+ALTER TABLE `epiteto`
+  MODIFY `idEpiteto` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT de la tabla `estadosalud`
+--
+ALTER TABLE `estadosalud`
+  MODIFY `idEstadoSalud` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+
+--
+-- AUTO_INCREMENT de la tabla `familia`
+--
+ALTER TABLE `familia`
+  MODIFY `idFamilia` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT de la tabla `forma`
+--
+ALTER TABLE `forma`
+  MODIFY `idForma` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT de la tabla `foto`
+--
+ALTER TABLE `foto`
+  MODIFY `idFoto` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT de la tabla `genero`
+--
+ALTER TABLE `genero`
+  MODIFY `idGenero` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT de la tabla `historial`
+--
+ALTER TABLE `historial`
+  MODIFY `idActividad` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT de la tabla `imagen`
+--
+ALTER TABLE `imagen`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT de la tabla `nombrecomun`
+--
+ALTER TABLE `nombrecomun`
+  MODIFY `idNombreComun` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT de la tabla `orden`
+--
+ALTER TABLE `orden`
+  MODIFY `idOrden` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT de la tabla `planta`
+--
+ALTER TABLE `planta`
+  MODIFY `idPlanta` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT de la tabla `planta_has_uso`
+--
+ALTER TABLE `planta_has_uso`
+  MODIFY `Planta_idPlanta` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT de la tabla `reino`
+--
+ALTER TABLE `reino`
+  MODIFY `idReino` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT de la tabla `tipohoja`
+--
+ALTER TABLE `tipohoja`
+  MODIFY `idTipoHoja` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT de la tabla `uso`
+--
+ALTER TABLE `uso`
+  MODIFY `idUso` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT de la tabla `usuario`
+--
+ALTER TABLE `usuario`
+  MODIFY `idUsuario` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
+-- AUTO_INCREMENT de la tabla `zonacardinal`
+--
+ALTER TABLE `zonacardinal`
+  MODIFY `idZonaCardinal` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- Restricciones para tablas volcadas
+--
+
+--
+-- Filtros para la tabla `consulta`
+--
+ALTER TABLE `consulta`
+  ADD CONSTRAINT `fk_Consulta_idUsuario` FOREIGN KEY (`Usuario_idUsuario`) REFERENCES `usuario` (`idUsuario`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+
+--
+-- Filtros para la tabla `exportar`
+--
+ALTER TABLE `exportar`
+  ADD CONSTRAINT `fk_Exportar_idPlanta` FOREIGN KEY (`Planta_idPlanta`) REFERENCES `planta` (`idPlanta`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  ADD CONSTRAINT `fk_Exportar_idUsuario` FOREIGN KEY (`Usuario_idUsuario`) REFERENCES `usuario` (`idUsuario`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+
+--
+-- Filtros para la tabla `favorito`
+--
+ALTER TABLE `favorito`
+  ADD CONSTRAINT `fk_Favorito_idPlanta` FOREIGN KEY (`Planta_idPlanta`) REFERENCES `planta` (`idPlanta`) ON DELETE NO ACTION ON UPDATE CASCADE,
+  ADD CONSTRAINT `fk_Favorito_idUsuario` FOREIGN KEY (`Usuario_idUsuario`) REFERENCES `usuario` (`idUsuario`) ON DELETE NO ACTION ON UPDATE CASCADE;
+
+--
+-- Filtros para la tabla `foto`
+--
+ALTER TABLE `foto`
+  ADD CONSTRAINT `fk_Foto_idEstadoSalud` FOREIGN KEY (`EstadoSalud_idEstadoSalud`) REFERENCES `estadosalud` (`idEstadoSalud`) ON DELETE NO ACTION ON UPDATE CASCADE,
+  ADD CONSTRAINT `fk_Foto_idPlanta` FOREIGN KEY (`Planta_idPlanta`) REFERENCES `planta` (`idPlanta`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+
+--
+-- Filtros para la tabla `nombrecomun`
+--
+ALTER TABLE `nombrecomun`
+  ADD CONSTRAINT `fk_NombreComun_idPlanta` FOREIGN KEY (`Planta_idPlanta`) REFERENCES `planta` (`idPlanta`) ON DELETE NO ACTION ON UPDATE CASCADE;
+
+--
+-- Filtros para la tabla `planta_has_uso`
+--
+ALTER TABLE `planta_has_uso`
+  ADD CONSTRAINT `fk_Planta_has_Uso_idPlanta` FOREIGN KEY (`Planta_idPlanta`) REFERENCES `planta` (`idPlanta`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  ADD CONSTRAINT `fk_Planta_has_Uso_idUso` FOREIGN KEY (`Uso_idUso`) REFERENCES `uso` (`idUso`) ON DELETE NO ACTION ON UPDATE CASCADE;
+COMMIT;
+
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;

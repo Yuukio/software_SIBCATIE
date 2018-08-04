@@ -7282,17 +7282,17 @@ input:checked + .slider:before {
     position: absolute;
     height: 35px;
     width: 35px;
-    background-color: green;
+    background-color: #c6d834;
     margin-left: -18px;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.16), 0 2px 10px rgba(0, 0, 0, 0.12);
 }
 
 .verde:hover input ~ .checkmark-verde {
-    background-color: #065900;
+    background-color: #9DAE2A;
 }
 
 .verde input:checked ~ .checkmark-verde {
-    background-color: green;
+    background-color: #c6d834;
 }
 
 /*** AZUL ***/
@@ -7300,35 +7300,35 @@ input:checked + .slider:before {
     position: absolute;
     height: 35px;
     width: 35px;
-    background-color: blue;
+    background-color: #0084FF;
     margin-left: -18px;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.16), 0 2px 10px rgba(0, 0, 0, 0.12);
 }
 
 .azul:hover input ~ .checkmark-azul {
-    background-color: #00118E;
+    background-color: #128FB8;
 }
 
 .azul input:checked ~ .checkmark-azul {
-    background-color: blue;
+    background-color: #0084FF;
 }
 
-/*** MORADO ***/
+/*** CAFE ***/
 .checkmark-morado {
     position: absolute;
     height: 35px;
     width: 35px;
-    background-color: purple;
+    background-color: #825301;
     margin-left: -18px;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.16), 0 2px 10px rgba(0, 0, 0, 0.12);
 }
 
 .morado:hover input ~ .checkmark-morado {
-    background-color: #56017A;
+    background-color: #6E4703;
 }
 
 .morado input:checked ~ .checkmark-morado {
-    background-color: purple;
+    background-color: #825301;
 }
 
 /*** ROSADO ***/
@@ -7336,17 +7336,17 @@ input:checked + .slider:before {
     position: absolute;
     height: 35px;
     width: 35px;
-    background-color: pink;
+    background-color: #f842bb;
     margin-left: -18px;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.16), 0 2px 10px rgba(0, 0, 0, 0.12);
 }
 
 .rosado:hover input ~ .checkmark-rosado {
-    background-color: #854F4F;
+    background-color: #9D0389;
 }
 
 .rosado input:checked ~ .checkmark-rosado {
-    background-color: pink;
+    background-color: #f842bb;
 }
 
 /*** BLANCO ***/
@@ -7354,7 +7354,7 @@ input:checked + .slider:before {
     position: absolute;
     height: 35px;
     width: 35px;
-    background-color: white;
+    background-color: #F4F4F4;
     margin-left: -18px;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.16), 0 2px 10px rgba(0, 0, 0, 0.12);
 }
@@ -7364,5 +7364,5 @@ input:checked + .slider:before {
 }
 
 .blanco input:checked ~ .checkmark-blanco {
-    background-color: white;
+    background-color: #F4F4F4;
 }

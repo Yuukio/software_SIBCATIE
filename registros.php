@@ -78,7 +78,6 @@ $id_usuario = $_SESSION['idUsuario'];
     <script src="plugins/bootstrap-notify/bootstrap-notify.js"></script>
     <script src="js/alertify.js"></script>
 
-
 </head>
 
 <body class="theme-red">
@@ -1085,6 +1084,12 @@ $id_usuario = $_SESSION['idUsuario'];
             }
         });
 
+    </script>
+
+    <script>
+        $(document).ready(function () {
+            $('[data-toggle="opciones"]').tooltip();
+        });
     </script>
 
     <?php

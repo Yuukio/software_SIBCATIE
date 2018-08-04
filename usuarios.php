@@ -56,7 +56,21 @@ if (isset($_POST['enviar'])) {
         if (count($resultado)) {
             $id = substr($nombre_usuario, -1);
             $id = $id + 1;
+            $nombre_usuario = substr ($nombre_usuario, 0, strlen($nombre_usuario) - 1);
             $nombre_usuario = $nombre_usuario . $id;
+
+            $sql_existe = "SELECT * FROM usuario WHERE nombre_usuario = '$nombre_usuario'";
+            $stmt_existe = $pdoConn->prepare($sql_existe);
+            $stmt_existe->execute();
+            $resultado = $stmt_existe->fetchAll();
+
+            if (count($resultado)) {
+                $id = substr($nombre_usuario, -1);
+                $id = $id + 1;
+                $nombre_usuario = substr ($nombre_usuario, 0, strlen($nombre_usuario) - 1);
+                $nombre_usuario = $nombre_usuario . $id;
+            }
+
         }
     } else {
         $nombre_usuario = $nombre_usuario;
@@ -89,8 +103,8 @@ if (isset($_POST['enviar'])) {
 
             $destino = "ruisu.08@gmail.com";
 
-            $contenido = "Bienvenido a SIBCATIE " . $nombre . ' ' . $apellido . '!! \n \n' . "Te han registrado como " . $nombre_rol . " en nuestro Sistema de Informaón Botánica del CATIE.\n\n" .
-                    "Para iniciar sesión, ingresa en el siguiente link y utiliza los siguientes datos:" . "\n    - Usuario: " . $nombre_usuario . "\n    - Contraseña: " . $password .
+            $contenido = "Bienvenido a SIBCATIE " . $nombre . ' ' . $apellido . "!! \n \n" . "Te han registrado como " . $nombre_rol . " en nuestro Sistema de Informaón Botánica del CATIE.\n\n" .
+                    "Ingresa a nuestro sitio web sibcatie.com e inicia sesión con los siguientes datos:" . "\n    - Usuario: " . $nombre_usuario . "\n    - Contraseña: " . $password .
                     "\n\nEsta contraseña es momentánea, por favor ingresa a tu perfil de usuario y cámbiala por una personal.";
 
             mail($destino, "Nueva cuenta SIBCATIE", $contenido);
@@ -492,23 +506,4 @@ include_once 'plantillas/head-dashboard.php';
     ?>
 
 </body>
-
-<!--<script>
-    function openCity(evt, cityName) {
-        var i, tabcontent, tablinks;
-        tabcontent = document.getElementsByClassName("tabcontentC");
-        for (i = 0; i < tabcontent.length; i++) {
-            tabcontent[i].style.display = "none";
-        }
-        tablinks = document.getElementsByClassName("tablinks");
-        for (i = 0; i < tablinks.length; i++) {
-            tablinks[i].className = tablinks[i].className.replace(" active", "");
-        }
-        document.getElementById(cityName).style.display = "block";
-        evt.currentTarget.className += " active";
-    }
-
-    // Get the element with id="defaultOpen" and click on it
-    document.getElementById("defaultOpen").click();
-</script>-->
 </html>

@@ -24,12 +24,17 @@ if (isset($_POST['login'])) {
         //iniciar sesion
         ControlSesion::iniciarSesion($validador_s->obtenerUsuario()->getIdusuario(), $validador_s->obtenerUsuario()->getNombre_usuario(), 
                 $validador_s->obtenerUsuario()->getRol(), $validador_s->obtenerUsuario()->getSeccion(), $validador_s->obtenerUsuario()->getCorreo(),
-                $validador_s->obtenerUsuario()->getNombre(), $validador_s->obtenerUsuario()->getApellido());
-        Redireccion::redirigir(SERVIDOR);
-        //redirigir a index
-        //echo 'Bien';
+                $validador_s->obtenerUsuario()->getNombre(), $validador_s->obtenerUsuario()->getApellido(), $validador_s->obtenerUsuario()->getActivo());
+        
+        if ($validador_s->obtenerUsuario()->getActivo() == 0) {
+            echo '<script language="javascript">alert("Su cuenta ha sido suspendida por algún motivo. Contanta con algún administrador para mayor información.");</script>';
+            ControlSesion::cerrarSesion();
+        }else{
+            Redireccion::redirigir(SERVIDOR);
+            //redirigir a index
+            //echo 'Bien';
+        } 
     }
-
     Conexion::cerrar_conexion();
 }
 

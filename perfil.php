@@ -2,7 +2,7 @@
 include_once 'app/Conexion.inc.php';
 include_once 'app/conexion2.php';
 
-$titulo = 'FLORA NATIVA';
+$titulo = 'PERFIL';
 
 include_once 'plantillas/documento-declaracion.inc.php';
 include_once 'plantillas/navbar-perfil.inc.php';
@@ -11,19 +11,19 @@ include_once 'plantillas/navbar-perfil.inc.php';
 Conexion::abrir_conexion();
 ?>
 
-<div class="container" style="margin-top: 60px; margin-bottom: 60px">
+<div class="container" style="margin-top: 60px; margin-bottom: 100px">
     <div class="row">
         <div class="col-md-4" style="margin-bottom: 30px">
-            <button class="btn btn btn-default btn-block btn-info">
-            	<a href="#" style="color: white; text-decoration: none">Perfil de usuario</a>
-            </button>
-            <button class="btn btn btn-default btn-block ">Cambiar contraseña</button>
+
+            <input type="button" class="btn btn-info btn-block" value="Perfil de usuario" disabled /> 
+            <input type="button" class="btn btn-info btn-block" onclick = "location='cambiar-password.php'" value="Cambiar contraseña" /> 
+            
         </div>
         <div class="col-md-8">
             <div class="card" style="padding: 20px">
                 <div class="header">
                     <h2>
-                        REGISTRO DE ESPECIES
+                        Editar perfil de usuario
                     </h2>
                 </div>
                 <div class="body" id="tabla-registro">
@@ -58,9 +58,3 @@ Conexion::abrir_conexion();
 <?php
 include_once './plantillas/documento-cierre.inc.php';
 ?>
-
-<script type="text/javascript">
-    $(document).ready(function () {
-        $('#elementos-busqueda').load('tablas/elementos-busqueda.php');
-    });
-</script>

@@ -454,9 +454,9 @@ include_once 'plantillas/head-dashboard.php';
                                         ?>
                                         <tr valign="top">
                                             <td> <?php echo $fila_historial_m['fecha_historial']; ?></td>
+                                            <td> <?php echo $fila_historial_m['nombre_usuario']; ?></td>
                                             <td> <?php echo $fila_historial_m['registro']; ?></td>
                                             <td> <?php echo $fila_historial_m['accion']; ?></td>
-                                            <td> <?php echo $fila_historial_m['nombre_usuario']; ?></td>
                                         </tr>
                                         <?php
                                     }

@@ -12,8 +12,8 @@ if (ControlSesion::sesionIniciada()) {
 <body id="page-top" data-spy="scroll" data-target=".navbar" data-offset="60">
 
     <!-- Navigation -->
-    <nav class="navbar navbar-expand-lg" id="mainNav" style="background-color: #1E1E1E">
-        <div class="container-fluid">
+    <nav class="navbar navbar-expand-lg" id="mainNav" style="background-color: #020202">
+        <div class="container">
             <a class="navbar-brand" href="index.php">
                 <img  src="img/logo-SIBCATIE-lg.png" height="38">
             </a>

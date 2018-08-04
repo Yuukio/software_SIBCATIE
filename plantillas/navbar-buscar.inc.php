@@ -9,7 +9,7 @@ Conexion::abrir_conexion();
 
     <!-- Navigation -->
     <nav class="navbar navbar-expand-lg navbar-dark fixed-top" id="mainNav">
-        <div class="container-fluid">
+        <div class="container">
             <a class="navbar-brand" href="index.php">
                 <img  src="img/logo-SIBCATIE-lg.png" height="38">
             </a>
@@ -48,7 +48,7 @@ Conexion::abrir_conexion();
                                     <?php echo $_SESSION['nombre_usuario']; ?>
                                 </a>
                                 <div class="dropdown-menu" style="left: -60px">
-                                    <a class="dropdown-item" style="" href="perfil.php">Perfil</a>
+                                    <a class="dropdown-item" style="" href="lista-favoritos.php">Perfil</a>
                                     <a class="dropdown-item" href="#">Hacer consulta</a>
                                     <div class="dropdown-divider"></div>
                                     <a class="dropdown-item" href="app/cerrarSesion.inc.php">Cerrar sesión</a>

@@ -5,6 +5,32 @@ include_once '../plantillas/dataTable.inc.php';
 include_once '../app/Redireccion.inc.php';
 ?>
 
+<style>
+    .bs-example{
+        margin: 200px 100px;
+    }
+    .bs-example a{
+        margin: 25px;
+        font-size: 20px;
+    }
+    /* Styles for custom tooltip template */
+    .tooltip-head{
+        color: #fff;
+        background: #000;
+        padding: 10px 10px 5px;
+        border-radius: 4px 4px 0 0;
+        text-align: center;
+        margin-bottom: -2px; /* Hide default tooltip rounded corner from top */
+    }
+    .tooltip-head .glyphicon{
+        font-size: 22px;
+        vertical-align: bottom;
+    }
+    .tooltip-head h3{
+        margin: 0;
+        font-size: 18px;
+    }
+</style>
 
 
 <div class="table-responsive">
@@ -178,15 +204,15 @@ include_once '../app/Redireccion.inc.php';
                     <td><?php echo $fila['nombre_epiteto'] ?></td>
                     <td style="text-align:center; width: 5px;"><?php echo $visible ?></td>
                     <td style="text-align:center;">
-                        <a href="<?php echo "http://localhost/software_SIBCATIE/especie.php" . '?id=' . "$id"; ?>" style="color: #17c4cb">
+                        <a href="<?php echo "http://localhost/software_SIBCATIE/especie.php" . '?id=' . "$id"; ?>" style="color: #17c4cb" data-toggle="opciones" title="Ver registro <?php echo $fila['idMascara'] ?> completo." data-placement='bottom'>
                             <i class="material-icons">search</i>
                         </a>
                         <i>&nbsp;</i>
-                        <a href="#" style="color: #ffc122">
+                        <a href="#" style="color: #ffc122" data-toggle="opciones" title="Editar registro <?php echo $fila['idMascara'] ?>." data-placement='bottom'>
                             <i class="material-icons" data-toggle="modal" data-target="#modalActualizarPlanta" onclick="formActualizarDatos('<?php echo $datos ?>')">edit</i>
                         </a>
                         <i>&nbsp;</i>
-                        <a href="#" style="color: #2a445f" name="btn-comun">
+                        <a href="#" style="color: #2a445f" name="btn-comun" data-toggle="opciones" title="Mantenimiento de nombres comunes del registro <?php echo $fila['idMascara'] ?>." data-placement='bottom'>
                             <i class="material-icons" data-toggle="modal" data-target="#modalAgregarComun" onclick="obtenerID('<?php echo $id ?>')">playlist_add</i>
                         </a>
                     </td>
@@ -208,4 +234,10 @@ include_once '../app/Redireccion.inc.php';
 <script src="https://cdnjs.cloudflare.com/ajax/libs/baguettebox.js/1.8.1/baguetteBox.min.js"></script>
 <script>
                                 baguetteBox.run('.tz-gallery');
+</script>
+
+<script>
+    /*$(document).ready(function(){
+        $('[data-toggle="opciones"]').tooltip(); 
+    });*/
 </script>

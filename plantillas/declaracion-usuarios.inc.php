@@ -17,8 +17,13 @@
         echo "<title>$titulo</title>";
         ?>
 
+
         <!-- Bootstrap core CSS -->
         <link href="vendor/bootstrap/css/bootstrap.css" rel="stylesheet">
+
+
+        <!-- Custom Css -->
+        <link href="css/perfil.css" rel="stylesheet">
 
         <!-- Custom fonts for this template -->
         <link href="vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
@@ -41,6 +46,35 @@
 
         <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
         <script src="js/alertify.js"></script>
+    
+        <!--************************************-->
+    
+        <!-- JQuery DataTable Css -->
+        <link href="plugins/jquery-datatable/skin/bootstrap/css/dataTables.bootstrap.css" rel="stylesheet">
+
+        <link rel="stylesheet" type="text/css" href="css/css/alertify.css">
+        <link rel="stylesheet" type="text/css" href="css/css/themes/default.css">
+
+
+
+        <!-- Jquery DataTable Plugin Js -->
+        <script src="plugins/jquery-datatable/jquery.dataTables.js"></script>
+        <script src="plugins/jquery-datatable/skin/bootstrap/js/dataTables.bootstrap.js"></script>
+        <script src="plugins/jquery-datatable/extensions/export/dataTables.buttons.min.js"></script>
+        <script src="plugins/jquery-datatable/extensions/export/buttons.flash.min.js"></script>
+        <script src="plugins/jquery-datatable/extensions/export/jszip.min.js"></script>
+        <script src="plugins/jquery-datatable/extensions/export/pdfmake.min.js"></script>
+        <script src="plugins/jquery-datatable/extensions/export/vfs_fonts.js"></script>
+        <script src="plugins/jquery-datatable/extensions/export/buttons.html5.min.js"></script>
+        <script src="plugins/jquery-datatable/extensions/export/buttons.print.min.js"></script>
+        <!-- Custom Js -->
+        <script src="js/pages/tables/jquery-datatable.js"></script>
+
+
+
+        <script src="js/script.js"></script>
+
+        <script src="plugins/bootstrap-notify/bootstrap-notify.js"></script>
 
         
 

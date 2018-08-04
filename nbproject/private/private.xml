@@ -12,11 +12,18 @@
     </editor-bookmarks>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/xampp/htdocs/software_SIBCATIE/app/config.inc.php</file>
-            <file>file:/C:/xampp/htdocs/software_SIBCATIE/plantillas/navbar.inc.php</file>
-            <file>file:/C:/xampp/htdocs/software_SIBCATIE/plantillas/navbar-buscar.inc.php</file>
-            <file>file:/C:/xampp/htdocs/software_SIBCATIE/tablas/elementos-busqueda.php</file>
-            <file>file:/C:/xampp/htdocs/software_SIBCATIE/buscar-flora-nativa.php</file>
+            <file>file:/C:/xampp/htdocs/software_SIBCATIE/plantillas/dataTable.inc.php</file>
+            <file>file:/C:/xampp/htdocs/software_SIBCATIE/js/jquery.dataTables.min.js</file>
+            <file>file:/C:/xampp/htdocs/software_SIBCATIE/tablas/tablasListas.php</file>
+            <file>file:/C:/xampp/htdocs/software_SIBCATIE/css/jquery.dataTables.css</file>
+            <file>file:/C:/xampp/htdocs/software_SIBCATIE/plantillas/documento-declaracion.inc.php</file>
+            <file>file:/C:/xampp/htdocs/software_SIBCATIE/tablas/tablaRegistros.php</file>
+            <file>file:/C:/xampp/htdocs/software_SIBCATIE/css/jquery.dataTables.min.css</file>
+            <file>file:/C:/xampp/htdocs/software_SIBCATIE/tablas/tablaFavoritos-usuario.php</file>
+            <file>file:/C:/xampp/htdocs/software_SIBCATIE/css/agency.css</file>
+            <file>file:/C:/xampp/htdocs/software_SIBCATIE/listas-perfil.php</file>
+            <file>file:/C:/xampp/htdocs/software_SIBCATIE/plantillas/head-dashboard.php</file>
+            <file>file:/C:/xampp/htdocs/software_SIBCATIE/plugins/jquery-datatable/skin/bootstrap/css/dataTables.bootstrap.css</file>
         </group>
     </open-files>
 </project-private>

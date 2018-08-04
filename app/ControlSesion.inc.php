@@ -2,7 +2,7 @@
 
 class ControlSesion {
 
-    public static function iniciarSesion($id_usuario, $nombre_usuario, $rol, $seccion, $email, $nombre, $apellido) {
+    public static function iniciarSesion($id_usuario, $nombre_usuario, $rol, $seccion, $email, $nombre, $apellido, $activo) {
 
         if (session_id() == '') {
             session_start();
@@ -15,6 +15,7 @@ class ControlSesion {
         $_SESSION['email'] = $email;
         $_SESSION['nombre'] = $nombre;
         $_SESSION['apellido'] = $apellido;
+        $_SESSION['activo'] = $activo;
     }
 
     public static function cerrarSesion() {
