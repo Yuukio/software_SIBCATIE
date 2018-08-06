@@ -1,11 +1,8 @@
-<?php 
 
-$nombre_usuario = 'Luis.Solano2';
 
-$id = substr($nombre_usuario, -1);
-$id = $id + 1;
-$nombre_usuario = substr ($nombre_usuario, 0, strlen($nombre_usuario) - 1);
-$nombre_usuario = $nombre_usuario . $id;
+    <?php
 
-echo $nombre_usuario;
- ?>
+    $familia = $_POST['familia-filtro'];
+    echo $familia;
+
+    ?>

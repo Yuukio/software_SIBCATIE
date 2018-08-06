@@ -155,22 +155,7 @@ include_once '../app/Redireccion.inc.php';
                         $determinado . '*' . $fila['reproduccion'] . '*' . $fila['revision'] . '*' . $fila['visible'] . '*' . $id;
 
                 $nombre_cientifico = $fila['nombre_genero'] . ' ' . $fila['nombre_epiteto'];
-                $revision = $fila['revision'];
                 $visible = $fila['visible'];
-
-                /* ingreso de iconos de revision */
-                if ($revision == 0) {
-
-                    $revision = '<a style="color: #E74C3C">
-                                    <i class="material-icons">close</i>
-                                </a>
-                                ';
-                } else {
-                    $revision = '<a style="color: #27AE60">
-                                <i class="material-icons">check</i>
-                            </a>
-                            ';
-                }
 
                 /* ingreso de iconos de visible */
                 if ($visible == 1) {

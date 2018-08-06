@@ -7178,10 +7178,9 @@ input:checked + .slider:before {
 
 /* The container */
 .containerCheck {
-        /* display: block; */
-    position: relative;
-    padding-left: 30px;
-    padding-right: 30px;
+    /* display: block; */
+    /*padding-left: 0px;
+    padding-right: 0px;*/
     cursor: pointer;
     -webkit-user-select: none;
     -moz-user-select: none;
@@ -7196,6 +7195,10 @@ input:checked + .slider:before {
     position: absolute;
     opacity: 0;
     cursor: pointer;
+    background-color: yellow;
+    width: 35px;
+    height: 35px;
+    
 }
 
 /* Create the checkmark/indicator (hidden when not checked) */
@@ -7229,8 +7232,8 @@ input:checked + .slider:before {
     height: 35px;
     width: 35px;
     background-color: red;
-    margin-left: -18px;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.16), 0 2px 10px rgba(0, 0, 0, 0.12);
+    margin-left: -18px;
 }
 
 .rojo:hover input ~ .checkmark-rojo {
@@ -7247,8 +7250,8 @@ input:checked + .slider:before {
     height: 35px;
     width: 35px;
     background-color: orange;
-    margin-left: -18px;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.16), 0 2px 10px rgba(0, 0, 0, 0.12);
+    margin-left: -18px;
 }
 
 .naranja:hover input ~ .checkmark-naranja {
@@ -7265,8 +7268,8 @@ input:checked + .slider:before {
     height: 35px;
     width: 35px;
     background-color: yellow;
-    margin-left: -18px;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.16), 0 2px 10px rgba(0, 0, 0, 0.12);
+    margin-left: -18px;
 }
 
 .amarillo:hover input ~ .checkmark-amarillo {
@@ -7283,8 +7286,8 @@ input:checked + .slider:before {
     height: 35px;
     width: 35px;
     background-color: #c6d834;
-    margin-left: -18px;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.16), 0 2px 10px rgba(0, 0, 0, 0.12);
+    margin-left: -18px;
 }
 
 .verde:hover input ~ .checkmark-verde {
@@ -7301,8 +7304,8 @@ input:checked + .slider:before {
     height: 35px;
     width: 35px;
     background-color: #0084FF;
-    margin-left: -18px;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.16), 0 2px 10px rgba(0, 0, 0, 0.12);
+    margin-left: -18px;
 }
 
 .azul:hover input ~ .checkmark-azul {
@@ -7314,20 +7317,20 @@ input:checked + .slider:before {
 }
 
 /*** CAFE ***/
-.checkmark-morado {
+.checkmark-cafe{
     position: absolute;
     height: 35px;
     width: 35px;
     background-color: #825301;
-    margin-left: -18px;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.16), 0 2px 10px rgba(0, 0, 0, 0.12);
+    margin-left: -18px;
 }
 
-.morado:hover input ~ .checkmark-morado {
+.morado:hover input ~ .checkmark-cafe{
     background-color: #6E4703;
 }
 
-.morado input:checked ~ .checkmark-morado {
+.morado input:checked ~ .checkmark-cafe{
     background-color: #825301;
 }
 
@@ -7337,8 +7340,8 @@ input:checked + .slider:before {
     height: 35px;
     width: 35px;
     background-color: #f842bb;
-    margin-left: -18px;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.16), 0 2px 10px rgba(0, 0, 0, 0.12);
+    margin-left: -18px;
 }
 
 .rosado:hover input ~ .checkmark-rosado {
@@ -7355,8 +7358,8 @@ input:checked + .slider:before {
     height: 35px;
     width: 35px;
     background-color: #F4F4F4;
-    margin-left: -18px;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.16), 0 2px 10px rgba(0, 0, 0, 0.12);
+    margin-left: -18px;
 }
 
 .blanco:hover input ~ .checkmark-blanco {
@@ -7365,4 +7368,35 @@ input:checked + .slider:before {
 
 .blanco input:checked ~ .checkmark-blanco {
     background-color: #F4F4F4;
+}
+
+.col-xsa-5, .col-sma-5, .col-mda-5, .col-lga-5 {
+    min-height: 1px !important; 
+    position: relative;
+}
+
+.col-xsa-5 {
+    float: left;
+    width: 100%;
+}
+
+@media (min-width: 768px) {
+    .col-sma-5 {
+        float: left;
+        width: 50%;
+    }
+}
+
+@media (min-width: 992px) {
+    .col-mda-5 {
+        float: left;
+        width: 25%;
+    }
+}
+
+@media (min-width: 1200px) {
+    .col-lga-5 {
+        float: left;
+        width: 20%;
+    }
 }

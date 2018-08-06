@@ -1976,9 +1976,7 @@ include_once 'plantillas/head-dashboard.php';
                         }
                     }
                 });
-
             }
-
         });
 
         //CREAR NUEVA DIVISION

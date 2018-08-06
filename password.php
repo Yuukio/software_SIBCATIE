@@ -30,8 +30,8 @@ include_once 'plantillas/head-dashboard.php';
             <div class="row">
                 <div class="col-md-4" style="margin-bottom: 30px">
 
-                    <input type="button" class="btn btn-info btn-block" value="Perfil de usuario" disabled /> 
-                    <input type="button" class="btn btn-info btn-block" onclick = "location = 'password.php'" value="Cambiar contraseña" /> 
+                    <input type="button" class="btn btn-info btn-block" onclick = "location = 'perfil.php'" value="Perfil de usuario" /> 
+                    <input type="button" class="btn btn-info btn-block" value="Cambiar contraseña" disabled /> 
 
                 </div>
                 <div class="col-md-8">

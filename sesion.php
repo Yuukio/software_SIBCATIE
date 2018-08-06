@@ -33,7 +33,7 @@ if (isset($_POST['login'])) {
             Redireccion::redirigir(SERVIDOR);
             //redirigir a index
             //echo 'Bien';
-        } 
+        }
     }
     Conexion::cerrar_conexion();
 }

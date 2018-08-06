@@ -161,9 +161,21 @@
 
                 <li class="header">CONFIGURACIONES</li>
                 <li>
-                    <a href="index.php">
+                    <a href="perfil.php">
                         <i class="material-icons col-light-blue">donut_large</i>
+                        <span>Perfil de usuario</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="index.php">
+                        <i class="material-icons col-amber">donut_large</i>
                         <span>Salir al Buscador</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="app/cerrarSesion.inc.php">
+                        <i class="material-icons col-red">donut_large</i>
+                        <span>Cerrar sesión</span>
                     </a>
                 </li>
             </ul>
