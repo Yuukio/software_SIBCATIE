@@ -826,6 +826,7 @@
   width: 0;
   overflow: visible;
   z-index: 1982;
+  text-align: center;
   -webkit-transform: translate3d(0, 0, 0);
           transform: translate3d(0, 0, 0);
 }
@@ -850,13 +851,16 @@
   margin-top: 10px;
 }
 .alertify-notifier .ajs-message.ajs-success {
-  background: rgba(91, 189, 114, 1);
+  background: #0DB232;
+  color: white; 
 }
 .alertify-notifier .ajs-message.ajs-error {
-  background: rgba(217, 92, 92, 0.95);
+  background: #A51919;
+  color: white; 
 }
 .alertify-notifier .ajs-message.ajs-warning {
-  background: rgba(252, 248, 215, 0.95);
+  background: #F1CB1A;
+  color: black; 
 }
 .alertify-notifier .ajs-message .ajs-close {
   position: absolute;

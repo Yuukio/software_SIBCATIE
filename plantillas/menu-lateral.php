@@ -93,6 +93,9 @@
         if (!isset($indefinidos) || empty($indefinidos)) {
             $indefinidos = '';
         }
+        if (!isset($perfil) || empty($perfil)) {
+            $perfil = '';
+        }
         ?>
 
 
@@ -159,7 +162,7 @@
                     </a>
                 </li>
 
-                <li class="header">CONFIGURACIONES</li>
+                <li class="header <?php echo $perfil ?>">CONFIGURACIONES</li>
                 <li>
                     <a href="perfil.php">
                         <i class="material-icons col-light-blue">donut_large</i>

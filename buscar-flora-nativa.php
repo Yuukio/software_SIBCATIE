@@ -6,8 +6,7 @@ $titulo = 'FLORA NATIVA';
 
 include_once 'plantillas/documento-declaracion.inc.php';
 include_once 'plantillas/navbar-buscar.inc.php';
-?>
-<?php
+
 Conexion::abrir_conexion();
 ?>
 
@@ -140,6 +139,8 @@ Conexion::abrir_conexion();
             </form>
 
             <div style="background-color: #00b0e4; height: 2px; margin: 0px 70px 10px 70px"></div>
+            
+            <input style="display: none;" id="id-lista" type='text' value=''>
 
         </div>
         <div class="col-md-12 col-lg-10" id="elementos-busqueda">
@@ -219,30 +220,20 @@ include_once './plantillas/documento-cierre.inc.php';
             blanco = 0;
         }
 
-        console.log(rojo);
-        console.log(naranja);
-        console.log(amarillo);
-        console.log(verde);
-        console.log(azul);
-        console.log(cafe);
-        console.log(rosado);
-        console.log(blanco);
-
         //**************************************************
 
         $.ajax({
-            
+
             type: "POST",
             url: "app/filtrarBusqueda.php",
             data: {'funcion': 'filtrar-busqueda', 'familia-id': familia_id, 'genero-id': genero_id, 'rojo': rojo, 'naranja': naranja, 'amarillo': amarillo, 'verde': verde, 'azul': azul, 'cafe': cafe, 'rosado': rosado, 'blanco': blanco},
-            
+
             success: function (r) {
-                console.log(naranja);
                 var datos = $.parseJSON(r);
                 $("#elementos-busqueda").html("");
                 $.each(datos, function (i, item)
                 {
-                    $("#elementos-busqueda").append("<div class='col-xsa-5 col-sma-5 col-mda-5 col-lga-5' style='padding: 10px; padding-top: 20px'><div style='height: 100%; width: 100%'><div class='card mb-4 box-shadow'><img class='card-img-top' data-src='holder.js/100px225?theme=thumb&amp;bg=55595c&amp;fg=eceeef&amp;text=Thumbnail' alt='Thumbnail [100%x100%]' style='width: 100%; display: block;' src='app/" + item.url_img + "' data-holder-rendered='true'><div class='card-body' style='text-align: center'><div style='text-align: left; margin-bottom: 5px'><h6>" + item.nombre_genero + "</h6><p style='margin-bottom: 0px;'><i>" + item.nombre_epiteto + "</i></p></div><div style='text-align: right; margin-bottom: 10px'><small class='text-muted'>ID -" + item.idMascara + "</small></div><div class='justify-content-between align-items-center'><div class='btn-group' style='text-align: center;'><button type='button' class='btn btn-sm btn-info'>Ver</button><button type='button' class='btn btn-sm btn-outline-secondary'>Guardar</button><button type='button' class='btn btn-sm btn-outline-secondary'>Exportar</button></div></div></div></div></div></div>");
+                    $("#elementos-busqueda").append("<div class='col-xsa-5 col-sma-5 col-mda-5 col-lga-5' style='padding: 10px; padding-top: 20px'><div style='height: 100%; width: 100%'><div class='card mb-4 box-shadow'><img class='card-img-top' data-src='holder.js/100px225?theme=thumb&amp;bg=55595c&amp;fg=eceeef&amp;text=Thumbnail' alt='Thumbnail [100%x100%]' style='width: 100%; display: block;' src='app/" + item.url_img + "' data-holder-rendered='true'><div class='card-body' style='text-align: center'><div style='text-align: left; margin-bottom: 5px'><h6>" + item.nombre_genero + "</h6><p style='margin-bottom: 0px;'><i>" + item.nombre_epiteto + "</i></p></div><div style='text-align: right; margin-bottom: 10px'><small class='text-muted'>ID - " + item.idMascara + "</small></div><div class='justify-content-between align-items-center'><div class='btn-group' style='text-align: center;'><button type='button' class='btn btn-sm btn-info'><a href='http://localhost/software_SIBCATIE/ver-especie.php?id=" + item.idPlanta + "' style='color: white; text-decoration: none; padding: 6px 0px 6px 0px'>Ver</a></button><form><button type='button' class='btn btn-sm btn-outline-secondary' id='guardar' onclick=\"guardarFavorito('" + item.idPlanta + "')\">Guardar</button><button type='button' class='btn btn-sm btn-outline-secondary' id='exportar' onclick=\"guardarExportar('" + item.idPlanta + "')\">Exportar</button></form></div></div></div></div></div></div>");
                 });
             }
         });
@@ -278,4 +269,54 @@ include_once './plantillas/documento-cierre.inc.php';
     });
 
 </script>
+
+<!-- AGREGAR A LISTAS DE USUARIOS -->
+<script>
+    function guardarFavorito(id) {
+        $('#id-lista').val(id);
+
+        id = $('#id-lista').val();
+
+        $.ajax({
+            type: "POST",
+            url: "app/listas-usuario.php",
+            data: {'funcion': 'agregar-favoritos', 'id': id},
+            success: function (r) {
+                if (r == 1) {
+                    alertify.success("Agregado a favoritos");
+                } else if (r == 2) {
+                    alertify.warning("Debes estar registrado");
+                } else {
+                    alertify.error("Error del servidor");
+                }
+            }
+        });
+    }
+
+    function guardarExportar(id) {
+        $('#id-lista').val(id);
+
+        id = $('#id-lista').val();
+
+        $.ajax({
+            type: "POST",
+            url: "app/listas-usuario.php",
+            data: {'funcion': 'agregar-exportar', 'id': id},
+            success: function (r) {
+                if (r == 1) {
+                    alertify.success("Agregado a Exportación");
+                } else if (r == 2) {
+                    alertify.warning("Debes estar registrado");
+                } else {
+                    alertify.error("Error del servidor");
+                }
+            }
+        });
+    }
+
+</script>
+
+
+
+
 

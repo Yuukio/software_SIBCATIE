@@ -78,6 +78,20 @@ $id_usuario = $_SESSION['idUsuario'];
     <script src="plugins/bootstrap-notify/bootstrap-notify.js"></script>
     <script src="js/alertify.js"></script>
 
+    <style>
+        @media screen and (max-width: 600px){
+        
+            .registro{
+                height: 110px;
+                text-align: center;
+            }
+            .opciones{
+                top: -10px !important;
+                margin-right: 15px;
+            }
+        }
+    </style>
+
 </head>
 
 <body class="theme-red">
@@ -96,20 +110,26 @@ $id_usuario = $_SESSION['idUsuario'];
 
             <!--**********REGISTRO DE ESPECIES****************************-->
             <div class="card">
-                <div class="header">
-                    <h2>
-                        REGISTRO DE ESPECIES
-                    </h2>
-                    <ul class="header-dropdown m-r--5">
-                        <li class="dropdown" style="vertical-align: top; margin-right: 10px; top: -5px">
-                            <div class="btn-group" role="group">
-                                <button type="submit" name="favoritos" id="favoritos" class="btn btn-info waves-effect">Favorito</button>
-                                <button type="submit" name="exportar" id="exportar" class="btn btn-info waves-effect">Exportar</button>
-                                <button type="submit" name="ocultar" id="ocultar" class="btn btn-info waves-effect">Ocultar</button>
-                                <button type="button" class="btn btn-info waves-effect" data-toggle="modal" data-target="#modalRegistroPlanta">Agregar</button>
-                            </div>
-                        </li>
-                    </ul>
+                <div class="header registro">
+                    <div class="row">
+                        <div class="col-lg-6 col-md-6 col-ms-12 col-xs-12">
+                            <h2>
+                                REGISTRO DE ESPECIES
+                            </h2>
+                        </div>
+                        <div class="col-lg-6 col-md-6 col-ms-12 col-xs-12">
+                            <ul class="header-dropdown m-r--5">
+                                <li class="dropdown opciones" style="top: -22px;">
+                                    <div class="btn-group" role="group">
+                                        <button type="submit" name="favoritos" id="favoritos" class="btn btn-info waves-effect">Favorito</button>
+                                        <button type="submit" name="exportar" id="exportar" class="btn btn-info waves-effect">Exportar</button>
+                                        <button type="submit" name="ocultar" id="ocultar" class="btn btn-info waves-effect">Ocultar</button>
+                                        <button type="button" class="btn btn-info waves-effect" data-toggle="modal" data-target="#modalRegistroPlanta">Agregar</button>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
                 </div>
                 <div class="body" id="tabla-registro">
 
@@ -978,7 +998,7 @@ $id_usuario = $_SESSION['idUsuario'];
                             $('#tabla-comun').load('tablas/tablaNombreComun.php?id=' + id);
                             alertify.success("Agregado correctamente");
                         } else {
-                            alertify.success("Error del servidor");
+                            alertify.error("Error del servidor");
                         }
                     }
                 });

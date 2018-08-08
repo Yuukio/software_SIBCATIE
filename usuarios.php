@@ -56,7 +56,7 @@ if (isset($_POST['enviar'])) {
         if (count($resultado)) {
             $id = substr($nombre_usuario, -1);
             $id = $id + 1;
-            $nombre_usuario = substr ($nombre_usuario, 0, strlen($nombre_usuario) - 1);
+            $nombre_usuario = substr($nombre_usuario, 0, strlen($nombre_usuario) - 1);
             $nombre_usuario = $nombre_usuario . $id;
 
             $sql_existe = "SELECT * FROM usuario WHERE nombre_usuario = '$nombre_usuario'";
@@ -67,10 +67,9 @@ if (isset($_POST['enviar'])) {
             if (count($resultado)) {
                 $id = substr($nombre_usuario, -1);
                 $id = $id + 1;
-                $nombre_usuario = substr ($nombre_usuario, 0, strlen($nombre_usuario) - 1);
+                $nombre_usuario = substr($nombre_usuario, 0, strlen($nombre_usuario) - 1);
                 $nombre_usuario = $nombre_usuario . $id;
             }
-
         }
     } else {
         $nombre_usuario = $nombre_usuario;
@@ -146,196 +145,9 @@ include_once 'plantillas/head-dashboard.php';
             <div class="row clearfix">
 
                 <!--**********LISTA DE USUARIOS****************************-->
-                <div class="col-md-8">
+                <div class="col-md-8" id="tabla-usuarios">
                     <!--Usuarios registrados-->
-                    <div class="card">
-                        <header>
-                            <div class="header bg-blue-grey" style="padding: 0px !important; padding-top: 8px">
-                                <ul class="nav nav-tabs" style="padding-left: 15px; padding-bottom: 15px; font-size: 18px; font-weight: normal; border-bottom: 0px solid #b7b7b7">
-                                    <li class="active"><a data-toggle="tab" href="#administradores" style="color: #fff !important">ADMINISTRADORES</a></li>
-                                    <li><a data-toggle="tab" href="#ayudantes" style="color: #fff !important">COLABORADORES</a></li>
-                                    <li><a data-toggle="tab" href="#publico" style="color: #fff !important">PÚBLICO</a></li>
-                                </ul>
-                            </div>
-                        </header>
-                        <div class="body">
 
-                            <div class="tab-content">
-
-                                <!--******************************TAB 1-->
-                                <div id="administradores" class="tab-pane fade in active">
-                                    <div class="body" style="padding: 0px">
-                                        <div class="table-responsive">
-                                            <table class="table table-bordered table-striped table-hover js-basic-example dataTable">
-                                                <thead>
-                                                    <tr style="background: white">
-                                                        <!--<th>Apellido</th>
-                                                        <th>Nombre</th>-->
-                                                        <th>Usuario</th>
-                                                        <th>Email</th>
-                                                        <th>Teléfono</th>
-                                                        <th>Activo</th>
-                                                    </tr>
-                                                </thead>
-                                                <tbody>
-                                                    <?php
-                                                    $sql_admin = "SELECT u.nombre, u.apellido, u.email, u.activo, u.telefono, u.nombre_usuario, s.nombre_seccion FROM usuario u
-                                                                    LEFT JOIN seccion s ON u.seccion_idseccion=s.idseccion
-                                                                    WHERE u.rol_idrol = 0";
-
-                                                    $consulta_admin = Conexion::obtener_conexion()->query($sql_admin);
-
-                                                    while ($file_admin = $consulta_admin->fetch(PDO::FETCH_ASSOC)) {
-                                                        ?>
-                                                        <tr valign="top">
-                                                            <!--<td><?php // echo $file_admin['apellido'];    ?></td> 
-                                                            <td><?php //echo $file_admin['nombre'];    ?></td>-->
-                                                            <td><?php echo $file_admin['nombre_usuario']; ?></td>
-                                                            <td><?php echo $file_admin['email']; ?></td>
-                                                            <td><?php echo $file_admin['telefono']; ?></td>
-                                                            <?php
-                                                            if ($file_admin['activo'] == 1) {
-                                                                ?>
-                                                                <td style="text-align:center; width: 5px;"><a style="color: #1C9708">
-                                                                        <i class="material-icons">lock_open</i>
-                                                                    </a>
-                                                                </td>
-                                                                <?php
-                                                            } elseif ($file_admin['activo'] == 0) {
-                                                                ?>
-                                                                <td style="text-align:center; width: 5px;"><a style="color: #BB0808">
-                                                                        <i class="material-icons">lock_outline</i>
-                                                                    </a>
-                                                                </td>
-                                                                <?php
-                                                            }
-                                                            ?>
-                                                        </tr>
-                                                        <?php
-                                                    }
-                                                    ?>                                                    
-                                                </tbody>
-                                            </table>
-                                        </div>
-
-                                    </div>
-                                </div>
-
-                                <!--******************************TAB 2-->
-                                <div id="ayudantes" class="tab-pane fade">
-                                    <div id="administradores" class="tab-pane fade in active">
-                                        <div class="body" style="padding: 0px">
-                                            <div class="table-responsive">
-                                                <table class="table table-bordered table-striped table-hover js-basic-example dataTable">
-                                                    <thead>
-                                                        <tr style="background: white">
-                                                            <th>Usuario</th>
-                                                            <th>Email</th>
-                                                            <th>Teléfono</th>
-                                                            <th>Activo</th>
-                                                        </tr>
-                                                    </thead>
-                                                    <tbody>
-                                                        <?php
-                                                        $sql_ayudante = "SELECT u.nombre, u.apellido, u.email, u.activo, u.telefono, u.nombre_usuario, s.nombre_seccion FROM usuario u
-                                                                            LEFT JOIN seccion s ON u.seccion_idseccion=s.idseccion
-                                                                            WHERE u.rol_idrol = 1";
-
-                                                        $consulta_ayudante = Conexion::obtener_conexion()->query($sql_ayudante);
-
-                                                        while ($file_ayudante = $consulta_ayudante->fetch(PDO::FETCH_ASSOC)) {
-                                                            ?>
-                                                            <tr valign="top">
-                                                                <!--<td><?php // echo $file_admin['apellido'];    ?></td> 
-                                                                <td><?php //echo $file_admin['nombre'];    ?></td>-->
-                                                                <td><?php echo $file_ayudante['nombre_usuario']; ?></td>
-                                                                <td><?php echo $file_ayudante['email']; ?></td>
-                                                                <td><?php echo $file_ayudante['telefono']; ?></td>
-                                                                <?php
-                                                                if ($file_ayudante['activo'] == 1) {
-                                                                    ?>
-                                                                    <td style="text-align:center; width: 5px;"><a style="color: #1C9708">
-                                                                            <i class="material-icons">lock_open</i>
-                                                                        </a>
-                                                                    </td>
-                                                                    <?php
-                                                                } elseif ($file_ayudante['activo'] == 0) {
-                                                                    ?>
-                                                                    <td style="text-align:center; width: 5px;"><a style="color: #BB0808">
-                                                                            <i class="material-icons">lock_outline</i>
-                                                                        </a>
-                                                                    </td>
-                                                                    <?php
-                                                                }
-                                                                ?>
-                                                            </tr>
-                                                            <?php
-                                                        }
-                                                        ?>                                                    
-                                                    </tbody>
-                                                </table>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <!--******************************TAB 3-->
-                                <div id="publico" class="tab-pane fade">
-                                    <div id="administradores" class="tab-pane fade in active">
-                                        <div class="body" style="padding: 0px">
-                                            <div class="table-responsive">
-                                                <table class="table table-bordered table-striped table-hover js-basic-example dataTable">
-                                                    <thead>
-                                                        <tr style="background: white">
-                                                            <th>Usuario</th>
-                                                            <th>Email</th>
-                                                            <th>Activo</th>
-                                                        </tr>
-                                                    </thead>
-                                                    <tbody>
-                                                        <?php
-                                                        $sql_publico = "SELECT email, activo, nombre_usuario FROM usuario
-                                                                        WHERE rol_idrol = 2";
-
-                                                        $consulta_publico = Conexion::obtener_conexion()->query($sql_publico);
-
-                                                        while ($file_publico = $consulta_publico->fetch(PDO::FETCH_ASSOC)) {
-                                                            ?>
-                                                            <tr valign="top">
-                                                                <!--<td><?php // echo $file_admin['apellido'];    ?></td> 
-                                                                <td><?php //echo $file_admin['nombre'];    ?></td>-->
-                                                                <td><?php echo $file_publico['nombre_usuario']; ?></td>
-                                                                <td><?php echo $file_publico['email']; ?></td>
-                                                                <?php
-                                                                if ($file_publico['activo'] == 1) {
-                                                                    ?>
-                                                                    <td style="text-align:center; width: 5px;"><a style="color: #1C9708">
-                                                                            <i class="material-icons">lock_open</i>
-                                                                        </a>
-                                                                    </td>
-                                                                    <?php
-                                                                } elseif ($file_publico['activo'] == 0) {
-                                                                    ?>
-                                                                    <td style="text-align:center; width: 5px;"><a style="color: #BB0808">
-                                                                            <i class="material-icons">lock_outline</i>
-                                                                        </a>
-                                                                    </td>
-                                                                    <?php
-                                                                }
-                                                                ?>
-                                                            </tr>
-                                                            <?php
-                                                        }
-                                                        ?>                                                    
-                                                    </tbody>
-                                                </table>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
                 </div>
 
                 <!--**********REGISTRO DE USUARIOS********************-->
@@ -404,24 +216,19 @@ include_once 'plantillas/head-dashboard.php';
                                 <div class="body">
                                     <div class="container-fluid">
                                         <div class="row clearfix">
-                                            <form role="form">
+
+                                            <form id="form-actualizar">
                                                 <a href="#" data-toggle="admin-usuarios" title="
-                                                    Al ingresar el nombre de usuario y contraseña, podrá suspender o activar su cuenta. El color verde indica que la cuenta será activada y el color rojo indica que la cuenta será suspendida. Si selecciona un rol administrativo, podrá modificar los permisos del usuario al precionar el botón 'Cambiar'.
-                                                " data-placement='left' class="close">?</a>
+                                                   Al ingresar el nombre de usuario y contraseña, podrá suspender o activar su cuenta. El color verde indica que la cuenta será activada y el color rojo indica que la cuenta será suspendida. Si selecciona un rol administrativo, podrá modificar los permisos del usuario al precionar el botón 'Cambiar'.
+                                                   " data-placement='left' class="close">?</a>
                                                 <h4 style="margin-bottom: 20px; margin-top: 5px; text-align: center; width: 100%">Administrar cuenta de SIBCATIE</h4>
                                                 <div class="row">
                                                     <div class="col-md-6 mb-3">
                                                         <input type="text" class="form-control" id="usuario" placeholder="Nombre de usuario" value="" required>
-                                                        <!--<div class="invalid-feedback">
-                                                            Valid first name is required.
-                                                        </div>-->
                                                     </div>
 
                                                     <div class="col-md-6 mb-3">
                                                         <input type="text" class="form-control" id="correo" placeholder="Correo electrónico" value="" required>
-                                                        <!--<div class="invalid-feedback">
-                                                            Valid last name is required.
-                                                        </div>-->
                                                     </div>
                                                 </div>
                                                 <hr class="mb-4" style="margin-top: 0px">
@@ -438,13 +245,13 @@ include_once 'plantillas/head-dashboard.php';
                                                         </button>
                                                     </div>
                                                     <div class="col-md-6" style="padding: 0px; padding-right: 10px">
-                                                        <button class="btn btn-info btn-block" type="submit" id="suspender-cuenta" style="height: 33px">
+                                                        <button class="btn btn-info btn-block" type="button" id="cambiar-rol" style="height: 33px">
                                                             Cambiar</button>
                                                     </div>
                                                 </div>
 
                                                 <div class="col-md-6 col-sm-12 col-xs-12">
-                                                    <select id="rol" name="rol" class="form-control">
+                                                    <select id="rol-mant" name="rol" class="form-control">
                                                         <option value="0">Administrador</option>
                                                         <option value="1">Colaborador</option>
                                                     </select>
@@ -465,40 +272,117 @@ include_once 'plantillas/head-dashboard.php';
     </section>
 
     <script>
-        $(document).ready(function(){
-            $('[data-toggle="admin-usuarios"]').tooltip(); 
+        $(document).ready(function () {
+            $('[data-toggle="admin-usuarios"]').tooltip();
+        });
+    </script>
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $('#tabla-usuarios').load('tablas/tablaUsuarios.php');
         });
     </script>
 
     <script>
+
         $('#suspender-cuenta').click(function ()
         {
             usuario = $('#usuario').val();
             correo = $('#correo').val();
 
-            /*if (!nombre_forma)
-             {
-             alertify.warning('Debe completar todos los campos');
-             } else
-             {*/
+            if (usuario == '' && correo == '') {
+                alertify.warning("Debe llenar los campos.");
+            } else {
+                $.ajax({
+                    type: "POST",
+                    url: "app/mantenimiento-usuarios.php",
+                    data: {'funcion': 'suspenderCuenta', 'usuario': usuario, 'correo': correo},
+                    success: function (r) {
 
-            $.ajax({
-                type: "POST",
-                url: "app/registrarAdministrado.php",
-                data: {'nombre': nombre, 'apellido': apellido, 'correo': correo, 'telefono': telefono, 'rol': rol},
-                success: function (r) {
-
-                    if (r == 1) {
-                        alertify.success("Agregado con éxito");
-                    } else if (r == 2) {
-                        alertify.warning("Este correo ya se encuentra en uso");
-                    } else {
-                        alertify.error("Error del servidor");
+                        if (r == '1') {
+                            $('#tabla-usuarios').load('tablas/tablaUsuarios.php');
+                            alertify.success("Cuenta suspendida.");
+                        } else if (r == '2') {
+                            alertify.error("Esta cuenta no existe.");
+                        } else if (r == '3') {
+                            alertify.warning("Esta cuenta ya está suspendida.");
+                        } else if (r == '4') {
+                            alertify.error("No puedes manipular una cuenta de administrador.");
+                        } else {
+                            alertify.error("Error del servidor.");
+                        }
                     }
-                }
-            });
-            //}
+                });
+            }
         });
+
+        $('#activar-cuenta').click(function ()
+        {
+            usuario = $('#usuario').val();
+            correo = $('#correo').val();
+
+            if (usuario == '' && correo == '') {
+                alertify.warning("Debe llenar los campos.");
+            } else {
+
+                $.ajax({
+                    type: "POST",
+                    url: "app/mantenimiento-usuarios.php",
+                    data: {'funcion': 'activarCuenta', 'usuario': usuario, 'correo': correo},
+                    success: function (r) {
+
+                        if (r == '1') {
+                            $('#tabla-usuarios').load('tablas/tablaUsuarios.php');
+                            alertify.success("Cuenta activada.");
+                        } else if (r == '2') {
+                            alertify.error("Esta cuenta no existe.");
+                        } else if (r == '3') {
+                            alertify.warning("Esta cuenta ya está activada.");
+                        } else if (r == '4') {
+                            alertify.error("No puedes manipular una cuenta de administrador.");
+                        } else {
+                            alertify.error("Error del servidor.");
+                        }
+                    }
+                });
+            }
+        });
+
+        $('#cambiar-rol').click(function ()
+        {
+            usuario = $('#usuario').val();
+            correo = $('#correo').val();
+            rol = $('#rol-mant').val();
+            
+            console.log(rol);
+
+            if (usuario == '' && correo == '') {
+                alertify.warning("Debe llenar los campos.");
+            } else {
+
+                $.ajax({
+                    type: "POST",
+                    url: "app/mantenimiento-usuarios.php",
+                    data: {'funcion': 'cambiarRol', 'usuario': usuario, 'correo': correo, 'rol': rol},
+                    success: function (r) {
+
+                        if (r == '1') {
+                            alertify.error("Esta cuenta no existe.");
+                        } else if (r == '2') {
+                            alertify.error("No puedes manipular esta cuenta.");
+                        } else if (r == '3') {
+                            alertify.warning("Esta cuenta ya tiene ese rol.");
+                        } else if (r == '4') {
+                            $('#tabla-usuarios').load('tablas/tablaUsuarios.php');
+                            alertify.success("Rol modificado.");
+                        } else {
+                            alertify.error("Error del servidor.");
+                        }
+                    }
+                });
+            }
+        });
+
     </script>
 
     <?php

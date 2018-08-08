@@ -49,7 +49,7 @@ if ($funcion == 'filtrar-busqueda') {
     $where = "planta.activo=1 AND planta.visible=1 AND planta.revision=1" . " " . $familia_and . " " . $genero_and;
 
     try {
-        $query = "SELECT genero.nombre_genero, epiteto.nombre_epiteto, planta.idMascara, planta.idPlanta, planta.url_img FROM `planta` 
+        $query = "SELECT planta.idPlanta, genero.nombre_genero, epiteto.nombre_epiteto, planta.idMascara, planta.idPlanta, planta.url_img FROM `planta` 
                     INNER JOIN genero ON planta.Genero_idGenero=genero.idGenero 
                     INNER JOIN epiteto ON planta.Epiteto_idEpiteto=epiteto.idEpiteto
                     WHERE $where $or

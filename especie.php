@@ -80,22 +80,6 @@ $echo = $idMascara . ' - ' . $reino . ' - ' . $division . ' - ' . $clase . ' - '
         margin-bottom: 3px !important;
     }
 
-    .img_pincipal{
-        height: 330px;
-        width: 440px;
-        -webkit-box-shadow: 0px 2px 6px 2px rgba(0,0,0,0.75);
-        -moz-box-shadow: 0px 2px 6px 2px rgba(0,0,0,0.75);
-        box-shadow: 0px 2px 6px 2px rgba(0,0,0,0.75);
-
-    }
-
-    .esquina{
-        opacity: 1;
-        height: 37px;
-        width: 210px;
-        left: 20px;
-        top: -50px;
-    }
     .icono{
         top: -3px !important;
     }

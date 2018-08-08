@@ -8,6 +8,23 @@ include_once 'plantillas/documento-declaracion.inc.php';
 include_once 'plantillas/navbar.inc.php';
 ?>
 
+<style>
+
+    @media screen and (min-width: 1024px){
+        
+        .img{
+            position: absolute;
+            top:50%;
+            margin-top: -70px;
+        }
+
+        .cont{
+            position: relative;
+        }
+    }
+
+</style>
+
 <!-- Header -->
 <header class="masthead" style="background-image: url(img/fondo-portada.jpg)">
     <div class="col-md-6">
@@ -385,11 +402,11 @@ include_once 'plantillas/navbar.inc.php';
                 <hr class="my-4">
                 <h3 class="section-subheading text-muted">Conoce mejor nuestro centro botánico</h3>
             </div>
-            <div class="col-md-6" style="text-align: right">
+            <div class="col-lg-6 col-md-12" style="text-align: right">
                 <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
             </div>
-            <div class="col-md-6" style="text-align: center">
-                <img class="img-fluid" src="img/jardin-botanico.jpg">
+            <div class="col-lg-6 col-md-12 cont" style="padding: 30px">
+                <img class="img-fluid img" src="img/sibcatie-logo2.png">          
             </div>
             <div class="col-md-12" style="text-align: center;" >
                 <br><a class="btn btn-primary btn-xl text-uppercase js-scroll-trigger" href="#buscar">Seguir leyendo</a>
@@ -398,7 +415,7 @@ include_once 'plantillas/navbar.inc.php';
     </div>
 
 </section>
-<!-- Clients -->
+<!-- Clients 
 <section class="py-5 bg-grey">
     <div class="container">
         <div class="row">
@@ -424,15 +441,15 @@ include_once 'plantillas/navbar.inc.php';
             </div>
         </div>
     </div>
-</section>
+</section>-->
 
 <!-- Contact -->
 <section id="contact">
     <div class="container">
         <div class="row">
             <div class="col-lg-12 text-center">
-                <h2 class="section-heading text-uppercase">Contact Us</h2>
-                <h3 class="section-subheading text-muted">Lorem ipsum dolor sit amet consectetur.</h3>
+                <h2 class="section-heading text-uppercase">Contáctenos</h2>
+                <h3 class="section-subheading text-muted">Si desea visitarnos o consultar sobre alguna especie en venta, no dude en llenar nuestro formulario.</h3>
             </div>
         </div>
         <div class="row">
@@ -441,28 +458,28 @@ include_once 'plantillas/navbar.inc.php';
                     <div class="row">
                         <div class="col-md-6">
                             <div class="form-group">
-                                <input class="form-control" id="name" type="text" placeholder="Your Name *" required="required" data-validation-required-message="Please enter your name.">
+                                <input class="form-control" id="name" type="text" placeholder="Nombre *" required="required" data-validation-required-message="Por favor digite su nombre.">
                                 <p class="help-block text-danger"></p>
                             </div>
                             <div class="form-group">
-                                <input class="form-control" id="email" type="email" placeholder="Your Email *" required="required" data-validation-required-message="Please enter your email address.">
+                                <input class="form-control" id="email" type="email" placeholder="Correo electrónico  *" required="required" data-validation-required-message="Por favor digite su correo electrónico">
                                 <p class="help-block text-danger"></p>
                             </div>
                             <div class="form-group">
-                                <input class="form-control" id="phone" type="tel" placeholder="Your Phone *" required="required" data-validation-required-message="Please enter your phone number.">
+                                <input class="form-control" id="phone" type="tel" placeholder="Número de teléfono">
                                 <p class="help-block text-danger"></p>
                             </div>
                         </div>
                         <div class="col-md-6">
                             <div class="form-group">
-                                <textarea class="form-control" id="message" placeholder="Your Message *" required="required" data-validation-required-message="Please enter a message."></textarea>
+                                <textarea class="form-control" id="message" placeholder="Mensaje *" required="required" data-validation-required-message="Por favor digite su consulta."></textarea>
                                 <p class="help-block text-danger"></p>
                             </div>
                         </div>
                         <div class="clearfix"></div>
                         <div class="col-lg-12 text-center">
                             <div id="success"></div>
-                            <button id="sendMessageButton" class="btn btn-primary btn-xl text-uppercase" type="submit">Send Message</button>
+                            <button id="sendMessageButton" class="btn btn-primary btn-xl text-uppercase" type="submit">Enviar Mensaje</button>
                         </div>
                     </div>
                 </form>

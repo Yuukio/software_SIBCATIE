@@ -39,9 +39,10 @@
 
         <link rel="stylesheet" type="text/css" href="css/css/alertify.css">
 
+        <link rel="stylesheet" href="css/gallery-clean.css">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/baguettebox.js/1.8.1/baguetteBox.min.css">
+
         <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
         <script src="js/alertify.js"></script>
-
-        
 
     </head>

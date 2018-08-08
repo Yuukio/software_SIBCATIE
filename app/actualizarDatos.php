@@ -495,3 +495,17 @@ elseif ($funcion == 'eliminarImagen') {
         echo '0';
     }
 }
+
+// ********ACTUALIZAR TELEFONO
+elseif ($funcion == 'actualizarTelefono') {
+    $telefono = $_POST["telefono"];
+    try {
+        $query = "UPDATE `usuario` SET `telefono`= '$telefono' WHERE idUsuario=$id_usuario";
+        $stmt = $pdoConn->prepare($query);
+        $stmt->execute();
+        
+        echo '1';
+    } catch (Exception $e) {
+        echo '0'; 
+    }
+}

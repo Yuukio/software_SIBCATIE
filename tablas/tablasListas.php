@@ -21,7 +21,7 @@ if (!ControlSesion::sesionIniciada() OR ControlSesion::rolVisitante()) {
                 </button>
                 <h2>LISTA DE FAVORITOS</h2>
             </div>
-            <div class="body">
+            <div class="body table-responsive">
                 <table class="table table-bordered table-striped table-hover js-basic-example dataTable">
                     <thead>
                         <tr style="background-color: white">
@@ -90,7 +90,7 @@ if (!ControlSesion::sesionIniciada() OR ControlSesion::rolVisitante()) {
                 </button>
                 <h2>LISTA DE EXPORTACIÓN</h2>
             </div>
-            <div class="body">
+            <div class="body table-responsive">
                 <table class="table table-bordered table-striped table-hover">
                     <thead>
                         <tr style="background-color: white">

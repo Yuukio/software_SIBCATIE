@@ -15,7 +15,7 @@ if (ControlSesion::sesionIniciada()) {
     <nav class="navbar navbar-expand-lg" id="mainNav" style="background-color: #020202">
         <div class="container">
             <a class="navbar-brand" href="index.php">
-                <img  src="img/logo-SIBCATIE-lg.png" height="38">
+                <img  src="img/sibcatie-logo2.png" height="38">
             </a>
             <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
                 Menu

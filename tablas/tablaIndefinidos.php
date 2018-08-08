@@ -5,8 +5,6 @@ include_once '../plantillas/dataTable.inc.php';
 include_once '../app/Redireccion.inc.php';
 ?>
 
-
-
 <div class="table-responsive">
     <table class="table table-bordered table-striped table-hover js-basic-example dataTable">
         <thead>
