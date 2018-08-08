@@ -48,8 +48,8 @@ Conexion::abrir_conexion();
                                     <?php echo $_SESSION['nombre_usuario']; ?>
                                 </a>
                                 <div class="dropdown-menu" style="left: -60px">
-                                    <a class="dropdown-item" style="" href="lista-favoritos.php">Perfil</a>
-                                    <a class="dropdown-item" href="#">Hacer consulta</a>
+                                    <a class="dropdown-item" href="lista-favoritos.php">Perfil</a>
+                                    <a class="dropdown-item" href="enviar-consulta.php">Hacer consulta</a>
                                     <div class="dropdown-divider"></div>
                                     <a class="dropdown-item" href="app/cerrarSesion.inc.php">Cerrar sesión</a>
                                 </div>
