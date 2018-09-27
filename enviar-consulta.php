@@ -12,6 +12,15 @@ if (!ControlSesion::sesionIniciada()) {
     Redireccion::redirigir(SERVIDOR);
 }
 
+$id_usuario = $_SESSION['idUsuario'];
+
+$sql = "SELECT email FROM usuario WHERE idUsuario=$id_usuario";
+$consulta = $pdoConn->prepare($sql);
+$consulta->execute();
+$fila = $consulta->fetch(PDO::FETCH_ASSOC);
+
+$email = $fila['email'];
+
 Conexion::abrir_conexion();
 ?>
 
@@ -31,28 +40,32 @@ Conexion::abrir_conexion();
 
         <div class="col-md-12">
 
-            <form>
+            <form name='formulario' id='formulario' method='post' action='app/enviarConsulta.php' target='_self' enctype="multipart/form-data">
                 <div class="row">
                     <div class="col-md-12">
                         <div class="row">
+
+                        	<input style="display: none" class="form-control" type='text' name='email' id='email' value="<?php echo $email; ?>">
+                        	<input style="display: none" class="form-control" type='text' name='asunto' id='asunto' value="Consulta SIBCATIE" />
+
                             <div class="col-md-6" style="margin-top: 15px">
                                 <label>Nombre</label>
-                                <input class="form-control" type="text">
+                                <input class="form-control" type='text' name='Nombre' id='Nombre'>
                             </div>
                             <div class="col-md-6" style="margin-top: 15px">
                                 <label>Fotografía</label>
                                 <br>
-                                <input type="file">
+                                <input type='file' name='archivo1' id='archivo1'>
                             </div>
 
                             <div class="col-md-12">
                             	<br>
                                 <label>Consulta</label>
-                                <textarea class="form-control" cols="30" rows="5"></textarea>
+                                <textarea class="form-control" name="mensaje" cols="30" rows="5" id="mensaje"></textarea>
                             </div>
                             <div class="col-md-12">
                             	<br>
-                            	<button class="btn btn-info btn-lg btn-block">ENVIAR CONSULTA</button>
+                            	<button type="submit" class="btn btn-info btn-lg btn-block">ENVIAR CONSULTA</button>
                             </div>
                         </div>
                     </div>

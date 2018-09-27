@@ -33,7 +33,7 @@ Conexion::abrir_conexion();
                         <a class="nav-link js-scroll-trigger" href="#galeria">Galería</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link js-scroll-trigger" href="#nosotros">¿Quiénes somos?</a>
+                        <a class="nav-link js-scroll-trigger" href="#nosotros">¿Qué es SIBCATIER?</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link js-scroll-trigger" href="#contact">Contacto</a>

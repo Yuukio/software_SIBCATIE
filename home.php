@@ -91,7 +91,7 @@ include_once 'plantillas/head-dashboard.php';
                     <div class="col-md-12" style="padding: 0px">
                         <div class="card">
                             <div class="header bg-cyan">
-                                <h2>USUARIOS ADMINISTRADORES</h2>
+                                <h2>ADMINISTRADORES</h2>
                                 <ul class="header-dropdown m-r--5">
                                     <li>
                                         <a href="javascript:void(0);" class=" waves-effect waves-block" data-toggle="modal" data-target="#modalUsuariosAdministradores">
@@ -171,7 +171,7 @@ include_once 'plantillas/head-dashboard.php';
                                             <i class="material-icons">speaker_notes_off</i>
                                         </div>
                                         <div class="content">
-                                            <div class="text">INDEFINIDAS</div>
+                                            <div class="text">INDETERMINADAS</div>
                                             <div class="number">
                                                 <?php 
                                                 $sql_indefinidas = "SELECT COUNT(*) as total FROM planta WHERE revision=0";

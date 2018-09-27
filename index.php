@@ -43,9 +43,9 @@ include_once 'plantillas/navbar.inc.php';
     <div class="container" style="max-width: 1240px">
         <div class="row">
             <div class="col-lg-12 text-center">
-                <h2 class="section-heading text-uppercase">Registro de Especies</h2>
+                <h2 class="section-heading text-uppercase">Módulos de información Florística</h2>
                 <hr class="my-4">
-                <h3 class="section-subheading text-muted">Descubre todas nuestras especies dando click en cualquier area de campo</h3>
+                <h3 class="section-subheading text-muted">Descubra las maravillas botánicas que alberga el CATIE pulsando en cualquiera de los siguientes módulos.</h3>
             </div>
         </div>
         <div class="row" style="padding-top: 30px;">
@@ -119,6 +119,10 @@ include_once 'plantillas/navbar.inc.php';
                     </li>
                 </ul>
             </div>
+            <div class="col-md-12" style="text-align: center; margin-top: 60px">
+                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sunt ut voluptatum eius sapiente, totam reiciendis temporibus qui quibusdam, recusandae sit vero unde, sed, incidunt et ea quo dolore laudantium consectetur. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sunt ut voluptatum eius sapiente, totam reiciendis temporibus qui quibusdam, recusandae sit vero unde, sed, incidunt et ea quo dolore laudantium consectetur</p>
+            </style>
+            </div>   
         </div>
     </div>
 </section>
@@ -252,9 +256,9 @@ include_once 'plantillas/navbar.inc.php';
 <section id="galeria" class="bg-grey">
     <div class="container gallery-container">
         <div class="col-md-12" style="text-align: center; padding-right: 15px">
-            <h2 class="section-heading text-uppercase">GALERÍA DEL JARDÍN BOTÁNICO</h2>
+            <h2 class="section-heading text-uppercase">GALERÍA DEL LOS JARDINES BOTÁNICOS</h2>
             <hr class="my-4">
-            <h3 class="section-subheading text-muted">Ven y disfruta en persona de nuestro jardín botánico del CATIE.</h3>
+            <h3 class="section-subheading text-muted">Ven y disfruta en persona de nuestros jardines botánicos del CATIE.</h3>
         </div>
         <div class="tz-gallery">
             <div class="row">
@@ -270,8 +274,8 @@ include_once 'plantillas/navbar.inc.php';
                     </a>
                 </div>
                 <div class="col-sm-6 col-md-4">
-                    <a class="lightbox" href="img/galeria-home/3.jpg">
-                        <img src="img/galeria-home/3.jpg" alt="Tunnel">
+                    <a class="lightbox" href="img/galeria-home/IMAG0636.jpg">
+                        <img src="img/galeria-home/IMAG0636.jpg" alt="Tunnel">
                     </a>
                 </div>
                 <div class="col-sm-6 col-md-4">
@@ -280,13 +284,13 @@ include_once 'plantillas/navbar.inc.php';
                     </a>
                 </div>
                 <div class="col-sm-6 col-md-4">
-                    <a class="lightbox" href="img/galeria-home/5.jpg">
-                        <img src="img/galeria-home/5.jpg" alt="Coast">
+                    <a class="lightbox" href="img/galeria-home/IMAG0640.jpg">
+                        <img src="img/galeria-home/IMAG0640.jpg" alt="Coast">
                     </a>
                 </div> 
                 <div class="col-sm-6 col-md-4">
-                    <a class="lightbox" href="img/galeria-home/6.jpg">
-                        <img src="img/galeria-home/6.jpg" alt="Rails">
+                    <a class="lightbox" href="img/galeria-home/IMAG0647.jpg">
+                        <img src="img/galeria-home/IMAG0647.jpg" alt="Rails">
                     </a>
                 </div>
 
@@ -300,7 +304,7 @@ include_once 'plantillas/navbar.inc.php';
     </script>
 </section>
 
-<!-- EQUIPO 
+<!-- EQUIPO -->
 <section class="bg-grey" id="equipo">
     <div class="container">
         <div class="row">
@@ -391,7 +395,96 @@ include_once 'plantillas/navbar.inc.php';
         </div>
     </div>
 </section>
--->
+<section class="bg-grey" id="equipo">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12 text-center">
+                <h2 class="section-heading text-uppercase">Administradores</h2>
+                <hr class="my-4">
+                <h3 class="section-subheading text-muted">Conoce a los principales miembros botánicos del CATIE</h3>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-4">
+                <div class="team-member">
+                    <img class="mx-auto rounded-circle" src="img/team/1.jpg" alt="">
+                    <h4>Kay Garland</h4>
+                    <p class="text-muted">Lead Designer</p>
+                    <ul class="list-inline social-buttons">
+                        <li class="list-inline-item">
+                            <a href="#">
+                                <i class="fa fa-twitter"></i>
+                            </a>
+                        </li>
+                        <li class="list-inline-item">
+                            <a href="#">
+                                <i class="fa fa-facebook"></i>
+                            </a>
+                        </li>
+                        <li class="list-inline-item">
+                            <a href="#">
+                                <i class="fa fa-linkedin"></i>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="col-sm-4">
+                <div class="team-member">
+                    <img class="mx-auto rounded-circle" src="img/team/2.jpg" alt="">
+                    <h4>Larry Parker</h4>
+                    <p class="text-muted">Lead Marketer</p>
+                    <ul class="list-inline social-buttons">
+                        <li class="list-inline-item">
+                            <a href="#">
+                                <i class="fa fa-twitter"></i>
+                            </a>
+                        </li>
+                        <li class="list-inline-item">
+                            <a href="#">
+                                <i class="fa fa-facebook"></i>
+                            </a>
+                        </li>
+                        <li class="list-inline-item">
+                            <a href="#">
+                                <i class="fa fa-linkedin"></i>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="col-sm-4">
+                <div class="team-member">
+                    <img class="mx-auto rounded-circle" src="img/team/3.jpg" alt="">
+                    <h4>Diana Pertersen</h4>
+                    <p class="text-muted">Lead Developer</p>
+                    <ul class="list-inline social-buttons">
+                        <li class="list-inline-item">
+                            <a href="#">
+                                <i class="fa fa-twitter"></i>
+                            </a>
+                        </li>
+                        <li class="list-inline-item">
+                            <a href="#">
+                                <i class="fa fa-facebook"></i>
+                            </a>
+                        </li>
+                        <li class="list-inline-item">
+                            <a href="#">
+                                <i class="fa fa-linkedin"></i>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-8 mx-auto text-center">
+                <p class="large text-muted">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aut eaque, laboriosam veritatis, quos non quis ad perspiciatis, totam corporis ea, alias ut unde.</p>
+            </div>
+        </div>
+    </div>
+</section>
 
 <!-- SOBRE NOSOTROS -->
 <section id="nosotros" class="bg-light">

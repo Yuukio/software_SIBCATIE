@@ -194,7 +194,7 @@ include_once '../app/Redireccion.inc.php';
                     <td><?php echo $fila['nombre_epiteto'] ?></td>
                     <td style="text-align:center; width: 5px;"><?php echo $visible ?></td>
                     <td style="text-align:center;">
-                        <a href="<?php echo "http://localhost/software_SIBCATIE/especie.php" . '?id=' . "$id"; ?>" style="color: #17c4cb" data-toggle="opciones" title="Ver registro <?php echo $fila['idMascara'] ?> completo." data-placement='bottom'>
+                        <a href="<?php echo "http://sibcatie.com/especie.php" . '?id=' . "$id"; ?>" style="color: #17c4cb" data-toggle="opciones" title="Ver registro <?php echo $fila['idMascara'] ?> completo." data-placement='bottom'>
                             <i class="material-icons">search</i>
                         </a>
                         <i>&nbsp;</i>

@@ -127,7 +127,7 @@
                     <li class= "<?php echo $indefinidos ?>" >
                         <a href="indefinidos.php">
                             <i class="material-icons">cancel</i>
-                            <span>Especies indefinidas</span>
+                            <span>Especies indeterminadas</span>
                         </a>
                     </li>
                     <li class= "<?php echo $usuarios ?>" >
@@ -158,7 +158,7 @@
                 <li class= "<?php echo $listas ?>" >
                     <a href="listas.php">
                         <i class="material-icons">view_list</i>
-                        <span>Administrar Listas</span>
+                        <span>Listas personales</span>
                     </a>
                 </li>
 
@@ -189,7 +189,7 @@
         <!-- Footer -->
         <div class="legal">
             <div class="copyright">
-                &copy; 2018 <a href="javascript:void(0);">CATIE - Área Botánica</a>.
+                &copy; 2018 <a href="javascript:void(0);">Jardines Botánicos del CATIE</a>.
             </div>
             <div class="version">
                 <b>Version: </b> 1.0.1

@@ -15,11 +15,11 @@ Conexion::abrir_conexion();
 <div class="container-fluid">
     <div class="row">
         <div class="col-md-12" style="color: white; background-image: url(img/nativa2.jpg); text-align: center">
-            <h1 style="padding-top: 140px; padding-bottom: 60px; text-align: center">Flora Nativa del Jardín Botánico del CATIE</h1>
+            <h1 style="padding-top: 140px; padding-bottom: 60px; text-align: center">Flora Nativa del los Jardines Botánicos del CATIE</h1>
         </div>
         <div class="col-md-12 col-lg-2" style="background-color: #e9e9e9; border-right: ridge;">
 
-            <form style="margin-top: 20px">
+            <!--<form style="margin-top: 20px">
                 <div class="row no-gutters align-items-center">
                     <div class="col">
                         <input class="form-control" type="search" placeholder="Buscar...">
@@ -30,7 +30,7 @@ Conexion::abrir_conexion();
                         </button>
                     </div>
                 </div>
-            </form>
+            </form>-->
 
             <h5 style="padding: 10px; padding-top: 30px; text-align: center;">Buscador avanzado</h5>
             <div style="background-color: #00b0e4; height: 2px; margin: 0px 70px 10px 70px"></div>

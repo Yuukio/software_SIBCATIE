@@ -36,7 +36,7 @@ include_once 'plantillas/documento-declaracion.inc.php';
 
 <div class="container" style="text-align: center">
     <div>
-        <img src="img/success.png" width="200" height="200"> 
+        <img src="img/check-circle.gif" width="200" height="200"> 
     </div>
     <br>
     <div class="jumbotron-fluid text-center">

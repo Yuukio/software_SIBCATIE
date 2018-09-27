@@ -43,7 +43,7 @@ include_once '../app/conexion2.php';
                             <div class="justify-content-between align-items-center">
                                 <div class="btn-group" style="text-align: center;">
                                     <button type="button" class="btn btn-sm btn-info">
-                                        <a href='http://localhost/software_SIBCATIE/ver-especie.php?id=<?php echo $id; ?>' style='color: white; text-decoration: none; padding: 6px 0px 6px 0px'>Ver</a>
+                                        <a href='http://sibcatie.com//ver-especie.php?id=<?php echo $id; ?>' style='color: white; text-decoration: none; padding: 6px 0px 6px 0px'>Ver</a>
                                     </button>
                                     <form>
                                         <button type="button" class="btn btn-sm btn-outline-secondary" id="guardar" onclick="guardarFavorito('<?php echo $id; ?>')">Guardar</button>
